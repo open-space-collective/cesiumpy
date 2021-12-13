@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 import collections
 
-from cesiumpy.entities.entity import Polygon, Polyline
+from cesiumpy.entities.graphics import Polygon, Polyline
 import cesiumpy.util.common as com
 
 

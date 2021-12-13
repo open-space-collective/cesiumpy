@@ -2,8 +2,10 @@
 # coding: utf-8
 
 from __future__ import unicode_literals
+from __future__ import annotations
 
 import random
+from typing import Optional
 import six
 import traitlets
 import warnings
@@ -38,14 +40,42 @@ class Color(Material):
         warnings.warn(msg)
         return self.withAlpha(alpha)
 
-    @classmethod
-    def fromAlpha(cls, color, alpha):
-        return Color(red=color.red, green=color.green, blue=color.blue,
-                     alpha=alpha)
+    def copy(self) -> Color:
+        return Color(
+            red = self.red,
+            green = self.green,
+            blue = self.blue,
+            alpha = self.alpha,
+        )
 
-    @classmethod
-    def fromBytes(cls, red=255, green=255, blue=255, alpha=None):
-        """
+    def generate_script(self, widget = None) -> str:
+        return f'new Cesium.{repr(self)}'
+
+    def __repr__(self) -> str:
+        if self.alpha is None:
+            return f'Color({self.red}, {self.green}, {self.blue})'
+        return f'Color({self.red}, {self.green}, {self.blue}, {self.alpha})'
+
+    # Static methods
+
+    @staticmethod
+    def fromAlpha(color: Color, alpha: float) -> Color:
+
+        return Color(
+            red = color.red,
+            green = color.green,
+            blue = color.blue,
+            alpha = alpha,
+        )
+
+    @staticmethod
+    def fromBytes(
+        red: float = 255,
+        green: float = 255,
+        blue: float = 255,
+        alpha: Optional[float] = None,
+    ) -> Color:
+        '''
         Creates a new Color specified using red, green, blue, and alpha values
         that are in the range of 0 to 255, converting them internally to a range
         of 0.0 to 1.0.
@@ -61,29 +91,32 @@ class Color(Material):
             The blue component.
         alpha: int, default None
             The alpha component.
-        """
-        if alpha is not None:
-            alpha = alpha / 255.
-        return Color(red=red / 255., green=green / 255.,
-                     blue=blue / 255., alpha=alpha)
+        '''
 
-    @classmethod
-    def fromString(self, color):
-        """
+        return Color(
+            red = red / 255.,
+            green = green / 255.,
+            blue = blue / 255.,
+            alpha = alpha / 255. if (alpha is not None) else None,
+        )
+
+    @staticmethod
+    def fromString(color: str) -> CSSColor:
+        '''
         Creates a Color instance from a CSS color value. Shortcut for
-        Color.fromCssColorString.
+        Color.fromCSSColorString.
 
         Parameters
         ----------
 
         color: str
             The CSS color value in #rgb, #rrggbb, rgb(), rgba(), hsl(), or hsla() format.
-        """
-        return CssColor(name=color)
+        '''
+        return CSSColor(name = color)
 
-    @classmethod
-    def fromCssColorString(self, color):
-        """
+    @staticmethod
+    def fromCSSColorString(color: str) -> CSSColor:
+        '''
         Creates a Color instance from a CSS color value.
 
         Parameters
@@ -91,26 +124,8 @@ class Color(Material):
 
         color: str
             The CSS color value in #rgb, #rrggbb, rgb(), rgba(), hsl(), or hsla() format.
-        """
-        return CssColor(name=color)
-
-    def __repr__(self):
-        if self.alpha is None:
-            rep = """Color({red}, {green}, {blue})"""
-            return rep.format(red=self.red, green=self.green, blue=self.blue)
-        else:
-            rep = """Color({red}, {green}, {blue}, {alpha})"""
-            return rep.format(red=self.red, green=self.green,
-                              blue=self.blue, alpha=self.alpha)
-
-    @property
-    def script(self):
-        # need new
-        return 'new Cesium.{rep}'.format(rep=repr(self))
-
-    def copy(self):
-        return Color(red=self.red, green=self.green,
-                     blue=self.blue, alpha=self.alpha)
+        '''
+        return CSSColor(name = color)
 
     @classmethod
     def maybe(cls, x):
@@ -132,33 +147,42 @@ class Color(Material):
         raise ValueError(msg.format(x=x))
 
 
-class CssColor(Color):
+class CSSColor(Color):
+
+    # Definitions
 
     name = traitlets.Unicode()
     alpha = traitlets.Float(min=0., max=1., allow_none=True)
 
-    def __init__(self, name, alpha=None):
+    # Constructor
+
+    def __init__(
+        self,
+        name: str,
+        alpha: float = None
+    ) -> None:
+
         self.name = name
         self.alpha = alpha
 
-    def __repr__(self):
+    # Methods
+
+    def copy(self) -> CSSColor:
+        return CSSColor(
+            name = self.name,
+            alpha = self.alpha
+        )
+
+    def generate_script(self, widget = None) -> str:
+        return f'Cesium.{repr(self)}'
+
+    def __repr__(self) -> str:
         if self.alpha is None:
-            rep = """Color.fromCssColorString("{name}")"""
-            return rep.format(name=self.name)
-        else:
-            rep = """Color.fromCssColorString("{name}").withAlpha({alpha})"""
-            return rep.format(name=self.name, alpha=self.alpha)
-
-    @property
-    def script(self):
-        # no need new
-        return 'Cesium.{rep}'.format(rep=repr(self))
-
-    def copy(self):
-        return self.__class__(name=self.name, alpha=self.alpha)
+            return f'Color.fromCSSColorString("{self.name}")'
+        return f'Color.fromCSSColorString("{self.name}").withAlpha({self.alpha})'
 
 
-class ColorConstant(CssColor):
+class ColorConstant(CSSColor):
 
     def __repr__(self):
         if self.alpha is None:

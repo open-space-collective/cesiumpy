@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import traitlets
 
 import cesiumpy
-from cesiumpy.base import _CesiumObject, _CesiumBase, RistrictedList
+from cesiumpy.base import _CesiumObject, _CesiumBase, RestrictedList
 
 
 class Scene(_CesiumObject):
@@ -15,13 +15,12 @@ class Scene(_CesiumObject):
 
     def __init__(self, widget):
         self.widget = widget
-        self._primitives = RistrictedList(self.widget, allowed=cesiumpy.Model,
+        self._primitives = RestrictedList(self.widget, allowed=cesiumpy.Model,
                                           propertyname='scene.primitives')
 
     @property
     def primitives(self):
         return self._primitives
 
-    @property
-    def script(self):
-        return self._primitives.script
+    def generate_script(self, widget = None):
+        return self._primitives.generate_script(widget = widget)
