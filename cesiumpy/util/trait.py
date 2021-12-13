@@ -4,9 +4,11 @@
 from __future__ import unicode_literals
 
 import collections
-import traitlets
-
 from enum import Enum
+import datetime
+from typing import Optional
+
+import traitlets
 
 import cesiumpy.util.common as com
 import cesiumpy.util.html as html
@@ -36,6 +38,18 @@ class URITrait(traitlets.Unicode):
         return super(URITrait, self).validate(obj, value)
 
 
+class DateTimeTrait(traitlets.TraitType):
+    info_text = 'a datetime'
+
+    def validate(self, obj, value):
+        if isinstance(value, datetime.datetime):
+            return value
+        self.error(obj, value)
+
+    def from_string(self, s):
+        return datetime.datetime.fromisoformat(s)
+
+
 # --------------------------------------------------
 # Container
 # --------------------------------------------------
@@ -43,69 +57,96 @@ class URITrait(traitlets.Unicode):
 
 class _HTMLObject(traitlets.HasTraits):
 
+    # Properties
+
+    @property
+    def script(self):
+        raise NotImplementedError
+
+    # Methods
+
+    def generate_script(self, widget = None):
+        return self.script
+
     def __eq__(self, other):
         # conmpare with script
         if isinstance(other, _HTMLObject):
             return self.script == other.script
         return False
 
-    @property
-    def script(self):
-        raise NotImplementedError
-
 
 class _JavaScriptObject(_HTMLObject):
-    """
+    '''
     Base class for JavaScript instances, which can be converted to
     JavaScript instance
-    """
+    '''
+
+    # Properties
 
     @property
     def _klass(self):
-        raise NotImplementedError('must be overriden in child classes')
-        return "Cesium.{0}".format(self.__class__.__name__)
+        raise NotImplementedError('Must be overriden in child classes.')
 
     @property
     def _props(self):
-        raise NotImplementedError('must be overriden in child classes')
+        raise NotImplementedError('Must be overriden in child classes.')
 
     @property
-    def _property_dict(self):
+    def _property_dict(self) -> collections.OrderedDict:
         props = collections.OrderedDict()
         for p in self._props:
             props[p] = getattr(self, p)
         return props
 
-    @property
-    def script(self):
-        props = self._property_dict
-        results = com.to_jsobject(props)
-        return ''.join(results)
+    # Methods
+
+    def generate_script(self, widget = None) -> str:
+        return ''.join(com.to_jsobject(self._property_dict, widget = widget))
 
 
 class _JavaScriptEnum(Enum):
 
+    # Properties
+
     @property
-    def script(self):
+    def script(self) -> str:
+        return self.generate_script()
+
+    # Methods
+
+    def generate_script(self, widget = None) -> str:
         return self.value
 
 
 class _DIV(_HTMLObject):
 
-    divid = traitlets.Unicode()
+    # Definitions
+
+    id = traitlets.Unicode()
     width = traitlets.Unicode()
     height = traitlets.Unicode()
 
-    def __init__(self, divid=None, width='100%', height='100%'):
+    # Constructor
 
-        if divid is None:
-            divid = 'container-{0}'.format(id(self))
-        self.divid = divid
+    def __init__(
+        self,
+        id: Optional[str] = None,
+        width: str = '100%',
+        height: str = '100%',
+    ) -> None:
 
+        super().__init__()
+
+        self.id = id or 'cesiumContainer'
         self.width = width
         self.height = height
 
+    # Properties
+
     @property
-    def script(self):
-        container = """<div id="{0}" style="width:{1}; height:{2};"><div>"""
-        return container.format(self.divid, self.width, self.height)
+    def script(self) -> str:
+        return '<div id="{id}" style="width:{width}; height:{height};"><div>'.format(
+            id = self.id,
+            width = self.width,
+            height = self.height
+        )

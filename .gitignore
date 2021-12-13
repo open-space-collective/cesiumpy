@@ -1,3 +1,6 @@
 build/
 dist/
 *.pyc
+test*.py
+test*.html
+*.egg-info

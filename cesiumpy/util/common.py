@@ -7,6 +7,9 @@ import collections
 import importlib
 import itertools
 import six
+import datetime
+
+from cesiumpy.util import case
 
 # --------------------------------------------------
 # Misc
@@ -95,6 +98,20 @@ def validate_listlike_lonlat(x, key):
     return x
 
 
+def validate_listlike_lonlatalt(x, key):
+    """ validate whether x is list-likes consists from lon, lat, alt tuples """
+    try:
+        assert len(x) % 3 == 0
+        all(validate_longitude(e, key=key) for e in x[::3])
+        all(validate_latitude(e, key=key) for e in x[1::3])
+        # validation will raise ValueError immediately
+    except ValueError:
+        msg = '{key} must be a list consists from longitude and latitude: {x}'
+        raise ValueError(msg.format(key=key, x=x))
+
+    return x
+
+
 # --------------------------------------------------
 # Check Functions
 # --------------------------------------------------
@@ -153,27 +170,29 @@ def is_listlike_3elem(x):
 # Converter Functions
 # --------------------------------------------------
 
-def to_jsscalar(x):
+def to_jsscalar(x, widget = None):
     """ convert x to JavaScript representation """
 
     from cesiumpy.base import _CesiumObject, _CesiumEnum
     if isinstance(x, (_CesiumObject, _CesiumEnum)):
-        return x.script
+        return x.generate_script(widget = widget)
 
     if isinstance(x, bool):
         # convert to JavaScript repr
         x = 'true' if x else 'false'
     elif isinstance(x, six.string_types):
-        x = '"{0}"'.format(x)
+        x = f'"{x}"'
+    elif isinstance(x, datetime.datetime):
+        x = f'Cesium.JulianDate.fromIso8601("{x.isoformat()}")'
     elif isinstance(x, dict):
-        x = ''.join(to_jsobject(x))
+        x = ''.join(to_jsobject(x, widget = widget))
     elif isinstance(x, list):
-        x = [str(to_jsscalar(e)) for e in x]
+        x = [str(to_jsscalar(e, widget = widget)) for e in x]
         x = '[{0}]'.format(', '.join(x))
     return x
 
 
-def to_jsobject(x):
+def to_jsobject(x, widget = None):
     """ convert x to JavaScript Object """
 
     results = ['{']
@@ -189,8 +208,7 @@ def to_jsobject(x):
         return ['']
 
     for key, val in six.iteritems(x):
-        val = to_jsscalar(val)
-        results.append('{0} : {1}, '.format(key, val))
+        results.append(f'{case.snake_case_to_camel_case(key)}: {to_jsscalar(val, widget = widget)}, ')
     results[-1] = results[-1][:-2]     # remove final comma
     results.append('}')
     return results

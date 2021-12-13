@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 import os
 import six
 import warnings
+from typing import List
 
 
 def _check_uri(sourceUri):
@@ -24,22 +25,44 @@ def _wrap_uri(sourceUri):
         raise ValueError(sourceUri)
 
 
-def _wrap_script(script):
-    if not isinstance(script, list):
-        script = [script]
+def _wrap_async_init(scripts: List[str]) -> List[str]:
+
+    before: List[str] = [
+        'async function init() {',
+    ]
+
+    after: List[str] = [
+        '}',
+        'init();',
+    ]
+
+    return before + _add_indent(scripts) + after
+
+
+def _wrap_scripts(scripts: List[str]) -> List[str]:
+    assert isinstance(scripts, list)
+
     # filter None and empty str
-    script = [s for s in script if s is not None and len(s) > 0]
-    script = _add_indent(script)
-    return ["""<script type="text/javascript">"""] + script + ["""</script>"""]
+    scripts = [s for s in scripts if ((s is not None) and len(s) > 0)]
+
+    before: List[str] = [
+        '<script type="text/javascript">',
+    ]
+
+    after: List[str] = [
+        '</script>',
+    ]
+
+    return before + _add_indent(_wrap_async_init(scripts)) + after
 
 
 def _add_indent(script, indent=2):
-        """ Indent list of script with specfied number of spaces """
-        if not isinstance(script, list):
-            script = [script]
+    """ Indent list of script with specfied number of spaces """
+    if not isinstance(script, list):
+        script = [script]
 
-        indent = ' ' * indent
-        return [indent + s for s in script]
+    indent = ' ' * indent
+    return [indent + s for s in script]
 
 
 def _build_html(*args):

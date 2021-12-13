@@ -4,12 +4,12 @@
 from __future__ import unicode_literals
 
 import six
-from geopy.geocoders import GoogleV3
+from geopy.geocoders.geocodefarm import GeocodeFarm
 
 import cesiumpy.util.common as com
 
 # ToDo: want different geocoders?
-_GEOCODER = GoogleV3()
+_GEOCODER = GeocodeFarm()
 
 
 def _maybe_geocode(x, height=None):

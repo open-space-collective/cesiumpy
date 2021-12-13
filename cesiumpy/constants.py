@@ -80,3 +80,15 @@ class Math(_CesiumEnum):
 
     # The number of radians in an arc second.
     RADIANS_PER_ARCSECOND = 'RADIANS_PER_ARCSECOND'
+
+class HeightReference(_CesiumEnum):
+
+    NONE = 'Cesium.HeightReference.NONE'
+    CLAMP_TO_GROUND = 'Cesium.HeightReference.CLAMP_TO_GROUND'
+    RELATIVE_TO_GROUND = 'Cesium.HeightReference.RELATIVE_TO_GROUND'
+
+class ArcType(_CesiumEnum):
+
+    NONE = 'Cesium.ArcType.NONE'
+    GEODESIC = 'Cesium.ArcType.GEODESIC'
+    RHUMB = 'Cesium.ArcType.RHUMB'

@@ -21,14 +21,10 @@ class _Cartesian(_CesiumObject):
     def __init__(self):
         raise NotImplementedError
 
-    @property
-    def script(self):
+    def generate_script(self, widget=None) -> str:
         if self._is_array or self._is_degrees:
-            rep = """Cesium.{self}"""
-            return rep.format(self=self)
-        else:
-            rep = """new Cesium.{self}"""
-            return rep.format(self=self)
+            return f'Cesium.{self}'
+        return f'new Cesium.{self}'
 
 
 def _maybe_cartesian2_list(x, key):
@@ -164,7 +160,7 @@ class Cartesian3Array(_Cartesian):
         if isinstance(x, Cartesian3Array):
             x = x.x
 
-        self.x = com.validate_listlike_lonlat(x, 'x')
+        self.x = com.validate_listlike_lonlatalt(x, 'x')
         # currently, array always be degrees
         self._is_degrees = True
 
@@ -172,7 +168,7 @@ class Cartesian3Array(_Cartesian):
         return len(self.x)
 
     def __repr__(self):
-        rep = """Cartesian3.fromDegreesArray({x})"""
+        rep = """Cartesian3.fromDegreesArrayHeights({x})"""
         return rep.format(x=self.x)
 
 
