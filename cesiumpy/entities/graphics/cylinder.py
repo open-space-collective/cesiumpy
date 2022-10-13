@@ -11,7 +11,7 @@ from cesiumpy.entities.entity import _CesiumEntity
 
 class Cylinder(_CesiumEntity):
 
-    '''
+    """
     CylinderGraphics
 
     Parameters
@@ -42,25 +42,27 @@ class Cylinder(_CesiumEntity):
         A numeric Property specifying the number of vertical lines to draw along the perimeter for the outline.
     slices: int, default 128
         The number of edges around perimeter of the cylinder.
-    '''
+    """
 
     # Definitons
 
-    _klass = 'cylinder'
+    _klass = "cylinder"
 
     _props = [
-        'length',
-        'top_radius',
-        'bottom_radius',
-        'height_reference',
-        'slices',
+        "length",
+        "top_radius",
+        "bottom_radius",
+        "height_reference",
+        "slices",
     ]
 
     length = traitlets.Float()
     top_radius = traitlets.Float()
     bottom_radius = traitlets.Float()
-    height_reference = traitlets.Instance(klass = constants.HeightReference, allow_none = True)
-    slices = traitlets.Float(allow_none = True)
+    height_reference = traitlets.Instance(
+        klass=constants.HeightReference, allow_none=True
+    )
+    slices = traitlets.Float(allow_none=True)
 
     # Constructor
 
@@ -70,31 +72,31 @@ class Cylinder(_CesiumEntity):
         length,
         top_radius,
         bottom_radius,
-        height_reference = None,
-        orientation = None,
-        show = None,
-        fill = None,
-        material = None,
-        outline = None,
-        outline_color = None,
-        outline_width = None,
-        number_of_vertical_lines = None,
-        slices = None,
-        name = None,
+        height_reference=None,
+        orientation=None,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outline_color=None,
+        outline_width=None,
+        number_of_vertical_lines=None,
+        slices=None,
+        name=None,
         **kwargs,
     ) -> None:
 
         super().__init__(
-            show = show,
-            fill = fill,
-            material = material,
-            outline = outline,
-            outline_color = outline_color,
-            outline_width = outline_width,
-            number_of_vertical_lines = number_of_vertical_lines,
-            position = position,
-            orientation = orientation,
-            name = name,
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outline_color=outline_color,
+            outline_width=outline_width,
+            number_of_vertical_lines=number_of_vertical_lines,
+            position=position,
+            orientation=orientation,
+            name=name,
             **kwargs,
         )
 

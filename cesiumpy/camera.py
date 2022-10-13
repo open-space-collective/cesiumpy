@@ -12,7 +12,7 @@ import cesiumpy.util.common as com
 
 class Camera(_CesiumObject):
 
-    _props = ['destination', 'orientation']
+    _props = ["destination", "orientation"]
 
     destination = traitlets.Instance(klass=cartesian._Cartesian, allow_none=True)
 
@@ -27,8 +27,9 @@ class Camera(_CesiumObject):
             return rep.format(klass=self.__class__.__name__)
         else:
             rep = "{klass}(destination={destination})"
-            return rep.format(klass=self.__class__.__name__,
-                              destination=self.destination)
+            return rep.format(
+                klass=self.__class__.__name__, destination=self.destination
+            )
 
     def flyTo(self, destination, orientation=None):
         from cesiumpy.entities.entity import _CesiumEntity

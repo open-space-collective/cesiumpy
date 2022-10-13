@@ -11,7 +11,7 @@ from cesiumpy.entities.entity import _CesiumEntity
 
 class Point(_CesiumEntity):
 
-    '''
+    """
     PointGraphics
 
     Parameters
@@ -33,43 +33,43 @@ class Point(_CesiumEntity):
         A NearFarScalar Property used to scale the point based on distance.
     translucency_by_distance:
         A NearFarScalar Property used to set translucency based on distance from the camera.
-    '''
+    """
 
     # Definitions
 
-    _klass = 'point'
+    _klass = "point"
 
     _props = [
-        'pixel_size',
+        "pixel_size",
     ]
 
-    pixel_size = traitlets.Float(allow_none = True)
+    pixel_size = traitlets.Float(allow_none=True)
 
     # Constructor
 
     def __init__(
         self,
         position,
-        color = None,
-        pixel_size = 10,
-        outline_color = None,
-        outline_width = None,
-        show = None,
-        scale_by_distance = None,
-        translucency_by_distance = None,
-        name = None,
+        color=None,
+        pixel_size=10,
+        outline_color=None,
+        outline_width=None,
+        show=None,
+        scale_by_distance=None,
+        translucency_by_distance=None,
+        name=None,
         **kwargs,
     ) -> None:
 
         super().__init__(
-            show = show,
-            color = color or cesiumpy.color.WHITE,
-            outline_color = outline_color,
-            outline_width = outline_width,
-            scale_by_distance = scale_by_distance,
-            translucency_by_distance = translucency_by_distance,
-            position = position,
-            name = name,
+            show=show,
+            color=color or cesiumpy.color.WHITE,
+            outline_color=outline_color,
+            outline_width=outline_width,
+            scale_by_distance=scale_by_distance,
+            translucency_by_distance=translucency_by_distance,
+            position=position,
+            name=name,
             **kwargs,
         )
 

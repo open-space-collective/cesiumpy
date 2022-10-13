@@ -12,8 +12,8 @@ from cesiumpy.base import _CesiumObject
 
 class ReferenceFrame(_CesiumEnum):
 
-    FIXED = 'Cesium.ReferenceFrame.FIXED'  # The fixed frame.
-    INERTIAL = 'Cesium.ReferenceFrame.INERTIAL'  # The inertial frame.
+    FIXED = "Cesium.ReferenceFrame.FIXED"  # The fixed frame.
+    INERTIAL = "Cesium.ReferenceFrame.INERTIAL"  # The inertial frame.
 
 
 class Property(_CesiumObject):
@@ -32,7 +32,7 @@ class SampledProperty(Property):
         self,
         property_name: str,
         type: Type[Property],
-        derivative_types = None,  # TBI
+        derivative_types=None,  # TBI
     ) -> None:
 
         super().__init__()
@@ -56,7 +56,7 @@ class SampledProperty(Property):
 
         self._samples.append((time, value, derivatives))
 
-    def generate_script(self, widget = None):
+    def generate_script(self, widget=None):
 
         # TBI: derivatives not supported
 
@@ -65,24 +65,26 @@ class SampledProperty(Property):
         property_scripts: List[str] = []
 
         property_scripts.append(
-            '{widget}.{property_name} = new Cesium.SampledProperty({type_name});'.format(
-                widget = widget._varname,
-                property_name = self._property_name,
-                type_name = self._type._static_klass(),
+            "{widget}.{property_name} = new Cesium.SampledProperty({type_name});".format(
+                widget=widget._varname,
+                property_name=self._property_name,
+                type_name=self._type._static_klass(),
             )
         )
 
         for (time, value, _) in self._samples:
 
-            pre_script: str = '{widget}.{property_name}.addSample({time}, {value});'.format(
-                widget = widget._varname,
-                property_name = self._property_name,
-                time = f'"{time.isoformat()}"',
-                value = value.generate_script(widget = widget),
+            pre_script: str = (
+                "{widget}.{property_name}.addSample({time}, {value});".format(
+                    widget=widget._varname,
+                    property_name=self._property_name,
+                    time=f'"{time.isoformat()}"',
+                    value=value.generate_script(widget=widget),
+                )
             )
 
             property_scripts.append(pre_script)
 
         widget.register_property(self._property_name, property_scripts)
 
-        return f'{widget._varname}.{self._property_name}'
+        return f"{widget._varname}.{self._property_name}"

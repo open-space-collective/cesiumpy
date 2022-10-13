@@ -10,18 +10,17 @@ import cesiumpy.util.common as com
 
 
 class _Spatial(object):
-
     @property
     def _np(self):
-        return com._check_package('numpy')
+        return com._check_package("numpy")
 
     @property
     def _spatial(self):
-        return com._check_package('scipy.spatial')
+        return com._check_package("scipy.spatial")
 
     @property
     def _geometry(self):
-        return com._check_package('shapely.geometry')
+        return com._check_package("shapely.geometry")
 
 
 class Voronoi(_Spatial):
@@ -68,10 +67,12 @@ class Voronoi(_Spatial):
         radius = span.max()
         span = span / 1.5
 
-        bbox = [[center[0] - span[0], center[1] - span[1]],
-                [center[0] + span[0], center[1] - span[1]],
-                [center[0] + span[0], center[1] + span[1]],
-                [center[0] - span[0], center[1] + span[1]]]
+        bbox = [
+            [center[0] - span[0], center[1] - span[1]],
+            [center[0] + span[0], center[1] - span[1]],
+            [center[0] + span[0], center[1] + span[1]],
+            [center[0] - span[0], center[1] + span[1]],
+        ]
         bbox = self._geometry.Polygon(bbox)
 
         # Construct a map containing all ridges for a given point
@@ -103,9 +104,9 @@ class Voronoi(_Spatial):
                     continue
 
                 # Compute the missing endpoint of an infinite ridge
-                t = self.vor.points[p2] - self.vor.points[p1]       # tangent
+                t = self.vor.points[p2] - self.vor.points[p1]  # tangent
                 t /= self._np.linalg.norm(t)
-                n = self._np.array([-t[1], t[0]])                   # normal
+                n = self._np.array([-t[1], t[0]])  # normal
 
                 midpoint = self.vor.points[[p1, p2]].mean(axis=0)
                 direction = self._np.sign((midpoint - center).dot(n)) * n
@@ -149,7 +150,9 @@ class ConvexHull(_Spatial):
             hull = self._spatial.ConvexHull(hull)
 
         if hull.points.shape[1] != 2:
-            raise ValueError("input must be 2 dimentional points or ConvexHull instance")
+            raise ValueError(
+                "input must be 2 dimentional points or ConvexHull instance"
+            )
 
         self.hull = hull
 

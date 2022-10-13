@@ -15,12 +15,13 @@ class Scene(_CesiumObject):
 
     def __init__(self, widget):
         self.widget = widget
-        self._primitives = RestrictedList(self.widget, allowed=cesiumpy.Model,
-                                          propertyname='scene.primitives')
+        self._primitives = RestrictedList(
+            self.widget, allowed=cesiumpy.Model, propertyname="scene.primitives"
+        )
 
     @property
     def primitives(self):
         return self._primitives
 
-    def generate_script(self, widget = None):
-        return self._primitives.generate_script(widget = widget)
+    def generate_script(self, widget=None):
+        return self._primitives.generate_script(widget=widget)

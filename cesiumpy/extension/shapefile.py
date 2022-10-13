@@ -24,6 +24,7 @@ try:
 
 
 except ImportError:
+
     class DummyClass(object):
         pass
 
@@ -39,6 +40,7 @@ except ImportError:
 # --------------------------------------------------
 # Convert shaply instances to Entity
 # --------------------------------------------------
+
 
 def to_entity(shape):
     """
@@ -63,7 +65,7 @@ def to_entity(shape):
     elif isinstance(shape, ShapelyPolygon):
         return cesiumpy.Polygon(hierarchy=shape)
 
-    msg = 'Unable to convert to cesiumpy entity: {shape}'.format(shape=shape)
+    msg = "Unable to convert to cesiumpy entity: {shape}".format(shape=shape)
     raise ValueError(msg)
 
 

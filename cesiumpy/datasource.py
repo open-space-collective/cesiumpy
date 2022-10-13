@@ -23,11 +23,12 @@ class DataSource(_CesiumObject):
     @property
     def script(self):
         props = com.to_jsobject(self._property_dict)
-        props = ''.join(props)
-        if props != '':
+        props = "".join(props)
+        if props != "":
             script = """{klass}.load("{source}", {props})"""
-            script = script.format(klass=self._klass,
-                                   source=self.sourceUri, props=''.join(props))
+            script = script.format(
+                klass=self._klass, source=self.sourceUri, props="".join(props)
+            )
         else:
             script = """{klass}.load("{source}")"""
             script = script.format(klass=self._klass, source=self.sourceUri)
@@ -74,8 +75,15 @@ class GeoJsonDataSource(DataSource):
         The default color for polygon interiors.
     """
 
-    _props = ['describe', 'markerSize', 'markerSymbol', 'markerColor',
-              'stroke', 'strokeWidth', 'fill']
+    _props = [
+        "describe",
+        "markerSize",
+        "markerSymbol",
+        "markerColor",
+        "stroke",
+        "strokeWidth",
+        "fill",
+    ]
 
     markerSize = traitlets.Float(allow_none=True)
     markerSymbol = traitlets.Unicode(allow_none=True)
@@ -84,9 +92,17 @@ class GeoJsonDataSource(DataSource):
     strokeWidth = traitlets.Float(allow_none=True)
     fill = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
 
-    def __init__(self, sourceUri, describe=None, markerSize=None,
-                 markerSymbol=None, markerColor=None, stroke=None,
-                 strokeWidth=None, fill=None):
+    def __init__(
+        self,
+        sourceUri,
+        describe=None,
+        markerSize=None,
+        markerSymbol=None,
+        markerColor=None,
+        stroke=None,
+        strokeWidth=None,
+        fill=None,
+    ):
         super(GeoJsonDataSource, self).__init__(sourceUri=sourceUri)
 
         self.describe = com.notimplemented(describe)

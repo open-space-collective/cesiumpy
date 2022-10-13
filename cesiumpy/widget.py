@@ -8,7 +8,7 @@ from cesiumpy.base import _CesiumBase
 
 class CesiumWidget(_CesiumBase):
 
-    '''
+    """
     CesiumWidget
 
     Parameters
@@ -52,5 +52,6 @@ class CesiumWidget(_CesiumBase):
         The DOM element or ID that will contain the CreditDisplay. If not specified, the credits are added to the bottom of the widget itself.
     terrain_exaggeration: float, default 1.
         A scalar used to exaggerate the terrain. Note that terrain exaggeration will not modify any other primitive as they are positioned relative to the ellipsoid.
-    '''
+    """
+
     ...

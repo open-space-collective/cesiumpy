@@ -15,8 +15,8 @@ from cesiumpy.property import Property, SampledProperty
 
 class ReferenceFrame(_CesiumEnum):
 
-    FIXED = 'Cesium.ReferenceFrame.FIXED'  # The fixed frame.
-    INERTIAL = 'Cesium.ReferenceFrame.INERTIAL'  # The inertial frame.
+    FIXED = "Cesium.ReferenceFrame.FIXED"  # The fixed frame.
+    INERTIAL = "Cesium.ReferenceFrame.INERTIAL"  # The inertial frame.
 
 
 class PositionProperty(Property):
@@ -24,11 +24,11 @@ class PositionProperty(Property):
     # Definitions
 
     _props = [
-        'reference_frame',
+        "reference_frame",
     ]
 
     # The reference frame in which the position is defined.
-    reference_frame = traitlets.Instance(klass = ReferenceFrame, allow_none = True)
+    reference_frame = traitlets.Instance(klass=ReferenceFrame, allow_none=True)
 
     # Constructor
 
@@ -45,11 +45,11 @@ class SampledPositionProperty(PositionProperty, SampledProperty):
     # Definitions
 
     _props = [
-        'number_of_derivatives',
+        "number_of_derivatives",
     ]
 
     # The number of derivatives that accompany each position; i.e. velocity, acceleration, etc...
-    number_of_derivatives = traitlets.Float(allow_none = True)
+    number_of_derivatives = traitlets.Float(allow_none=True)
 
     # Constructor
 
@@ -61,14 +61,14 @@ class SampledPositionProperty(PositionProperty, SampledProperty):
     ) -> None:
 
         PositionProperty.__init__(
-            self = self,
-            reference_frame = reference_frame,
+            self=self,
+            reference_frame=reference_frame,
         )
 
         SampledProperty.__init__(
-            self = self,
-            property_name = property_name,
-            type = cartesian.Cartesian3,
+            self=self,
+            property_name=property_name,
+            type=cartesian.Cartesian3,
         )
 
         self.number_of_derivatives = number_of_derivatives

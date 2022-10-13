@@ -23,8 +23,8 @@ class _Cartesian(_CesiumObject):
 
     def generate_script(self, widget=None) -> str:
         if self._is_array or self._is_degrees:
-            return f'Cesium.{self}'
-        return f'new Cesium.{self}'
+            return f"Cesium.{self}"
+        return f"new Cesium.{self}"
 
 
 def _maybe_cartesian2_list(x, key):
@@ -36,7 +36,7 @@ def _maybe_cartesian2_list(x, key):
             return x
         elif all(isinstance(e, _Cartesian) for e in x):
             # for better error message
-            msg = '{key} must be a listlike of Cartesian2: {x}'
+            msg = "{key} must be a listlike of Cartesian2: {x}"
             raise ValueError(msg.format(key=key, x=x))
 
         if com.is_listlike_2elem(x):
@@ -59,8 +59,8 @@ class Cartesian2(_Cartesian):
         self._is_degrees = degrees
 
         if degrees:
-            com.validate_longitude(x, key='x')
-            com.validate_latitude(y, key='y')
+            com.validate_longitude(x, key="x")
+            com.validate_latitude(y, key="y")
 
     @classmethod
     def fromDegrees(cls, x, y):
@@ -79,7 +79,7 @@ class Cartesian2(_Cartesian):
 
     @classmethod
     def maybe(cls, x, degrees=False):
-        """ Convert list or tuple to Cartesian2 """
+        """Convert list or tuple to Cartesian2"""
         if isinstance(x, Cartesian2):
             return x
 
@@ -103,8 +103,8 @@ class Cartesian3(_Cartesian):
         self._is_degrees = degrees
 
         if degrees:
-            com.validate_longitude(x, key='x')
-            com.validate_latitude(y, key='y')
+            com.validate_longitude(x, key="x")
+            com.validate_latitude(y, key="y")
 
     @classmethod
     def fromDegrees(cls, x, y, z):
@@ -134,7 +134,7 @@ class Cartesian3(_Cartesian):
 
     @classmethod
     def maybe(cls, x, degrees=False):
-        """ Convert list or tuple to Cartesian3 """
+        """Convert list or tuple to Cartesian3"""
         if isinstance(x, Cartesian3):
             return x
 
@@ -160,7 +160,7 @@ class Cartesian3Array(_Cartesian):
         if isinstance(x, Cartesian3Array):
             x = x.x
 
-        self.x = com.validate_listlike_lonlatalt(x, 'x')
+        self.x = com.validate_listlike_lonlatalt(x, "x")
         # currently, array always be degrees
         self._is_degrees = True
 
@@ -189,8 +189,8 @@ class Cartesian4(_Cartesian):
         self._is_degrees = degrees
 
         if degrees:
-            com.validate_longitude(x, key='x')
-            com.validate_latitude(y, key='y')
+            com.validate_longitude(x, key="x")
+            com.validate_latitude(y, key="y")
 
     @classmethod
     def fromDegrees(cls, x, y, z, w):
@@ -206,7 +206,7 @@ class Cartesian4(_Cartesian):
 
     @classmethod
     def maybe(cls, x, degrees=False):
-        """ Convert list or tuple to Cartesian4 """
+        """Convert list or tuple to Cartesian4"""
         if isinstance(x, Cartesian4):
             return x
 
@@ -234,10 +234,10 @@ class Rectangle(_Cartesian):
         self._is_degrees = degrees
 
         if degrees:
-            self.west = com.validate_longitude(west, key='west')
-            self.south = com.validate_latitude(south, key='south')
-            self.east = com.validate_longitude(east, key='east')
-            self.north = com.validate_latitude(north, key='north')
+            self.west = com.validate_longitude(west, key="west")
+            self.south = com.validate_latitude(south, key="south")
+            self.east = com.validate_longitude(east, key="east")
+            self.north = com.validate_latitude(north, key="north")
 
     @classmethod
     def fromDegrees(cls, west, south, east, north):
@@ -246,7 +246,9 @@ class Rectangle(_Cartesian):
     @property
     def _inner_repr(self):
         rep = "west={west}, south={south}, east={east}, north={north}"
-        return rep.format(west=self.west, south=self.south, east=self.east, north=self.north)
+        return rep.format(
+            west=self.west, south=self.south, east=self.east, north=self.north
+        )
 
     def __repr__(self):
         # show more detailed repr, as arg order is not easy to remember
@@ -260,10 +262,14 @@ class Rectangle(_Cartesian):
         # we can't use repr as it is like other Cartesian
         if self._is_degrees:
             rep = """Cesium.Rectangle.fromDegrees({west}, {south}, {east}, {north})"""
-            return rep.format(west=self.west, south=self.south, east=self.east, north=self.north)
+            return rep.format(
+                west=self.west, south=self.south, east=self.east, north=self.north
+            )
         else:
             rep = """new Cesium.Rectangle({west}, {south}, {east}, {north})"""
-            return rep.format(west=self.west, south=self.south, east=self.east, north=self.north)
+            return rep.format(
+                west=self.west, south=self.south, east=self.east, north=self.north
+            )
 
     @classmethod
     def maybe(cls, x):

@@ -10,7 +10,7 @@ from cesiumpy.util.trait import MaybeTrait
 
 class Box(_CesiumEntity):
 
-    '''
+    """
     BoxGraphics
 
     Parameters
@@ -32,18 +32,18 @@ class Box(_CesiumEntity):
         A Property specifying the Color of the outline.
     outline_width: float, default 1.
         A numeric Property specifying the width of the outline.
-    '''
+    """
 
     # Definitions
 
-    _klass = 'box'
+    _klass = "box"
 
     _props = [
-        'dimensions',
-        'shadows',
+        "dimensions",
+        "shadows",
     ]
 
-    dimensions = MaybeTrait(klass = cartesian.Cartesian3)
+    dimensions = MaybeTrait(klass=cartesian.Cartesian3)
     # shadows = MaybeTrait(klass = ShadowMode)
 
     # Constructor
@@ -52,28 +52,28 @@ class Box(_CesiumEntity):
         self,
         position,
         dimensions,
-        orientation = None,
-        show = None,
-        fill = None,
-        material = None,
-        outline = None,
-        outline_color = None,
-        outline_width = None,
-        shadows = None,
-        name = None,
+        orientation=None,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outline_color=None,
+        outline_width=None,
+        shadows=None,
+        name=None,
         **kwargs,
     ) -> None:
 
         super().__init__(
-            show = show,
-            fill = fill,
-            material = material,
-            outline = outline,
-            outline_color = outline_color,
-            outline_width = outline_width,
-            position = position,
-            orientation = orientation,
-            name = name,
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outline_color=outline_color,
+            outline_width=outline_width,
+            position=position,
+            orientation=orientation,
+            name=name,
             **kwargs,
         )
 
