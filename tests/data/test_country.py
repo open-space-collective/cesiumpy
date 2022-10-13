@@ -14,17 +14,19 @@ import cesiumpy
 
 ######################################################################################################################################################
 
-class TestCountry:
 
+class TestCountry:
     def test_country_getattr_error(self):
         msg = "Unable to load country data, file not found: 'X'"
         with pytest.raises(AttributeError, match=msg):
             cesiumpy.countries.X
 
         with pytest.raises(ValueError, match=msg):
-            cesiumpy.countries.get('X')
+            cesiumpy.countries.get("X")
 
-    @pytest.mark.skipif('shapely.geometry' not in sys.modules, reason="requires Shapely")
+    @pytest.mark.skipif(
+        "shapely.geometry" not in sys.modules, reason="requires Shapely"
+    )
     def test_country_jpn(self):
 
         jpn = cesiumpy.countries.jpn
@@ -50,18 +52,22 @@ class TestCountry:
         assert all([isinstance(e, cesiumpy.Polygon) for e in jpn]) is True
         assert jpn[0].script == exp
 
-    @pytest.mark.skipif('shapely.geometry' not in sys.modules, reason="requires Shapely")
+    @pytest.mark.skipif(
+        "shapely.geometry" not in sys.modules, reason="requires Shapely"
+    )
     def test_country_get_jpn(self):
 
-        jpn = cesiumpy.countries.get('jpn')
+        jpn = cesiumpy.countries.get("jpn")
         assert isinstance(jpn, list)
         assert all([isinstance(e, cesiumpy.Polygon) for e in jpn]) is True
         exp = """{polygon : {hierarchy : Cesium.Cartesian3.fromDegreesArray([153.958588, 24.295, 153.953308, 24.292774, 153.946625, 24.293331, 153.942749, 24.296944, 153.939697, 24.300831, 153.938873, 24.306942, 153.940247, 24.312496, 153.947754, 24.319443, 153.952759, 24.321384, 153.960236, 24.321663, 153.96579, 24.31361, 153.96579, 24.309441, 153.963013, 24.29833, 153.958588, 24.295])}}"""
         assert jpn[0].script == exp
 
-    @pytest.mark.skipif('shapely.geometry' not in sys.modules, reason="requires Shapely")
+    @pytest.mark.skipif(
+        "shapely.geometry" not in sys.modules, reason="requires Shapely"
+    )
     def test_viewer(self):
-        v = cesiumpy.Viewer(divid='viewertest')
+        v = cesiumpy.Viewer(divid="viewertest")
         v.entities.add(cesiumpy.countries.abw)
         res = v.to_html()
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
@@ -73,5 +79,6 @@ class TestCountry:
   widget.zoomTo(widget.entities);
 </script>"""
         assert res == exp
+
 
 ######################################################################################################################################################

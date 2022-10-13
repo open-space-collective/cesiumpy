@@ -9,9 +9,8 @@ import cesiumpy
 
 
 class TestWidget:
-
     def setUp(self):
-        self.widget = cesiumpy.CesiumWidget(id='widgettest')
+        self.widget = cesiumpy.CesiumWidget(id="widgettest")
 
     def test_repr(self):
         # should not be to_html output
@@ -29,7 +28,7 @@ class TestWidget:
         assert result == exp
 
     def test_widget_props(self):
-        widget = cesiumpy.CesiumWidget(id='namechange', height='50%', width='70%')
+        widget = cesiumpy.CesiumWidget(id="namechange", height="50%", width="70%")
         result = widget.to_html()
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -40,7 +39,7 @@ class TestWidget:
         assert result == exp
 
     def test_repr_html(self):
-        assert self ==widget.to_html(), self.widget._repr_html_()
+        assert self == widget.to_html(), self.widget._repr_html_()
 
     def test_random_divid(self):
         widget = cesiumpy.CesiumWidget()
@@ -48,13 +47,21 @@ class TestWidget:
 
 
 class TestViewer:
-
     def setUp(self):
-        self.options = dict(animation=True, baseLayerPicker=False, fullscreenButton=False,
-                            geocoder=False, homeButton=False, infoBox=False, sceneModePicker=True,
-                            selectionIndicator=False, navigationHelpButton=False,
-                            timeline=False, navigationInstructionsInitiallyVisible=False)
-        self.viewer = cesiumpy.Viewer(id='viewertest', **self.options)
+        self.options = dict(
+            animation=True,
+            baseLayerPicker=False,
+            fullscreenButton=False,
+            geocoder=False,
+            homeButton=False,
+            infoBox=False,
+            sceneModePicker=True,
+            selectionIndicator=False,
+            navigationHelpButton=False,
+            timeline=False,
+            navigationInstructionsInitiallyVisible=False,
+        )
+        self.viewer = cesiumpy.Viewer(id="viewertest", **self.options)
 
     def test_repr(self):
         # should not be to_html output
@@ -72,10 +79,15 @@ class TestViewer:
         assert result == exp
 
     def test_add_cylinder(self):
-        viewer = cesiumpy.Viewer(id='viewertest', **self.options)
-        cyl = cesiumpy.Cylinder(position=(-110, 50, 2000000), length=4000000,
-                                topRadius=100000, bottomRadius=100000,
-                                material=cesiumpy.color.AQUA, name='x')
+        viewer = cesiumpy.Viewer(id="viewertest", **self.options)
+        cyl = cesiumpy.Cylinder(
+            position=(-110, 50, 2000000),
+            length=4000000,
+            topRadius=100000,
+            bottomRadius=100000,
+            material=cesiumpy.color.AQUA,
+            name="x",
+        )
         viewer.entities.add(cyl)
         result = viewer.to_html()
 
@@ -96,13 +108,36 @@ class TestViewer:
 
     def test_add_polygon(self):
         viewer = cesiumpy.Viewer(id="viewertest", **self.options)
-        pol = cesiumpy.Polygon([-109.080842, 45.002073, -105.91517, 45.002073,
-                                -104.058488, 44.996596, -104.053011, 43.002989,
-                                -104.053011, 41.003906, -105.728954, 40.998429,
-                                -107.919731, 41.003906, -109.04798, 40.998429,
-                                -111.047063, 40.998429, -111.047063, 42.000709,
-                                -111.047063, 44.476286, -111.05254, 45.002073],
-                               material=cesiumpy.color.RED, name='x')
+        pol = cesiumpy.Polygon(
+            [
+                -109.080842,
+                45.002073,
+                -105.91517,
+                45.002073,
+                -104.058488,
+                44.996596,
+                -104.053011,
+                43.002989,
+                -104.053011,
+                41.003906,
+                -105.728954,
+                40.998429,
+                -107.919731,
+                41.003906,
+                -109.04798,
+                40.998429,
+                -111.047063,
+                40.998429,
+                -111.047063,
+                42.000709,
+                -111.047063,
+                44.476286,
+                -111.05254,
+                45.002073,
+            ],
+            material=cesiumpy.color.RED,
+            name="x",
+        )
         viewer.entities.add(pol)
         result = viewer.to_html()
 
@@ -119,48 +154,78 @@ class TestViewer:
     def test_add_entities(self):
         viewer = cesiumpy.Viewer(id="viewertest", **self.options)
 
-        box = cesiumpy.Box(dimensions=(40e4, 30e4, 50e4),
-                           material=cesiumpy.color.RED, position=[-120, 40, 0])
+        box = cesiumpy.Box(
+            dimensions=(40e4, 30e4, 50e4),
+            material=cesiumpy.color.RED,
+            position=[-120, 40, 0],
+        )
         viewer.entities.add(box)
 
-        ellipse = cesiumpy.Ellipse(semiMinorAxis=25e4, semiMajorAxis=40e4,
-                                   material=cesiumpy.color.BLUE, position=[-110, 40, 0])
+        ellipse = cesiumpy.Ellipse(
+            semiMinorAxis=25e4,
+            semiMajorAxis=40e4,
+            material=cesiumpy.color.BLUE,
+            position=[-110, 40, 0],
+        )
         viewer.entities.add(ellipse)
 
-        cyl = cesiumpy.Cylinder(position=[-100, 40, 50e4], length=100e4, topRadius=10e4,
-                                bottomRadius=10e4, material=cesiumpy.color.AQUA)
+        cyl = cesiumpy.Cylinder(
+            position=[-100, 40, 50e4],
+            length=100e4,
+            topRadius=10e4,
+            bottomRadius=10e4,
+            material=cesiumpy.color.AQUA,
+        )
         viewer.entities.add(cyl)
 
-        pol = cesiumpy.Polygon([-90, 40, -95, 40, -95, 45, -90, 40],
-                               material=cesiumpy.color.ORANGE)
+        pol = cesiumpy.Polygon(
+            [-90, 40, -95, 40, -95, 45, -90, 40], material=cesiumpy.color.ORANGE
+        )
         viewer.entities.add(pol)
 
-        rect = cesiumpy.Rectangle(coordinates=(-85, 40, -80, 45),
-                                  material=cesiumpy.color.GREEN)
+        rect = cesiumpy.Rectangle(
+            coordinates=(-85, 40, -80, 45), material=cesiumpy.color.GREEN
+        )
         viewer.entities.add(rect)
 
-        ellipsoid = cesiumpy.Ellipsoid(position=(-70, 40, 0), radii=(20e4, 20e4, 30e4),
-                                       material=cesiumpy.color.GREEN)
+        ellipsoid = cesiumpy.Ellipsoid(
+            position=(-70, 40, 0),
+            radii=(20e4, 20e4, 30e4),
+            material=cesiumpy.color.GREEN,
+        )
         viewer.entities.add(ellipsoid)
 
-        wall = cesiumpy.Wall(positions=[-60, 40, -65, 40, -65, 45, -60, 45],
-                             maximumHeights=[10e4] * 4, minimumHeights=[0] * 4,
-                             material=cesiumpy.color.RED)
+        wall = cesiumpy.Wall(
+            positions=[-60, 40, -65, 40, -65, 45, -60, 45],
+            maximumHeights=[10e4] * 4,
+            minimumHeights=[0] * 4,
+            material=cesiumpy.color.RED,
+        )
         viewer.entities.add(wall)
 
-        corridor = cesiumpy.Corridor(positions=[-120, 30, -90, 35, -60, 30],
-                                     width=2e5, material=cesiumpy.color.RED)
+        corridor = cesiumpy.Corridor(
+            positions=[-120, 30, -90, 35, -60, 30],
+            width=2e5,
+            material=cesiumpy.color.RED,
+        )
         viewer.entities.add(corridor)
 
-        polyline = cesiumpy.Polyline(positions=[-120, 25, -90, 30, -60, 25], width=0.5,
-                                     material=cesiumpy.color.BLUE)
+        polyline = cesiumpy.Polyline(
+            positions=[-120, 25, -90, 30, -60, 25],
+            width=0.5,
+            material=cesiumpy.color.BLUE,
+        )
         viewer.entities.add(polyline)
-        polylinevolume = cesiumpy.PolylineVolume(positions=[-120, 20, -90, 25, -60, 20],
-                                                 shape=[cesiumpy.Cartesian2(-50000, -50000),
-                                                        cesiumpy.Cartesian2(50000, -50000),
-                                                        cesiumpy.Cartesian2(50000, 50000),
-                                                        cesiumpy.Cartesian2(-50000, 50000)],
-                                                 material=cesiumpy.color.GREEN)
+        polylinevolume = cesiumpy.PolylineVolume(
+            positions=[-120, 20, -90, 25, -60, 20],
+            shape=[
+                cesiumpy.Cartesian2(-50000, -50000),
+                cesiumpy.Cartesian2(50000, -50000),
+                cesiumpy.Cartesian2(50000, 50000),
+                cesiumpy.Cartesian2(-50000, 50000),
+            ],
+            material=cesiumpy.color.GREEN,
+        )
         viewer.entities.add(polylinevolume)
         result = viewer.to_html()
 
@@ -196,7 +261,18 @@ class TestViewer:
 
         # add multiple objects at once
         viewer = cesiumpy.Viewer(id="viewertest", **self.options)
-        objs = [box, ellipse, cyl, pol, rect, ellipsoid, wall, corridor, polyline, polylinevolume]
+        objs = [
+            box,
+            ellipse,
+            cyl,
+            pol,
+            rect,
+            ellipsoid,
+            wall,
+            corridor,
+            polyline,
+            polylinevolume,
+        ]
         viewer.entities.add(objs)
         result = viewer.to_html()
         assert result == exp
@@ -238,7 +314,7 @@ class TestViewer:
 
     def test_model(self):
         viewer = cesiumpy.Viewer(id="viewertest")
-        m = cesiumpy.Model('xxx.gltf', modelMatrix=(-100, 40, 0), scale=200)
+        m = cesiumpy.Model("xxx.gltf", modelMatrix=(-100, 40, 0), scale=200)
         viewer.scene.primitives.add(m)
         result = viewer.to_html()
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
@@ -280,6 +356,5 @@ class TestViewer:
             viewer.scripts.add(1)
 
 
-if __name__ == '__main__':
-    nose.runmodule(argv=[__file__, '-vvs', '-x', '--pdb', '--pdb-failure'],
-                   exit=False)
+if __name__ == "__main__":
+    nose.runmodule(argv=[__file__, "-vvs", "-x", "--pdb", "--pdb-failure"], exit=False)

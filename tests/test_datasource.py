@@ -7,48 +7,57 @@ import cesiumpy
 
 
 class TestDataSource:
-
     def test_czmldatasource(self):
-        ds = cesiumpy.CzmlDataSource('xxx.czml')
+        ds = cesiumpy.CzmlDataSource("xxx.czml")
         exp = 'Cesium.CzmlDataSource.load("xxx.czml")'
         self.assertEqual(ds.script, exp)
-        ds = cesiumpy.CzmlDataSource.load('xxx.czml')
+        ds = cesiumpy.CzmlDataSource.load("xxx.czml")
         self.assertEqual(ds.script, exp)
 
     def test_geojsondatasource(self):
-        ds = cesiumpy.GeoJsonDataSource('xxx.geojson')
+        ds = cesiumpy.GeoJsonDataSource("xxx.geojson")
 
         exp = 'Cesium.GeoJsonDataSource.load("xxx.geojson")'
         self.assertEqual(ds.script, exp)
-        ds = cesiumpy.GeoJsonDataSource.load('xxx.geojson')
+        ds = cesiumpy.GeoJsonDataSource.load("xxx.geojson")
         self.assertEqual(ds.script, exp)
 
-        ds = cesiumpy.GeoJsonDataSource('xxx.geojson', markerColor=cesiumpy.color.RED,
-                                        stroke=cesiumpy.color.BLUE, fill=cesiumpy.color.GREEN)
+        ds = cesiumpy.GeoJsonDataSource(
+            "xxx.geojson",
+            markerColor=cesiumpy.color.RED,
+            stroke=cesiumpy.color.BLUE,
+            fill=cesiumpy.color.GREEN,
+        )
         exp = 'Cesium.GeoJsonDataSource.load("xxx.geojson", {markerColor : Cesium.Color.RED, stroke : Cesium.Color.BLUE, fill : Cesium.Color.GREEN})'
         self.assertEqual(ds.script, exp)
-        ds = cesiumpy.GeoJsonDataSource.load('xxx.geojson', markerColor=cesiumpy.color.RED,
-                                             stroke=cesiumpy.color.BLUE, fill=cesiumpy.color.GREEN)
+        ds = cesiumpy.GeoJsonDataSource.load(
+            "xxx.geojson",
+            markerColor=cesiumpy.color.RED,
+            stroke=cesiumpy.color.BLUE,
+            fill=cesiumpy.color.GREEN,
+        )
         self.assertEqual(ds.script, exp)
 
-        ds = cesiumpy.GeoJsonDataSource('xxx.geojson', markerColor='red',
-                                        stroke='blue', fill='green')
+        ds = cesiumpy.GeoJsonDataSource(
+            "xxx.geojson", markerColor="red", stroke="blue", fill="green"
+        )
         self.assertEqual(ds.script, exp)
-        ds = cesiumpy.GeoJsonDataSource.load('xxx.geojson', markerColor='red',
-                                             stroke='blue', fill='green')
+        ds = cesiumpy.GeoJsonDataSource.load(
+            "xxx.geojson", markerColor="red", stroke="blue", fill="green"
+        )
         self.assertEqual(ds.script, exp)
 
     def test_kmldatasource(self):
-        ds = cesiumpy.KmlDataSource('xxx.kml')
+        ds = cesiumpy.KmlDataSource("xxx.kml")
 
         exp = 'Cesium.KmlDataSource.load("xxx.kml")'
         self.assertEqual(ds.script, exp)
-        ds = cesiumpy.KmlDataSource.load('xxx.kml')
+        ds = cesiumpy.KmlDataSource.load("xxx.kml")
         self.assertEqual(ds.script, exp)
 
     def test_czml_viewer(self):
-        v = cesiumpy.Viewer(divid='viewertest')
-        d = cesiumpy.CzmlDataSource('data/simple.czml')
+        v = cesiumpy.Viewer(divid="viewertest")
+        d = cesiumpy.CzmlDataSource("data/simple.czml")
         v.dataSources.add(d)
         result = v.to_html()
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
@@ -61,8 +70,8 @@ class TestDataSource:
         self.assertEqual(result, exp)
 
     def test_geojson_viewer(self):
-        ds = cesiumpy.GeoJsonDataSource('./test.geojson', markerSymbol='?')
-        viewer = cesiumpy.Viewer(divid='viewertest')
+        ds = cesiumpy.GeoJsonDataSource("./test.geojson", markerSymbol="?")
+        viewer = cesiumpy.Viewer(divid="viewertest")
         viewer.dataSources.add(ds)
         viewer.camera.flyTo((-105.01621, 39.57422, 1000))
         result = viewer.to_html()
@@ -78,6 +87,5 @@ class TestDataSource:
         self.assertEqual(result, exp)
 
 
-if __name__ == '__main__':
-    nose.runmodule(argv=[__file__, '-vvs', '-x', '--pdb', '--pdb-failure'],
-                   exit=False)
+if __name__ == "__main__":
+    nose.runmodule(argv=[__file__, "-vvs", "-x", "--pdb", "--pdb-failure"], exit=False)

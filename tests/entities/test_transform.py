@@ -7,7 +7,6 @@ import cesiumpy
 
 
 class TestTransform:
-
     def test_transform(self):
         c = cesiumpy.Cartesian3(1, 1, 1)
         res = cesiumpy.Transforms.eastNorthUpToFixedFrame(c)
@@ -23,6 +22,5 @@ class TestTransform:
         self.assertEqual(res.script, exp)
 
 
-if __name__ == '__main__':
-    nose.runmodule(argv=[__file__, '-vvs', '-x', '--pdb', '--pdb-failure'],
-                   exit=False)
+if __name__ == "__main__":
+    nose.runmodule(argv=[__file__, "-vvs", "-x", "--pdb", "--pdb-failure"], exit=False)

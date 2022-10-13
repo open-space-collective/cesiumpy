@@ -8,23 +8,22 @@ import cesiumpy
 
 
 class TestCamera:
-
     def test_camera_basics(self):
-        widget = cesiumpy.CesiumWidget(divid='cesiumwidget')
+        widget = cesiumpy.CesiumWidget(divid="cesiumwidget")
 
         c = cesiumpy.Camera(widget)
-        self.assertEqual(c.script, '')
+        self.assertEqual(c.script, "")
 
         c.flyTo((1, 2, 3))
-        exp = '{destination : Cesium.Cartesian3.fromDegrees(1.0, 2.0, 3.0)}'
+        exp = "{destination : Cesium.Cartesian3.fromDegrees(1.0, 2.0, 3.0)}"
         self.assertEqual(c.script, exp)
 
         c.flyTo((4, 5, 6))
-        exp = '{destination : Cesium.Cartesian3.fromDegrees(4.0, 5.0, 6.0)}'
+        exp = "{destination : Cesium.Cartesian3.fromDegrees(4.0, 5.0, 6.0)}"
         self.assertEqual(c.script, exp)
 
         c.flyTo((4, 5, 6, 7))
-        exp = '{destination : Cesium.Rectangle.fromDegrees(4.0, 5.0, 6.0, 7.0)}'
+        exp = "{destination : Cesium.Rectangle.fromDegrees(4.0, 5.0, 6.0, 7.0)}"
         self.assertEqual(c.script, exp)
 
         msg = "x must be longitude, between -180 to 180"
@@ -35,21 +34,25 @@ class TestCamera:
         with pytest.raises_regexp(ValueError, msg):
             c.flyTo((1, 200, 3))
 
-        msg = "The 'destination' trait of a Camera instance must be a _Cartesian or None"
+        msg = (
+            "The 'destination' trait of a Camera instance must be a _Cartesian or None"
+        )
         with pytest.raises_regexp(traitlets.TraitError, msg):
             c.flyTo(1)
 
     def test_camera_repr(self):
-        widget = cesiumpy.CesiumWidget(divid='cesiumwidget')
+        widget = cesiumpy.CesiumWidget(divid="cesiumwidget")
 
         c = cesiumpy.Camera(widget)
         self.assertEqual(repr(c), "Camera(destination=default)")
 
         c.flyTo((-130, 40, 10000))
-        self.assertEqual(repr(c), "Camera(destination=Cartesian3.fromDegrees(-130.0, 40.0, 10000.0))")
+        self.assertEqual(
+            repr(c), "Camera(destination=Cartesian3.fromDegrees(-130.0, 40.0, 10000.0))"
+        )
 
     def test_widget(self):
-        widget = cesiumpy.CesiumWidget(divid='cesiumwidget')
+        widget = cesiumpy.CesiumWidget(divid="cesiumwidget")
         widget.camera.flyTo((-117.16, 32.71, 15000.0))
         result = widget.to_html()
 
@@ -63,7 +66,7 @@ class TestCamera:
         self.assertEqual(result, exp)
 
     def test_viewer(self):
-        viewer = cesiumpy.Viewer(divid='viewertest')
+        viewer = cesiumpy.Viewer(divid="viewertest")
         viewer.camera.flyTo((135, 30, 145, 45))
         result = viewer.to_html()
 
@@ -77,8 +80,13 @@ class TestCamera:
         self.assertEqual(result, exp)
 
         # add entity (doesn't change camera position)
-        cyl = cesiumpy.Cylinder(position=(120, 35, 5000), length=10000, topRadius=10000,
-                                bottomRadius=20000, material='red')
+        cyl = cesiumpy.Cylinder(
+            position=(120, 35, 5000),
+            length=10000,
+            topRadius=10000,
+            bottomRadius=20000,
+            material="red",
+        )
         viewer.entities.add(cyl)
         result = viewer.to_html()
 
@@ -108,9 +116,10 @@ class TestCamera:
 
     def test_geocode_defaultheight(self):
         import geopy
+
         try:
-            viewer = cesiumpy.Viewer(divid='viewertest')
-            viewer.camera.flyTo(u'Los Angeles')
+            viewer = cesiumpy.Viewer(divid="viewertest")
+            viewer.camera.flyTo("Los Angeles")
             result = viewer.to_html()
 
             exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
@@ -125,6 +134,5 @@ class TestCamera:
             raise nose.SkipTest("exceeded geocoder quota")
 
 
-if __name__ == '__main__':
-    nose.runmodule(argv=[__file__, '-vvs', '-x', '--pdb', '--pdb-failure'],
-                   exit=False)
+if __name__ == "__main__":
+    nose.runmodule(argv=[__file__, "-vvs", "-x", "--pdb", "--pdb-failure"], exit=False)

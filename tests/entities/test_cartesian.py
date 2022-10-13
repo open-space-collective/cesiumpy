@@ -13,8 +13,8 @@ import cesiumpy.entities.cartesian as cartesian
 
 ######################################################################################################################################################
 
-class TestCartesian:
 
+class TestCartesian:
     def test_cartesian2(self):
         c = cesiumpy.Cartesian2(5, 10)
         exp = "new Cesium.Cartesian2(5.0, 10.0)"
@@ -104,9 +104,10 @@ class TestCartesian:
 
         with pytest.raises(ValueError, match=msg):
             import geopy
+
             try:
                 # string causes geocode search
-                cesiumpy.Cartesian3.fromDegreesArray([('X', 20), (20, 20)])
+                cesiumpy.Cartesian3.fromDegreesArray([("X", 20), (20, 20)])
             except geopy.exc.GeocoderQuotaExceeded:
                 raise nose.SkipTest("exceeded geocoder quota")
 
@@ -237,5 +238,6 @@ class TestCartesian:
         c = cartesian.Rectangle.fromDegrees(5, 10, 20, 30)
         exp = "Rectangle.fromDegrees(west=5.0, south=10.0, east=20.0, north=30.0)"
         assert repr(c) == exp
+
 
 ######################################################################################################################################################

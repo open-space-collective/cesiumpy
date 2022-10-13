@@ -10,15 +10,15 @@ import cesiumpy.testing as tm
 
 
 class TestImageMaterial:
-
     def test_imagematerial(self):
-        m = cesiumpy.entities.material.ImageMaterialProperty('xxx.png')
-        self.assertEqual(repr(m), 'ImageMaterialProperty(xxx.png)')
-        self.assertEqual(m.script, """new Cesium.ImageMaterialProperty({image : "xxx.png"})""")
+        m = cesiumpy.entities.material.ImageMaterialProperty("xxx.png")
+        self.assertEqual(repr(m), "ImageMaterialProperty(xxx.png)")
+        self.assertEqual(
+            m.script, """new Cesium.ImageMaterialProperty({image : "xxx.png"})"""
+        )
 
 
 class TestTempImageMaterial:
-
     def test_matplotlibimage(self):
         tm._skip_if_no_matplotlib()
 
@@ -29,11 +29,21 @@ class TestTempImageMaterial:
         ax = plt.imshow(img)
         img = cesiumpy.entities.material.TemporaryImage(ax.figure)
         m = cesiumpy.entities.material.ImageMaterialProperty(img)
-        self.assertTrue(re.match("""new Cesium\\.ImageMaterialProperty\\({image : "\w+\\.png"}\\)""", m.script))
+        self.assertTrue(
+            re.match(
+                """new Cesium\\.ImageMaterialProperty\\({image : "\w+\\.png"}\\)""",
+                m.script,
+            )
+        )
 
         img = cesiumpy.entities.material.TemporaryImage(ax)
         m = cesiumpy.entities.material.ImageMaterialProperty(img)
-        self.assertTrue(re.match("""new Cesium\\.ImageMaterialProperty\\({image : "\w+\\.png"}\\)""", m.script))
+        self.assertTrue(
+            re.match(
+                """new Cesium\\.ImageMaterialProperty\\({image : "\w+\\.png"}\\)""",
+                m.script,
+            )
+        )
         plt.close()
 
         fig, axes = plt.subplots(2, 2)
@@ -44,6 +54,5 @@ class TestTempImageMaterial:
         plt.close()
 
 
-if __name__ == '__main__':
-    nose.runmodule(argv=[__file__, '-vvs', '-x', '--pdb', '--pdb-failure'],
-                   exit=False)
+if __name__ == "__main__":
+    nose.runmodule(argv=[__file__, "-vvs", "-x", "--pdb", "--pdb-failure"], exit=False)
