@@ -1,0 +1,125 @@
+<meta charset="utf-8" />
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.86/Build/Cesium/Cesium.js"></script>
+<link
+  href="https://cesium.com/downloads/cesiumjs/releases/1.86/Build/Cesium/Widgets/widgets.css"
+  rel="stylesheet"
+/>
+<div id="cesiumContainer" style="width: 1000px; height: 600px">
+  <div>
+    <script type="text/javascript">
+      async function init() {
+        Cesium.Ion.defaultAccessToken =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiM2FmYTZhZi1mNGFlLTQwYjgtOGYzZC0xNGYyYjg2MmQ4MzMiLCJpZCI6NzE4ODUsImlhdCI6MTYzNTUzNzcyMn0.Qn_UoR6ruURHKIDostP8wVUwzii-kQ77s6sAlayZddA";
+        var widget = new Cesium.Viewer("cesiumContainer", {
+          fullscreenButton: false,
+          homeButton: false,
+          infoBox: false,
+          sceneModePicker: false,
+          selectionIndicator: false,
+          timeline: true,
+          navigationHelpButton: false,
+          navigationInstructionsInitiallyVisible: false,
+          scene3dOnly: true,
+          clockViewModel: new Cesium.ClockViewModel(
+            new Cesium.Clock({
+              startTime: Cesium.JulianDate.fromIso8601(
+                "2022-01-01T00:00:00+00:00"
+              ),
+              stopTime: Cesium.JulianDate.fromIso8601(
+                "2022-01-02T00:00:00+00:00"
+              ),
+              clockRange: Cesium.ClockRange.CLAMPED,
+              canAnimate: true,
+              shouldAnimate: false,
+            })
+          ),
+        });
+        widget.property_5b3ae365 = new Cesium.SampledProperty(
+          Cesium.Cartesian3
+        );
+        widget.property_5b3ae365.addSample(
+          "2022-01-01T00:00:00+00:00",
+          Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0)
+        );
+        widget.property_ab923778 = new Cesium.SampledProperty(
+          Cesium.Quaternion
+        );
+        widget.property_ab923778.addSample(
+          "2022-01-01T00:00:00+00:00",
+          new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)
+        );
+        widget.property_b5c45f02_position = new Cesium.SampledProperty(
+          Cesium.Cartesian3
+        );
+        widget.property_b5c45f02_position.addSample(
+          "2022-01-01T00:00:00+00:00",
+          Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0)
+        );
+        widget.property_b5c45f02_orientation = new Cesium.SampledProperty(
+          Cesium.Quaternion
+        );
+        widget.property_b5c45f02_orientation.addSample(
+          "2022-01-01T00:00:00+00:00",
+          new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)
+        );
+        widget.entities.add({
+          position: widget.property_5b3ae365,
+          orientation: widget.property_ab923778,
+          point : {
+            pixelSize : 10,
+            color : Cesium.Color.fromCssColorString('#edc100')
+          },
+          // model: {
+          //   uri: await Cesium.IonResource.fromAssetId(669199),
+          //   availability: new Cesium.TimeIntervalCollection({
+          //     intervals: [
+          //       new Cesium.TimeInterval({
+          //         start: Cesium.JulianDate.fromIso8601(
+          //           "2022-01-01T00:00:00+00:00"
+          //         ),
+          //         stop: Cesium.JulianDate.fromIso8601(
+          //           "2022-01-02T00:00:00+00:00"
+          //         ),
+          //       }),
+          //     ],
+          //   }),
+          // },
+          label : {
+            text : 'Toto',
+            font : '10pt monospace',
+            style: Cesium.LabelStyle.FILL,
+            fillColor: Cesium.Color.CYAN,
+            backgroundColor: Cesium.Color.GRAY,
+            backgroundPadding: new Cesium.Cartesian2(10, 10),
+            horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+            pixelOffset: new Cesium.Cartesian2(10, 0),
+            eyeOffset: new Cesium.Cartesian3(0.0, 0.0, -100000.0)
+          },
+          ellipse : {
+            show: true,
+            fill: false,
+            outline: true,
+            outlineColor: Cesium.Color.LIME.withAlpha(0.75),
+            outlineWidth: 1,
+            semiMinorAxis : 100000,
+            semiMajorAxis : 100000,
+          },
+          path : {
+            show: true,
+            resolution : 60,
+            leadTime: 100,
+            // trailTime: 100,
+            material : Cesium.Color.fromCssColorString('#FF5500').withAlpha(0.75),
+            width : 1
+          },
+        });
+
+        // widget.entities.add({position: widget.property_b5c45f02_position, orientation: widget.property_b5c45f02_orientation, cylinder: {length: 3.0, topRadius: 0.5289809421253949, bottomRadius: 0.0, slices: 10.0, material: new Cesium.Color(1.0, 0.0, 0.0, 0.2), availability: new Cesium.TimeIntervalCollection({intervals: [new Cesium.TimeInterval({start: Cesium.JulianDate.fromIso8601("2022-01-01T00:00:00+00:00"), stop: Cesium.JulianDate.fromIso8601("2022-01-02T00:00:00+00:00")})]})}});
+        widget.zoomTo(widget.entities);
+        widget.trackedEntity =
+          widget.entities.values[widget.entities.values.length - 1];
+      }
+      init();
+    </script>
+  </div>
+</div>

@@ -31,14 +31,14 @@ class Color(Material):
         self.blue = blue
         self.alpha = alpha
 
-    def withAlpha(self, alpha):
+    def with_alpha(self, alpha):
         self.alpha = alpha
         return self
 
     def set_alpha(self, alpha):
-        msg = "Color.set_alpha is deprecated. Use Color.withAlpha"
+        msg = "Color.set_alpha is deprecated. Use Color.with_alpha"
         warnings.warn(msg)
-        return self.withAlpha(alpha)
+        return self.with_alpha(alpha)
 
     def copy(self) -> Color:
         return Color(
@@ -59,7 +59,7 @@ class Color(Material):
     # Static methods
 
     @staticmethod
-    def fromAlpha(color: Color, alpha: float) -> Color:
+    def from_alpha(color: Color, alpha: float) -> Color:
 
         return Color(
             red=color.red,
@@ -69,7 +69,7 @@ class Color(Material):
         )
 
     @staticmethod
-    def fromBytes(
+    def from_bytes(
         red: float = 255,
         green: float = 255,
         blue: float = 255,
@@ -101,10 +101,10 @@ class Color(Material):
         )
 
     @staticmethod
-    def fromString(color: str) -> CSSColor:
+    def from_string(color: str) -> CSSColor:
         """
         Creates a Color instance from a CSS color value. Shortcut for
-        Color.fromCSSColorString.
+        Color.from_css_color_string.
 
         Parameters
         ----------
@@ -115,7 +115,7 @@ class Color(Material):
         return CSSColor(name=color)
 
     @staticmethod
-    def fromCSSColorString(color: str) -> CSSColor:
+    def from_css_color_string(color: str) -> CSSColor:
         """
         Creates a Color instance from a CSS color value.
 

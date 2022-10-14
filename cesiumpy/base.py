@@ -213,11 +213,12 @@ class _CesiumBase(_CesiumObject):
     @property
     def _load_scripts(self) -> List[str]:
 
-        meta: str = '<meta charset="utf-8">'
-        js: str = f'<script src="https://cesium.com/downloads/cesiumjs/releases/{CESIUM_VERSION}/Build/Cesium/Cesium.js"></script>'
-        css: str = f'<link href="https://cesium.com/downloads/cesiumjs/releases/{CESIUM_VERSION}/Build/Cesium/Widgets/widgets.css" rel="stylesheet">'
-
-        return [meta, js, css]
+        return [
+            '<meta charset="utf-8">',
+            f'<script src="https://cesium.com/downloads/cesiumjs/releases/{CESIUM_VERSION}/Build/Cesium/Cesium.js"></script>',
+            f'<script src="https://storage.googleapis.com/loft-orbital-public/cesium-sensor-volumes.js"></script>',
+            f'<link href="https://cesium.com/downloads/cesiumjs/releases/{CESIUM_VERSION}/Build/Cesium/Widgets/widgets.css" rel="stylesheet">',
+        ]
 
     @property
     def _setup_scripts(self) -> List[str]:

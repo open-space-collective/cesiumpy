@@ -1,14 +1,23 @@
-#!/usr/bin/env python
-# coding: utf-8
+######################################################################################################################################################
 
+# @project        CesiumPy
+# @file           cesiumpy/entities/cartesian.py
+# @license        Apache 2.0
+
+######################################################################################################################################################
+
+from __future__ import annotations
 from __future__ import unicode_literals
 
+import math
 import traitlets
 
 from cesiumpy.base import _CesiumObject
 import cesiumpy.extension.geocode as geocode
 import cesiumpy.extension.shapefile as shapefile
 import cesiumpy.util.common as com
+
+######################################################################################################################################################
 
 
 class _Cartesian(_CesiumObject):
@@ -47,35 +56,52 @@ def _maybe_cartesian2_list(x, key):
     return x
 
 
+######################################################################################################################################################
+
+
 class Cartesian2(_Cartesian):
+
+    # Definitions
 
     x = traitlets.Float()
     y = traitlets.Float()
 
-    def __init__(self, x, y, degrees=False):
-        self.x = x
-        self.y = y
+    # Constructor
 
-        self._is_degrees = degrees
+    def __init__(
+        self,
+        x: float,
+        y: float,
+        degrees: bool = False,
+    ) -> None:
+
+        self.x: float = x
+        self.y: float = y
+
+        self._is_degrees: bool = degrees
 
         if degrees:
             com.validate_longitude(x, key="x")
             com.validate_latitude(y, key="y")
 
-    @classmethod
-    def fromDegrees(cls, x, y):
-        return Cartesian2(x, y, degrees=True)
+    # Methods
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.x)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self._is_degrees:
             rep = """Cartesian2.fromDegrees({x}, {y})"""
             return rep.format(x=self.x, y=self.y)
-        else:
-            rep = """Cartesian2({x}, {y})"""
-            return rep.format(x=self.x, y=self.y)
+
+        rep = """Cartesian2({x}, {y})"""
+        return rep.format(x=self.x, y=self.y)
+
+    # Class methods
+
+    @classmethod
+    def fromDegrees(cls, x, y):
+        return Cartesian2(x, y, degrees=True)
 
     @classmethod
     def maybe(cls, x, degrees=False):
@@ -89,29 +115,140 @@ class Cartesian2(_Cartesian):
         return x
 
 
+######################################################################################################################################################
+
+
 class Cartesian3(_Cartesian):
+
+    # Definitions
 
     x = traitlets.Float()
     y = traitlets.Float()
     z = traitlets.Float()
 
-    def __init__(self, x, y, z, degrees=False):
-        self.x = x
-        self.y = y
-        self.z = z
+    # Constructor
 
-        self._is_degrees = degrees
+    def __init__(
+        self,
+        x: float,
+        y: float,
+        z: float,
+        degrees: bool = False,
+    ) -> None:
+
+        self.x: float = x
+        self.y: float = y
+        self.z: float = z
+
+        self._is_degrees: bool = degrees
 
         if degrees:
             com.validate_longitude(x, key="x")
             com.validate_latitude(y, key="y")
 
+    # Methods
+
+    def __eq__(self, other: Cartesian3) -> bool:
+
+        """
+        Return True if two vectors are equal.
+        """
+
+        return self.x == other.x and self.y == other.y and self.z == other.z
+
+    def __mul__(self, scalar: float) -> Cartesian3:
+
+        """
+        Return vector multiplied by scalar.
+        """
+
+        return Cartesian3(
+            x=self.x * scalar,
+            y=self.y * scalar,
+            z=self.z * scalar,
+        )
+
+    def __truediv__(self, scalar: float) -> Cartesian3:
+
+        """
+        Return vector divided by scalar.
+        """
+
+        return Cartesian3(
+            x=self.x / scalar,
+            y=self.y / scalar,
+            z=self.z / scalar,
+        )
+
+    def angle_with(self, other: Cartesian3) -> float:
+
+        """
+        Return angle between two vectors in radians.
+        """
+
+        return math.acos(self.dot(other) / (self.magnitude() * other.magnitude()))
+
+    def magnitude(self) -> float:
+
+        """
+        Return magnitude of vector.
+        """
+
+        return (self.x**2 + self.y**2 + self.z**2) ** 0.5
+
+    def normalized(self) -> Cartesian3:
+
+        """
+        Return normalized vector.
+        """
+
+        return self / self.magnitude()
+
+    def dot(self, other: Cartesian3) -> float:
+
+        """
+        Return dot product of two vectors.
+        """
+
+        assert not self._is_degrees
+        assert not other._is_degrees
+
+        return self.x * other.x + self.y * other.y + self.z * other.z
+
+    def cross(self, other: Cartesian3) -> Cartesian3:
+
+        """
+        Return cross product of two vectors.
+        """
+
+        assert not self._is_degrees
+        assert not other._is_degrees
+
+        return Cartesian3(
+            x=self.y * other.z - self.z * other.y,
+            y=self.z * other.x - self.x * other.z,
+            z=self.x * other.y - self.y * other.x,
+        )
+
+    def __repr__(self) -> str:
+
+        """
+        Return string representation of Cartesian3.
+        """
+
+        if self._is_degrees:
+            return f"Cartesian3.fromDegrees({self.x}, {self.y}, {self.z})"
+
+        return f"Cartesian3({self.x}, {self.y}, {self.z})"
+
+    # Class methods
+
     @classmethod
-    def fromDegrees(cls, x, y, z):
+    def fromDegrees(cls, x, y, z) -> Cartesian3:
         return Cartesian3(x, y, z, degrees=True)
 
     @classmethod
-    def fromDegreesArray(cls, x):
+    def fromDegreesArray(cls, x) -> Cartesian3Array:
         # convert shaply.Polygon to coordinateslist
         x = shapefile._maybe_shapely_polygon(x)
         x = shapefile._maybe_shapely_line(x)
@@ -123,14 +260,6 @@ class Cartesian3(_Cartesian):
             raise NotImplementedError
 
         return Cartesian3Array(x)
-
-    def __repr__(self):
-        if self._is_degrees:
-            rep = """Cartesian3.fromDegrees({x}, {y}, {z})"""
-            return rep.format(x=self.x, y=self.y, z=self.z)
-        else:
-            rep = """Cartesian3({x}, {y}, {z})"""
-            return rep.format(x=self.x, y=self.y, z=self.z)
 
     @classmethod
     def maybe(cls, x, degrees=False):
@@ -152,6 +281,9 @@ class Cartesian3(_Cartesian):
         return x
 
 
+######################################################################################################################################################
+
+
 class Cartesian3Array(_Cartesian):
 
     _is_array = True
@@ -170,6 +302,9 @@ class Cartesian3Array(_Cartesian):
     def __repr__(self):
         rep = """Cartesian3.fromDegreesArrayHeights({x})"""
         return rep.format(x=self.x)
+
+
+######################################################################################################################################################
 
 
 class Cartesian4(_Cartesian):
@@ -215,6 +350,9 @@ class Cartesian4(_Cartesian):
         if com.is_listlike(x) and len(x) == 4:
             return Cartesian4(*x, degrees=degrees)
         return x
+
+
+######################################################################################################################################################
 
 
 class Rectangle(_Cartesian):
@@ -281,3 +419,6 @@ class Rectangle(_Cartesian):
         if com.is_listlike(x) and len(x) == 4:
             return Rectangle.fromDegrees(*x)
         return x
+
+
+######################################################################################################################################################

@@ -132,16 +132,16 @@ class TestColor:
         exp = "new Cesium.Color(1.0, 0.0, 0.0, 0.5)"
         self.assertEqual(c.script, exp)
 
-        c = cesiumpy.color.Color.fromBytes(255, 0, 255)
+        c = cesiumpy.color.Color.from_bytes(255, 0, 255)
         exp = "new Cesium.Color(1.0, 0.0, 1.0)"
         self.assertEqual(c.script, exp)
 
-        c = cesiumpy.color.Color.fromBytes(255, 0, 255, 255)
+        c = cesiumpy.color.Color.from_bytes(255, 0, 255, 255)
         exp = "new Cesium.Color(1.0, 0.0, 1.0, 1.0)"
         self.assertEqual(c.script, exp)
 
     def test_color_string(self):
-        c = cesiumpy.color.Color.fromString("#FF0000")
+        c = cesiumpy.color.Color.from_string("#FF0000")
         exp = """Cesium.Color.fromCssColorString("#FF0000")"""
         self.assertEqual(c.script, exp)
 

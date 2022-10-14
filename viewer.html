@@ -1,0 +1,49 @@
+<meta charset="utf-8">
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.86/Build/Cesium/Cesium.js"></script>
+<script src="https://storage.googleapis.com/loft-orbital-public/cesium-sensor-volumes.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.86/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<div id="cesiumContainer" style="width:1000px; height:600px;"><div>
+<script type="text/javascript">
+  async function init() {
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2NzNkYWEzMy0wMjBiLTRmMjctYjQ0OC0zYmI5MWI5OWMzZmIiLCJpZCI6MTAwMTgyLCJpYXQiOjE2NTcwNDY1NTV9.C9vziiqYdR7e6SQfLz5FueXB27R4SeuZv0Nn_vIeHIg";
+    var widget = new Cesium.Viewer("cesiumContainer", {fullscreenButton: false, homeButton: false, infoBox: false, sceneModePicker: false, selectionIndicator: false, timeline: true, navigationHelpButton: false, navigationInstructionsInitiallyVisible: false, scene3dOnly: true, clockViewModel: new Cesium.ClockViewModel(new Cesium.Clock({startTime: Cesium.JulianDate.fromIso8601("2022-01-01T00:00:00+00:00"), stopTime: Cesium.JulianDate.fromIso8601("2022-01-01T00:00:30+00:00"), clockRange: Cesium.ClockRange.CLAMPED, canAnimate: true, shouldAnimate: false}))});
+    widget.property_a7fcc37f = new Cesium.SampledProperty(Cesium.Cartesian3);
+    widget.property_a7fcc37f.addSample("2022-01-01T00:00:00+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_a7fcc37f.addSample("2022-01-01T00:00:30+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_8142d6aa = new Cesium.SampledProperty(Cesium.Quaternion);
+    widget.property_8142d6aa.addSample("2022-01-01T00:00:00+00:00", Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)));
+    widget.property_8142d6aa.addSample("2022-01-01T00:00:30+00:00", Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)));
+    widget.property_0b8d0218_position = new Cesium.SampledProperty(Cesium.Cartesian3);
+    widget.property_0b8d0218_position.addSample("2022-01-01T00:00:00+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_0b8d0218_position.addSample("2022-01-01T00:00:30+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_0b8d0218_orientation = new Cesium.SampledProperty(Cesium.Quaternion);
+    widget.property_0b8d0218_orientation.addSample("2022-01-01T00:00:00+00:00", Cesium.Quaternion.multiply(Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)), Cesium.Quaternion.fromAxisAngle(new Cesium.Cartesian3(0.0, 1.0, 0.0), 1.5707963267948966), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)));
+    widget.property_0b8d0218_orientation.addSample("2022-01-01T00:00:30+00:00", Cesium.Quaternion.multiply(Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)), Cesium.Quaternion.fromAxisAngle(new Cesium.Cartesian3(0.0, 1.0, 0.0), 1.5707963267948966), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)));
+    widget.property_99fcaf49_position = new Cesium.SampledProperty(Cesium.Cartesian3);
+    widget.property_99fcaf49_position.addSample("2022-01-01T00:00:00+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_99fcaf49_position.addSample("2022-01-01T00:00:30+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_99fcaf49_orientation = new Cesium.SampledProperty(Cesium.Quaternion);
+    widget.property_99fcaf49_orientation.addSample("2022-01-01T00:00:00+00:00", Cesium.Quaternion.multiply(Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)), Cesium.Quaternion.fromAxisAngle(new Cesium.Cartesian3(-1.0, 0.0, 0.0), 1.5707963267948966), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)));
+    widget.property_99fcaf49_orientation.addSample("2022-01-01T00:00:30+00:00", Cesium.Quaternion.multiply(Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)), Cesium.Quaternion.fromAxisAngle(new Cesium.Cartesian3(-1.0, 0.0, 0.0), 1.5707963267948966), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)));
+    widget.property_585f9262_position = new Cesium.SampledProperty(Cesium.Cartesian3);
+    widget.property_585f9262_position.addSample("2022-01-01T00:00:00+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_585f9262_position.addSample("2022-01-01T00:00:30+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_585f9262_orientation = new Cesium.SampledProperty(Cesium.Quaternion);
+    widget.property_585f9262_orientation.addSample("2022-01-01T00:00:00+00:00", Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)));
+    widget.property_585f9262_orientation.addSample("2022-01-01T00:00:30+00:00", Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)));
+    widget.property_62b1fb05_position = new Cesium.SampledProperty(Cesium.Cartesian3);
+    widget.property_62b1fb05_position.addSample("2022-01-01T00:00:00+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_62b1fb05_position.addSample("2022-01-01T00:00:30+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.property_62b1fb05_orientation = new Cesium.SampledProperty(Cesium.Quaternion);
+    widget.property_62b1fb05_orientation.addSample("2022-01-01T00:00:00+00:00", Cesium.Quaternion.multiply(Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)), Cesium.Quaternion.fromAxisAngle(new Cesium.Cartesian3(1.0, 0.0, 0.0), 3.141592653589793), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)));
+    widget.property_62b1fb05_orientation.addSample("2022-01-01T00:00:30+00:00", Cesium.Quaternion.multiply(Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(0.0, -1.5707963267948966, 0.0)), Cesium.Quaternion.fromAxisAngle(new Cesium.Cartesian3(1.0, 0.0, 0.0), 3.141592653589793), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0)));
+    widget.entities.add({position: widget.property_a7fcc37f, orientation: widget.property_8142d6aa, model: {uri: await Cesium.IonResource.fromAssetId(1359352), availability: new Cesium.TimeIntervalCollection({intervals: [new Cesium.TimeInterval({start: Cesium.JulianDate.fromIso8601("2022-01-01T00:00:00+00:00"), stop: Cesium.JulianDate.fromIso8601("2022-01-01T00:00:30+00:00")})]})}});
+    widget.entities.add({position: widget.property_0b8d0218_position, orientation: widget.property_0b8d0218_orientation, conicSensor: new CesiumSensorVolumes.ConicSensorGraphics({radius: 100.0, innerHalfAngle: 0.017453292519943295, outerHalfAngle: 0.017453292519943295, lateralSurfaceMaterial: Cesium.Color.RED, showIntersection: true, intersectionColor: Cesium.Color.WHITE, intersectionWidth: 1.0, show: true})});
+    widget.entities.add({position: widget.property_99fcaf49_position, orientation: widget.property_99fcaf49_orientation, conicSensor: new CesiumSensorVolumes.ConicSensorGraphics({radius: 100.0, innerHalfAngle: 0.017453292519943295, outerHalfAngle: 0.017453292519943295, lateralSurfaceMaterial: Cesium.Color.BLUE, showIntersection: true, intersectionColor: Cesium.Color.WHITE, intersectionWidth: 1.0, show: true})});
+    widget.entities.add({position: widget.property_585f9262_position, orientation: widget.property_585f9262_orientation, conicSensor: new CesiumSensorVolumes.ConicSensorGraphics({radius: 100.0, innerHalfAngle: 0.017453292519943295, outerHalfAngle: 0.017453292519943295, lateralSurfaceMaterial: Cesium.Color.GREEN, showIntersection: true, intersectionColor: Cesium.Color.WHITE, intersectionWidth: 1.0, show: true})});
+    widget.entities.add({position: widget.property_62b1fb05_position, orientation: widget.property_62b1fb05_orientation, conicSensor: new CesiumSensorVolumes.ConicSensorGraphics({radius: 1000000.0, innerHalfAngle: 0.2617993877991494, outerHalfAngle: 0.2617993877991494, lateralSurfaceMaterial: Cesium.Color.YELLOW.withAlpha(0.3), showIntersection: true, intersectionColor: Cesium.Color.RED, intersectionWidth: 1.0, show: true})});
+    widget.zoomTo(widget.entities);
+    widget.trackedEntity = widget.entities.values[widget.entities.values.length - 1];
+  }
+  init();
+</script>

@@ -93,8 +93,19 @@ from cesiumpy.property import Property
 from cesiumpy.property import SampledProperty
 from cesiumpy.position import SampledPositionProperty
 from cesiumpy.orientation import Quaternion
+from cesiumpy.orientation import HeadingPitchRoll
 
 from cesiumpy.viewer import Viewer  # noqa
 from cesiumpy.widget import CesiumWidget  # noqa
 
 from cesiumpy.version import version as __version__  # noqa
+
+from cesiumpy.satellite import Satellite  # noqa
+from cesiumpy.sensor import Sensor  # noqa
+from cesiumpy.sensor import CylindricalSensor  # noqa
+from cesiumpy.sensor import ConicalSensor  # noqa
+from cesiumpy import math  # noqa
+
+from cesiumpy.entities.sensors.conic_sensor import (
+    ConicSensor,
+)  # noqa

@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.86/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.86/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<div id="cesiumContainer" style="width:1000px; height:600px;"><div>
+<script type="text/javascript">
+  async function init() {
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiM2FmYTZhZi1mNGFlLTQwYjgtOGYzZC0xNGYyYjg2MmQ4MzMiLCJpZCI6NzE4ODUsImlhdCI6MTYzNTUzNzcyMn0.Qn_UoR6ruURHKIDostP8wVUwzii-kQ77s6sAlayZddA";
+    var widget = new Cesium.Viewer("cesiumContainer", {fullscreenButton: false, homeButton: false, infoBox: false, sceneModePicker: false, selectionIndicator: false, timeline: true, navigationHelpButton: false, navigationInstructionsInitiallyVisible: false, scene3dOnly: true, clockViewModel: new Cesium.ClockViewModel(new Cesium.Clock({startTime: Cesium.JulianDate.fromIso8601("2022-01-01T00:00:00+00:00"), stopTime: Cesium.JulianDate.fromIso8601("2022-10-09T08:00:32.537000+00:00"), clockRange: Cesium.ClockRange.CLAMPED, canAnimate: true, shouldAnimate: false}))});
+    widget.sampled_position = new Cesium.SampledProperty(Cesium.Cartesian3);
+    widget.sampled_position.addSample("2022-01-01T00:00:00+00:00", Cesium.Cartesian3.fromDegrees(0.0, 0.0, 500000.0));
+    widget.sampled_orientation = new Cesium.SampledProperty(Cesium.Quaternion);
+    widget.sampled_orientation.addSample("2022-01-01T00:00:00+00:00", new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0));
+    widget.entities.add({position: widget.sampled_position, orientation: widget.sampled_orientation, model: {uri: await Cesium.IonResource.fromAssetId(669199), availability: new Cesium.TimeIntervalCollection({intervals: [new Cesium.TimeInterval({start: Cesium.JulianDate.fromIso8601("2022-01-01T00:00:00+00:00"), stop: Cesium.JulianDate.fromIso8601("2022-01-02T00:00:00+00:00")})]})}});
+    widget.zoomTo(widget.entities);
+    widget.trackedEntity = widget.entities.values[widget.entities.values.length - 1];
+  }
+  init();
+</script>
