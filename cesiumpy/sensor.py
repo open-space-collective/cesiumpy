@@ -36,29 +36,35 @@ class Sensor(abc.ABC):
     def __init__(
         self,
         direction: cesiumpy.Cartesian3,
-        name: Optional[str] = None,
+        material: Optional[cesiumpy.entities.color.Color] = None,
         show_intersection: Optional[bool] = None,
         intersection_color: Optional[cesiumpy.color.Color] = None,
+        name: Optional[str] = None,
         show: Optional[bool] = None,
     ) -> None:
 
-        self._name: str = name or generate_name()
         self._direction: cesiumpy.Cartesian3 = direction
+        self._material: cesiumpy.entities.color.Color = material or DEFAULT_COLOR
 
-        self._show_intersection: bool = show_intersection if (show_intersection is not None) else True
-        self._intersection_color: cesiumpy.color.Color = intersection_color or DEFAULT_INTERSECTION_COLOR
+        self._show_intersection: bool = (
+            show_intersection if (show_intersection is not None) else True
+        )
+        self._intersection_color: cesiumpy.color.Color = (
+            intersection_color or DEFAULT_INTERSECTION_COLOR
+        )
 
+        self._name: str = name or generate_name()
         self._show: bool = show if (show is not None) else True
 
     # Properties
 
     @property
-    def name(self) -> str:
-        return self._name
-
-    @property
     def direction(self) -> cesiumpy.Cartesian3:
         return self._direction
+
+    @property
+    def material(self) -> cesiumpy.entities.color.Color:
+        return self._material
 
     @property
     def show_intersection(self) -> bool:
@@ -67,6 +73,10 @@ class Sensor(abc.ABC):
     @property
     def intersection_color(self) -> cesiumpy.color.Color:
         return self._intersection_color
+
+    @property
+    def name(self) -> str:
+        return self._name
 
     @property
     def show(self) -> bool:
@@ -82,89 +92,6 @@ class Sensor(abc.ABC):
     ) -> None:
 
         raise NotImplementedError
-
-
-######################################################################################################################################################
-
-
-class CylindricalSensor(Sensor):
-
-    """
-    Conical Sensor.
-    """
-
-    # Constructor
-
-    def __init__(
-        self,
-        direction: cesiumpy.Cartesian3,
-        top_radius: int,
-        bottom_radius: int,
-        length: int,
-        slices: Optional[int] = None,
-        material: Optional[cesiumpy.entities.color.Color] = None,
-        name: Optional[str] = None,
-        show_intersection: Optional[bool] = None,
-        intersection_color: Optional[cesiumpy.color.Color] = None,
-        show: Optional[bool] = None,
-    ) -> None:
-
-        super().__init__(
-            direction=direction,
-            name=name,
-            show_intersection=show_intersection,
-            intersection_color=intersection_color,
-            show=show,
-        )
-
-        self._top_radius: int = top_radius
-        self._bottom_radius: int = bottom_radius
-        self._length: int = length
-        self._slices: int = slices or DEFAULT_SLICES
-        self._material: cesiumpy.entities.color.Color = material or DEFAULT_COLOR
-
-    # Properties
-
-    @property
-    def top_radius(self) -> int:
-        return self._top_radius
-
-    @property
-    def bottom_radius(self) -> int:
-        return self._bottom_radius
-
-    @property
-    def length(self) -> int:
-        return self._length
-
-    @property
-    def slices(self) -> int:
-        return self._slices
-
-    @property
-    def material(self) -> cesiumpy.entities.color.Color:
-        return self._material
-
-    # Methods
-
-    def render(
-        self,
-        viewer: cesiumpy.Viewer,
-        satellite: cesiumpy.Satellite,
-    ) -> None:
-
-        viewer.entities.add(
-            cesiumpy.Cylinder(
-                position=self._generate_position(satellite),
-                orientation=self._generate_orientation(satellite),
-                availability=satellite.availability,
-                length=self.length,
-                top_radius=self.top_radius,
-                bottom_radius=self.bottom_radius,
-                slices=self.slices,
-                material=self.material,
-            )
-        )
 
     # Private methods
 
@@ -237,10 +164,233 @@ class CylindricalSensor(Sensor):
 ######################################################################################################################################################
 
 
-class ConicalSensor(CylindricalSensor):
+class CustomPatternSensor(Sensor):
 
     """
-    Conical Sensor.
+    Custom Pattern Sensor.
+    """
+
+    # Constructor
+
+    def __init__(
+        self,
+        direction: cesiumpy.Cartesian3,
+        radius: float,
+        directions: list[cesiumpy.Spherical],
+        material: Optional[cesiumpy.entities.color.Color] = None,
+        show_intersection: Optional[bool] = None,
+        intersection_color: Optional[cesiumpy.color.Color] = None,
+        name: Optional[str] = None,
+        show: Optional[bool] = None,
+    ) -> None:
+
+        super().__init__(
+            direction=direction,
+            material=material,
+            show_intersection=show_intersection,
+            intersection_color=intersection_color,
+            name=name,
+            show=show,
+        )
+
+        self._radius: float = radius
+        self._directions: list[cesiumpy.Spherical] = directions
+
+    # Properties
+
+    @property
+    def radius(self) -> float:
+        return self._radius
+
+    @property
+    def directions(self) -> list[cesiumpy.Spherical]:
+        return self._directions
+
+    # Methods
+
+    def render(
+        self,
+        viewer: cesiumpy.Viewer,
+        satellite: cesiumpy.Satellite,
+    ) -> None:
+
+        from cesiumpy.entities.sensors.custom_pattern_sensor import (
+            CustomPatternSensor as CustomPatternSensorEntity,
+        )
+
+        viewer.entities.add(
+            CustomPatternSensorEntity(
+                position=self._generate_position(satellite),
+                orientation=self._generate_orientation(satellite),
+                availability=satellite.availability,
+                radius=self.radius,
+                directions=self.directions,
+                lateral_surface_material=self.material,
+                show_intersection=self.show_intersection,
+                intersection_color=self.intersection_color,
+                intersection_width=1,
+                show=self.show,
+            )
+        )
+
+
+######################################################################################################################################################
+
+
+class RectangularSensor(CustomPatternSensor):
+
+    """
+    Rectangular Sensor.
+    """
+
+    # Constructor
+
+    def __init__(
+        self,
+        direction: cesiumpy.Cartesian3,
+        radius: float,
+        x_half_angle: float,
+        y_half_angle: float,
+        material: Optional[cesiumpy.entities.color.Color] = None,
+        name: Optional[str] = None,
+        show_intersection: Optional[bool] = None,
+        intersection_color: Optional[cesiumpy.color.Color] = None,
+        show: Optional[bool] = None,
+    ) -> None:
+
+        super().__init__(
+            direction=direction,
+            radius=radius,
+            directions=RectangularSensor.generate_directions(
+                x_half_angle, y_half_angle
+            ),
+            material=material,
+            show_intersection=show_intersection,
+            intersection_color=intersection_color,
+            name=name,
+            show=show,
+        )
+
+        self._x_half_angle: float = x_half_angle
+        self._y_half_angle: float = y_half_angle
+
+    # Properties
+
+    @property
+    def x_half_angle(self) -> float:
+        return self._x_half_angle
+
+    @property
+    def y_half_angle(self) -> float:
+        return self._y_half_angle
+
+    # Static methods
+
+    @staticmethod
+    def generate_directions(
+        x_half_angle: float,
+        y_half_angle: float,
+    ) -> list[cesiumpy.Spherical]:
+
+        tan_x: float = math.tan(min(x_half_angle, cesiumpy.math.to_radians(89.0)))
+        tan_y: float = math.tan(min(y_half_angle, cesiumpy.math.to_radians(89.0)))
+        theta: float = math.atan(tan_x / tan_y)
+        cone: float = math.atan(math.sqrt((tan_x * tan_x) + (tan_y * tan_y)))
+
+        return [
+            cesiumpy.Spherical(theta, cone),
+            cesiumpy.Spherical(cesiumpy.math.to_radians(180.0) - theta, cone),
+            cesiumpy.Spherical(cesiumpy.math.to_radians(180.0) + theta, cone),
+            cesiumpy.Spherical(-theta, cone),
+        ]
+
+
+######################################################################################################################################################
+
+
+class CylindricalSensor(Sensor):
+
+    """
+    Cylindrical Sensor.
+    """
+
+    # Constructor
+
+    def __init__(
+        self,
+        direction: cesiumpy.Cartesian3,
+        top_radius: int,
+        bottom_radius: int,
+        length: int,
+        slices: Optional[int] = None,
+        material: Optional[cesiumpy.entities.color.Color] = None,
+        name: Optional[str] = None,
+        show_intersection: Optional[bool] = None,
+        intersection_color: Optional[cesiumpy.color.Color] = None,
+        show: Optional[bool] = None,
+    ) -> None:
+
+        super().__init__(
+            direction=direction,
+            material=material,
+            show_intersection=show_intersection,
+            intersection_color=intersection_color,
+            name=name,
+            show=show,
+        )
+
+        self._top_radius: int = top_radius
+        self._bottom_radius: int = bottom_radius
+        self._length: int = length
+        self._slices: int = slices or DEFAULT_SLICES
+
+    # Properties
+
+    @property
+    def top_radius(self) -> int:
+        return self._top_radius
+
+    @property
+    def bottom_radius(self) -> int:
+        return self._bottom_radius
+
+    @property
+    def length(self) -> int:
+        return self._length
+
+    @property
+    def slices(self) -> int:
+        return self._slices
+
+    # Methods
+
+    def render(
+        self,
+        viewer: cesiumpy.Viewer,
+        satellite: cesiumpy.Satellite,
+    ) -> None:
+
+        viewer.entities.add(
+            cesiumpy.Cylinder(
+                position=self._generate_position(satellite),
+                orientation=self._generate_orientation(satellite),
+                availability=satellite.availability,
+                length=self.length,
+                top_radius=self.top_radius,
+                bottom_radius=self.bottom_radius,
+                slices=self.slices,
+                material=self.material,
+            )
+        )
+
+
+######################################################################################################################################################
+
+
+class ConicSensor(CylindricalSensor):
+
+    """
+    Conic Sensor.
     """
 
     # Constructor
@@ -289,8 +439,12 @@ class ConicalSensor(CylindricalSensor):
         satellite: cesiumpy.Satellite,
     ) -> None:
 
+        from cesiumpy.entities.sensors.conic_sensor import (
+            ConicSensor as ConicSensorEntity,
+        )
+
         viewer.entities.add(
-            cesiumpy.ConicSensor(
+            ConicSensorEntity(
                 position=self._generate_position(satellite),
                 orientation=self._generate_orientation(satellite),
                 availability=satellite.availability,

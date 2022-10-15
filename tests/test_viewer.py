@@ -59,31 +59,75 @@ class TestViewer:
             ),
             model=cesiumpy.IonResource(asset_id=asset_id),
             sensors=[
-                cesiumpy.ConicalSensor(
+                cesiumpy.ConicSensor(
                     direction=cesiumpy.Cartesian3(+1.0, 0.0, 0.0),
                     half_angle=cesiumpy.math.to_radians(1.0),
                     length=100.0,
                     material=cesiumpy.color.RED,
                 ),
-                cesiumpy.ConicalSensor(
+                cesiumpy.ConicSensor(
                     direction=cesiumpy.Cartesian3(0.0, +1.0, 0.0),
                     half_angle=cesiumpy.math.to_radians(1.0),
                     length=100.0,
                     material=cesiumpy.color.BLUE,
                 ),
-                cesiumpy.ConicalSensor(
+                cesiumpy.ConicSensor(
                     direction=cesiumpy.Cartesian3(0.0, 0.0, +1.0),
                     half_angle=cesiumpy.math.to_radians(1.0),
                     length=100.0,
                     material=cesiumpy.color.GREEN,
                 ),
-                cesiumpy.ConicalSensor(
-                    direction=cesiumpy.Cartesian3(0.0, 0.0, -1.0),
+                cesiumpy.ConicSensor(
+                    direction=cesiumpy.Cartesian3(0.0, +1.0, 0.0),
                     half_angle=cesiumpy.math.to_radians(15.0),
-                    length=1000e3,
+                    length=100.0,
                     material=cesiumpy.color.YELLOW.with_alpha(0.3),
-                    intersection_color=cesiumpy.color.RED,
-                    show=True,
+                ),
+                cesiumpy.CustomPatternSensor(
+                    direction=cesiumpy.Cartesian3(+1.0, 0.0, 0.0),
+                    radius=100.0,
+                    directions=[
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 0),
+                            cesiumpy.math.to_radians(5.0),
+                        ),
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 1),
+                            cesiumpy.math.to_radians(15.0),
+                        ),
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 2),
+                            cesiumpy.math.to_radians(20.0),
+                        ),
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 3),
+                            cesiumpy.math.to_radians(25.0),
+                        ),
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 4),
+                            cesiumpy.math.to_radians(15.0),
+                        ),
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 5),
+                            cesiumpy.math.to_radians(10.0),
+                        ),
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 6),
+                            cesiumpy.math.to_radians(60.0),
+                        ),
+                        cesiumpy.Spherical(
+                            cesiumpy.math.to_radians(45.0 * 7),
+                            cesiumpy.math.to_radians(25.0),
+                        ),
+                    ],
+                    material=cesiumpy.color.ORANGE.with_alpha(0.3),
+                ),
+                cesiumpy.RectangularSensor(
+                    direction=cesiumpy.Cartesian3(0.0, 0.0, -1.0),
+                    radius=100.0,
+                    x_half_angle=cesiumpy.math.to_radians(20.0),
+                    y_half_angle=cesiumpy.math.to_radians(20.0),
+                    material=cesiumpy.color.RED.with_alpha(0.3),
                 ),
             ],
         )

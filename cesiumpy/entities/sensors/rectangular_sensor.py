@@ -21,23 +21,21 @@ from cesiumpy.util.trait import MaybeTrait
 ######################################################################################################################################################
 
 
-class ConicSensor(_CesiumEntity):
+class RectangularSensor(_CesiumEntity):
 
     """
-    Conic Sensor.
+    Rectangular Sensor.
     """
 
     # Definitons
 
-    _klass = "conic_sensor"
+    _klass = "rectangular_sensor"
 
     _props = [
         "radius",
-        "inner_half_angle",
-        "outer_half_angle",
+        "x_half_angle",
+        "y_half_angle",
         "lateral_surface_material",
-        "minimum_clock_angle",
-        "maximum_clock_angle",
         "show_intersection",
         "intersection_color",
         "intersection_width",
@@ -45,13 +43,10 @@ class ConicSensor(_CesiumEntity):
 
     radius = traitlets.Float()
 
-    inner_half_angle = traitlets.Float()
-    outer_half_angle = traitlets.Float()
+    x_half_angle = traitlets.Float()
+    y_half_angle = traitlets.Float()
 
     lateral_surface_material = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
-
-    minimum_clock_angle = traitlets.Float(allow_none=True)
-    maximum_clock_angle = traitlets.Float(allow_none=True)
 
     show_intersection = traitlets.Bool(allow_none=True)
     intersection_color = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
@@ -63,11 +58,9 @@ class ConicSensor(_CesiumEntity):
         self,
         position,
         radius: float,
-        inner_half_angle: float,
-        outer_half_angle: float,
+        x_half_angle: float,
+        y_half_angle: float,
         lateral_surface_material: Optional[cesiumpy.color.Color] = None,
-        minimum_clock_angle: Optional[float] = None,
-        maximum_clock_angle: Optional[float] = None,
         show_intersection: Optional[bool] = None,
         intersection_color: Optional[cesiumpy.color.Color] = None,
         intersection_width: Optional[float] = None,
@@ -99,15 +92,12 @@ class ConicSensor(_CesiumEntity):
 
         self.radius: float = radius
 
-        self.inner_half_angle: float = inner_half_angle
-        self.outer_half_angle: float = outer_half_angle
+        self.x_half_angle: float = x_half_angle
+        self.y_half_angle: float = y_half_angle
 
         self.lateral_surface_material: Optional[
             cesiumpy.color.Color
         ] = lateral_surface_material
-
-        self.minimum_clock_angle: Optional[float] = minimum_clock_angle
-        self.maximum_clock_angle: Optional[float] = maximum_clock_angle
 
         self.show_intersection: Optional[bool] = show_intersection
         self.intersection_color: Optional[cesiumpy.color.Color] = intersection_color
@@ -124,8 +114,8 @@ class ConicSensor(_CesiumEntity):
         props["position"] = self.position
         props["orientation"] = self.orientation
 
-        props[self._klass] = ConicSensorGraphics(
-            **{prop: getattr(self, prop) for prop in ConicSensorGraphics._props}
+        props[self._klass] = RectangularSensorGraphics(
+            **{prop: getattr(self, prop) for prop in RectangularSensorGraphics._props}
         )
 
         return props
@@ -134,17 +124,15 @@ class ConicSensor(_CesiumEntity):
 ######################################################################################################################################################
 
 
-class ConicSensorGraphics(_CesiumObject):
+class RectangularSensorGraphics(_CesiumObject):
 
     # Definitions
 
     _props = [
         "radius",
-        "inner_half_angle",
-        "outer_half_angle",
+        "x_half_angle",
+        "y_half_angle",
         "lateral_surface_material",
-        "minimum_clock_angle",
-        "maximum_clock_angle",
         "show_intersection",
         "intersection_color",
         "intersection_width",
@@ -153,13 +141,10 @@ class ConicSensorGraphics(_CesiumObject):
 
     radius = traitlets.Float()
 
-    inner_half_angle = traitlets.Float()
-    outer_half_angle = traitlets.Float()
+    x_half_angle = traitlets.Float()
+    y_half_angle = traitlets.Float()
 
     lateral_surface_material = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
-
-    minimum_clock_angle = traitlets.Float(allow_none=True)
-    maximum_clock_angle = traitlets.Float(allow_none=True)
 
     show_intersection = traitlets.Bool(allow_none=True)
     intersection_color = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
@@ -172,11 +157,9 @@ class ConicSensorGraphics(_CesiumObject):
     def __init__(
         self,
         radius: float,
-        inner_half_angle: float,
-        outer_half_angle: float,
+        x_half_angle: float,
+        y_half_angle: float,
         lateral_surface_material: Optional[cesiumpy.color.Color] = None,
-        minimum_clock_angle: Optional[float] = None,
-        maximum_clock_angle: Optional[float] = None,
         show_intersection: Optional[bool] = None,
         intersection_color: Optional[cesiumpy.color.Color] = None,
         intersection_width: Optional[float] = None,
@@ -185,15 +168,12 @@ class ConicSensorGraphics(_CesiumObject):
 
         self.radius: float = radius
 
-        self.inner_half_angle: float = inner_half_angle
-        self.outer_half_angle: float = outer_half_angle
+        self.x_half_angle: float = x_half_angle
+        self.y_half_angle: float = y_half_angle
 
         self.lateral_surface_material: Optional[
             cesiumpy.color.Color
         ] = lateral_surface_material
-
-        self.minimum_clock_angle: Optional[float] = minimum_clock_angle
-        self.maximum_clock_angle: Optional[float] = maximum_clock_angle
 
         self.show_intersection: Optional[bool] = show_intersection
         self.intersection_color: Optional[cesiumpy.color.Color] = intersection_color
@@ -204,7 +184,7 @@ class ConicSensorGraphics(_CesiumObject):
     # Methods
 
     def generate_script(self, widget=None) -> str:
-        return f"new CesiumSensorVolumes.ConicSensorGraphics({super().generate_script(widget=widget)})"
+        return f"new CesiumSensorVolumes.RectangularPyramidSensorVolume({super().generate_script(widget=widget)})"
 
 
 ######################################################################################################################################################
