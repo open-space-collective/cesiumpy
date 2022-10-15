@@ -26,8 +26,11 @@ def cesium_token() -> Optional[str]:
 @pytest.fixture
 def asset_id() -> int:
 
-    # return 669199
-    return 1359352
+    # return 669199 # OLD
+    # return 1250090
+    return 1359555 # FIX
+    # return 1191175
+    # return 1359352
 
 
 @pytest.fixture
@@ -39,8 +42,8 @@ def epoch() -> timedelta:
 @pytest.fixture
 def duration() -> timedelta:
 
-    # return timedelta(hours=1.0)
-    return timedelta(seconds=30.0)
+    return timedelta(hours=1.0)
+    # return timedelta(seconds=30.0)
 
 
 @pytest.fixture
@@ -96,10 +99,10 @@ def sampled_position(
         samples=[
             (
                 instant,
-                cesiumpy.Cartesian3.fromDegrees(0.0, 0.0, 500e3),
+                cesiumpy.Cartesian3.fromDegrees(index, 0.0, 500e3),
                 None,
             )
-            for instant in instants
+            for (index, instant) in enumerate(instants)
         ],
     )
 
@@ -117,8 +120,8 @@ def sampled_orientation(
                 cesiumpy.Quaternion.from_heading_pitch_roll(
                     cesiumpy.HeadingPitchRoll(
                         heading=0.0,
-                        pitch=cesiumpy.math.to_radians(-90.0),
-                        roll=cesiumpy.math.to_radians(0.0),
+                        pitch=cesiumpy.math.to_radians(180.0),
+                        roll=0.0,
                     )
                 ),
                 None,

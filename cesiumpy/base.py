@@ -266,7 +266,8 @@ class _CesiumBase(_CesiumObject):
 
         if self.track_entity and (len(self.entities) > 0):
             camera_scripts.append(
-                f"{self._varname}.trackedEntity = {self._varname}.entities.values[{self._varname}.entities.values.length - 1];"
+                f"{self._varname}.trackedEntity = {self._varname}.entities.values[0];"
+                # f"{self._varname}.trackedEntity = {self._varname}.entities.values[{self._varname}.entities.values.length - 1];"
             )
 
         return camera_scripts
