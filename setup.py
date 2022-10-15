@@ -18,7 +18,7 @@ from setuptools import setup, find_packages
 ######################################################################################################################################################
 
 PACKAGE = "cesiumpy"
-README = "README.rst"
+README = "README.md"
 REQUIREMENTS = "requirements.txt"
 
 VERSION = "0.4.0.dev"
