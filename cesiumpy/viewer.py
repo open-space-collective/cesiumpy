@@ -11,7 +11,7 @@ import cesiumpy.util.common as com
 
 class Viewer(_CesiumBase):
 
-    '''
+    """
     Viewer
 
     Parameters
@@ -91,129 +91,129 @@ class Viewer(_CesiumBase):
         The collection of data sources visualized by the widget. If this parameter is provided, the instance is assumed to be owned by the caller and will not be destroyed when the viewer is destroyed.
     terrain_exaggeration: float, default 1.
         A scalar used to exaggerate the terrain. Note that terrain exaggeration will not modify any other primitive as they are positioned relative to the ellipsoid.
-    '''
+    """
 
     # Definitions
 
     # data_sources should be excluded from init, as it is handled separately
     _props = [
-        'animation',
-        'base_layer_picker',
-        'fullscreen_button',
-        'geocoder',
-        'home_button',
-        'info_box',
-        'scene_mode_picker',
-        'selection_indicator',
-        'timeline',
-        'navigation_help_button',
-        'navigation_instructions_initially_visible',
-        'scene3d_only',
-        'clock_view_model',
-        'selected_imagery_provider_view_model',
-        'imagery_provider_view_models',
-        'selected_terrain_provider_view_model',
-        'terrain_provider_view_models',
-        'imagery_provider',
-        'terrain_provider',
-        'sky_box',
-        'sky_atmosphere',
-        'fullscreen_element',
-        'use_default_render_loop',
-        'target_frame_rate',
-        'show_render_loop_errors',
-        'automatically_track_data_source_clocks',
-        'context_options',
-        'scene_mode',
-        'map_projection',
-        'globe',
-        'order_independent_translucency',
-        'credit_container',
-        'terrain_exaggeration',
+        "animation",
+        "base_layer_picker",
+        "fullscreen_button",
+        "geocoder",
+        "home_button",
+        "info_box",
+        "scene_mode_picker",
+        "selection_indicator",
+        "timeline",
+        "navigation_help_button",
+        "navigation_instructions_initially_visible",
+        "scene3d_only",
+        "clock_view_model",
+        "selected_imagery_provider_view_model",
+        "imagery_provider_view_models",
+        "selected_terrain_provider_view_model",
+        "terrain_provider_view_models",
+        "imagery_provider",
+        "terrain_provider",
+        "sky_box",
+        "sky_atmosphere",
+        "fullscreen_element",
+        "use_default_render_loop",
+        "target_frame_rate",
+        "show_render_loop_errors",
+        "automatically_track_data_source_clocks",
+        "context_options",
+        "scene_mode",
+        "map_projection",
+        "globe",
+        "order_independent_translucency",
+        "credit_container",
+        "terrain_exaggeration",
     ]
 
-    animation = traitlets.Bool(allow_none = True)
-    base_layer_picker = traitlets.Bool(allow_none = True)
-    fullscreen_button = traitlets.Bool(allow_none = True)
-    geocoder = traitlets.Bool(allow_none = True)
-    home_button = traitlets.Bool(allow_none = True)
-    info_box = traitlets.Bool(allow_none = True)
-    scene_mode_picker = traitlets.Bool(allow_none = True)
-    selection_indicator = traitlets.Bool(allow_none = True)
-    timeline = traitlets.Bool(allow_none = True)
-    navigation_help_button = traitlets.Bool(allow_none = True)
-    navigation_instructions_initially_visible = traitlets.Bool(allow_none = True)
-    automatically_track_data_source_clocks = traitlets.Bool(allow_none = True)
+    animation = traitlets.Bool(allow_none=True)
+    base_layer_picker = traitlets.Bool(allow_none=True)
+    fullscreen_button = traitlets.Bool(allow_none=True)
+    geocoder = traitlets.Bool(allow_none=True)
+    home_button = traitlets.Bool(allow_none=True)
+    info_box = traitlets.Bool(allow_none=True)
+    scene_mode_picker = traitlets.Bool(allow_none=True)
+    selection_indicator = traitlets.Bool(allow_none=True)
+    timeline = traitlets.Bool(allow_none=True)
+    navigation_help_button = traitlets.Bool(allow_none=True)
+    navigation_instructions_initially_visible = traitlets.Bool(allow_none=True)
+    automatically_track_data_source_clocks = traitlets.Bool(allow_none=True)
 
     # Constructor
 
     def __init__(
         self,
-        id = None,
-        width = '100%',
-        height = '100%',
-        animation = None,
-        base_layer_picker = None,
-        fullscreen_button = None,
-        geocoder = None,
-        home_button = None,
-        info_box = None,
-        scene_mode_picker = None,
-        selection_indicator = None,
-        timeline = None,
-        navigation_help_button = None,
-        navigation_instructions_initially_visible = None,
-        scene3d_only = None,
-        clock_view_model = None,
-        selected_imagery_provider_view_model = None,
-        imagery_provider_view_models = None,
-        selected_terrain_provider_view_model = None,
-        terrain_provider_view_models = None,
-        imagery_provider = None,
-        terrain_provider = None,
-        sky_box = None,
-        sky_atmosphere = None,
-        fullscreen_element = None,
-        use_default_render_loop = None,
-        target_frame_rate = None,
-        show_render_loop_errors = None,
-        automatically_track_data_source_clocks = None,
-        context_options = None,
-        scene_mode = None,
-        map_projection = None,
-        globe = None,
-        order_independent_translucency = None,
-        credit_container = None,
-        data_sources = None,
-        terrain_exaggeration = None,
-        zoom_to_entity = None,
-        track_entity = None,
+        id=None,
+        width="100%",
+        height="100%",
+        animation=None,
+        base_layer_picker=None,
+        fullscreen_button=None,
+        geocoder=None,
+        home_button=None,
+        info_box=None,
+        scene_mode_picker=None,
+        selection_indicator=None,
+        timeline=None,
+        navigation_help_button=None,
+        navigation_instructions_initially_visible=None,
+        scene3d_only=None,
+        clock_view_model=None,
+        selected_imagery_provider_view_model=None,
+        imagery_provider_view_models=None,
+        selected_terrain_provider_view_model=None,
+        terrain_provider_view_models=None,
+        imagery_provider=None,
+        terrain_provider=None,
+        sky_box=None,
+        sky_atmosphere=None,
+        fullscreen_element=None,
+        use_default_render_loop=None,
+        target_frame_rate=None,
+        show_render_loop_errors=None,
+        automatically_track_data_source_clocks=None,
+        context_options=None,
+        scene_mode=None,
+        map_projection=None,
+        globe=None,
+        order_independent_translucency=None,
+        credit_container=None,
+        data_sources=None,
+        terrain_exaggeration=None,
+        zoom_to_entity=None,
+        track_entity=None,
         **kwargs,
     ) -> None:
 
         super().__init__(
-            id = id,
-            width = width,
-            height = height,
-            scene3d_only = scene3d_only,
-            clock_view_model = clock_view_model,
-            imagery_provider = imagery_provider,
-            terrain_provider = terrain_provider,
-            sky_box = sky_box,
-            sky_atmosphere = sky_atmosphere,
-            scene_mode = scene_mode,
-            order_independent_translucency = order_independent_translucency,
-            map_projection = map_projection,
-            globe = globe,
-            use_default_render_loop = use_default_render_loop,
-            target_frame_rate = target_frame_rate,
-            show_render_loop_errors = show_render_loop_errors,
-            context_options = context_options,
-            credit_container = credit_container,
-            terrain_exaggeration = terrain_exaggeration,
-            zoom_to_entity = zoom_to_entity,
-            track_entity = track_entity,
-            **kwargs
+            id=id,
+            width=width,
+            height=height,
+            scene3d_only=scene3d_only,
+            clock_view_model=clock_view_model,
+            imagery_provider=imagery_provider,
+            terrain_provider=terrain_provider,
+            sky_box=sky_box,
+            sky_atmosphere=sky_atmosphere,
+            scene_mode=scene_mode,
+            order_independent_translucency=order_independent_translucency,
+            map_projection=map_projection,
+            globe=globe,
+            use_default_render_loop=use_default_render_loop,
+            target_frame_rate=target_frame_rate,
+            show_render_loop_errors=show_render_loop_errors,
+            context_options=context_options,
+            credit_container=credit_container,
+            terrain_exaggeration=terrain_exaggeration,
+            zoom_to_entity=zoom_to_entity,
+            track_entity=track_entity,
+            **kwargs,
         )
 
         self.animation = animation
@@ -232,20 +232,32 @@ class Viewer(_CesiumBase):
         self.selection_indicator = selection_indicator
         self.timeline = timeline
         self.navigation_help_button = navigation_help_button
-        self.navigation_instructions_initially_visible = navigation_instructions_initially_visible
+        self.navigation_instructions_initially_visible = (
+            navigation_instructions_initially_visible
+        )
 
-        self.selected_imagery_provider_view_model = com.notimplemented(selected_imagery_provider_view_model)
-        self.imagery_provider_view_models = com.notimplemented(imagery_provider_view_models)
-        self.selected_terrain_provider_view_model = com.notimplemented(selected_terrain_provider_view_model)
-        self.terrain_provider_view_models = com.notimplemented(terrain_provider_view_models)
+        self.selected_imagery_provider_view_model = com.notimplemented(
+            selected_imagery_provider_view_model
+        )
+        self.imagery_provider_view_models = com.notimplemented(
+            imagery_provider_view_models
+        )
+        self.selected_terrain_provider_view_model = com.notimplemented(
+            selected_terrain_provider_view_model
+        )
+        self.terrain_provider_view_models = com.notimplemented(
+            terrain_provider_view_models
+        )
         self.fullscreen_element = com.notimplemented(fullscreen_element)
 
-        self.automatically_track_data_source_clocks = automatically_track_data_source_clocks
+        self.automatically_track_data_source_clocks = (
+            automatically_track_data_source_clocks
+        )
 
         # ToDo: API to disable all flags to False
 
         if data_sources is not None:
-            data_sources = com.validate_listlike(data_sources, key = 'data_sources')
+            data_sources = com.validate_listlike(data_sources, key="data_sources")
             for ds in data_sources:
                 self._data_sources.add(ds)
 
@@ -254,4 +266,5 @@ class Viewer(_CesiumBase):
     @property
     def plot(self):
         from cesiumpy.plotting.plot import PlottingAccessor
+
         return PlottingAccessor(self)

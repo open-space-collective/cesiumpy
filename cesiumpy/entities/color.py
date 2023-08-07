@@ -17,12 +17,12 @@ from cesiumpy.entities.material import Material
 
 class Color(Material):
 
-    _props = ['red', 'green', 'blue', 'alpha']
+    _props = ["red", "green", "blue", "alpha"]
 
-    red = traitlets.Float(min=0., max=1.)
-    green = traitlets.Float(min=0., max=1.)
-    blue = traitlets.Float(min=0., max=1.)
-    alpha = traitlets.Float(min=0., max=1., allow_none=True)
+    red = traitlets.Float(min=0.0, max=1.0)
+    green = traitlets.Float(min=0.0, max=1.0)
+    blue = traitlets.Float(min=0.0, max=1.0)
+    alpha = traitlets.Float(min=0.0, max=1.0, allow_none=True)
 
     def __init__(self, red, green, blue, alpha=None):
 
@@ -31,51 +31,51 @@ class Color(Material):
         self.blue = blue
         self.alpha = alpha
 
-    def withAlpha(self, alpha):
+    def with_alpha(self, alpha):
         self.alpha = alpha
         return self
 
     def set_alpha(self, alpha):
-        msg = "Color.set_alpha is deprecated. Use Color.withAlpha"
+        msg = "Color.set_alpha is deprecated. Use Color.with_alpha"
         warnings.warn(msg)
-        return self.withAlpha(alpha)
+        return self.with_alpha(alpha)
 
     def copy(self) -> Color:
         return Color(
-            red = self.red,
-            green = self.green,
-            blue = self.blue,
-            alpha = self.alpha,
+            red=self.red,
+            green=self.green,
+            blue=self.blue,
+            alpha=self.alpha,
         )
 
-    def generate_script(self, widget = None) -> str:
-        return f'new Cesium.{repr(self)}'
+    def generate_script(self, widget=None) -> str:
+        return f"new Cesium.{repr(self)}"
 
     def __repr__(self) -> str:
         if self.alpha is None:
-            return f'Color({self.red}, {self.green}, {self.blue})'
-        return f'Color({self.red}, {self.green}, {self.blue}, {self.alpha})'
+            return f"Color({self.red}, {self.green}, {self.blue})"
+        return f"Color({self.red}, {self.green}, {self.blue}, {self.alpha})"
 
     # Static methods
 
     @staticmethod
-    def fromAlpha(color: Color, alpha: float) -> Color:
+    def from_alpha(color: Color, alpha: float) -> Color:
 
         return Color(
-            red = color.red,
-            green = color.green,
-            blue = color.blue,
-            alpha = alpha,
+            red=color.red,
+            green=color.green,
+            blue=color.blue,
+            alpha=alpha,
         )
 
     @staticmethod
-    def fromBytes(
+    def from_bytes(
         red: float = 255,
         green: float = 255,
         blue: float = 255,
         alpha: Optional[float] = None,
     ) -> Color:
-        '''
+        """
         Creates a new Color specified using red, green, blue, and alpha values
         that are in the range of 0 to 255, converting them internally to a range
         of 0.0 to 1.0.
@@ -91,32 +91,32 @@ class Color(Material):
             The blue component.
         alpha: int, default None
             The alpha component.
-        '''
+        """
 
         return Color(
-            red = red / 255.,
-            green = green / 255.,
-            blue = blue / 255.,
-            alpha = alpha / 255. if (alpha is not None) else None,
+            red=red / 255.0,
+            green=green / 255.0,
+            blue=blue / 255.0,
+            alpha=alpha / 255.0 if (alpha is not None) else None,
         )
 
     @staticmethod
-    def fromString(color: str) -> CSSColor:
-        '''
+    def from_string(color: str) -> CSSColor:
+        """
         Creates a Color instance from a CSS color value. Shortcut for
-        Color.fromCSSColorString.
+        Color.from_css_color_string.
 
         Parameters
         ----------
 
         color: str
             The CSS color value in #rgb, #rrggbb, rgb(), rgba(), hsl(), or hsla() format.
-        '''
-        return CSSColor(name = color)
+        """
+        return CSSColor(name=color)
 
     @staticmethod
-    def fromCSSColorString(color: str) -> CSSColor:
-        '''
+    def from_css_color_string(color: str) -> CSSColor:
+        """
         Creates a Color instance from a CSS color value.
 
         Parameters
@@ -124,12 +124,12 @@ class Color(Material):
 
         color: str
             The CSS color value in #rgb, #rrggbb, rgb(), rgba(), hsl(), or hsla() format.
-        '''
-        return CSSColor(name = color)
+        """
+        return CSSColor(name=color)
 
     @classmethod
     def maybe(cls, x):
-        """ Convert str or tuple to ColorConstant """
+        """Convert str or tuple to ColorConstant"""
         if isinstance(x, Color):
             return x
 
@@ -143,7 +143,7 @@ class Color(Material):
             if len(x) in (3, 4):
                 return Color(*x)
 
-        msg = 'Unable to convert to Color instance: {x}'
+        msg = "Unable to convert to Color instance: {x}"
         raise ValueError(msg.format(x=x))
 
 
@@ -152,15 +152,11 @@ class CSSColor(Color):
     # Definitions
 
     name = traitlets.Unicode()
-    alpha = traitlets.Float(min=0., max=1., allow_none=True)
+    alpha = traitlets.Float(min=0.0, max=1.0, allow_none=True)
 
     # Constructor
 
-    def __init__(
-        self,
-        name: str,
-        alpha: float = None
-    ) -> None:
+    def __init__(self, name: str, alpha: float = None) -> None:
 
         self.name = name
         self.alpha = alpha
@@ -168,13 +164,10 @@ class CSSColor(Color):
     # Methods
 
     def copy(self) -> CSSColor:
-        return CSSColor(
-            name = self.name,
-            alpha = self.alpha
-        )
+        return CSSColor(name=self.name, alpha=self.alpha)
 
-    def generate_script(self, widget = None) -> str:
-        return f'Cesium.{repr(self)}'
+    def generate_script(self, widget=None) -> str:
+        return f"Cesium.{repr(self)}"
 
     def __repr__(self) -> str:
         if self.alpha is None:
@@ -183,7 +176,6 @@ class CSSColor(Color):
 
 
 class ColorConstant(CSSColor):
-
     def __repr__(self):
         if self.alpha is None:
             rep = """Color.{name}"""
@@ -198,7 +190,7 @@ class ColorMap(_CesiumObject):
     name = traitlets.Unicode()
 
     def __init__(self, name):
-        plt = com._check_package('matplotlib.pyplot')
+        plt = com._check_package("matplotlib.pyplot")
         self.name = name
         self.cm = plt.get_cmap(name)
 
@@ -222,7 +214,7 @@ class ColorFactory(object):
 
     @property
     def Color(self):
-        """ return Color class """
+        """return Color class"""
         return Color
 
     def get_cmap(self, name):
@@ -252,9 +244,16 @@ class ColorFactory(object):
 
 
 # matplotlib compat
-_SINGLE_COLORS = {'B': 'BLUE', 'G': 'GREEN', 'R': 'RED',
-                  'C': 'CYAN', 'M': 'MAGENTA', 'Y': 'YELLOW',
-                  'K': 'BLACK', 'W': 'WHITE'}
+_SINGLE_COLORS = {
+    "B": "BLUE",
+    "G": "GREEN",
+    "R": "RED",
+    "C": "CYAN",
+    "M": "MAGENTA",
+    "Y": "YELLOW",
+    "K": "BLACK",
+    "W": "WHITE",
+}
 
 # --------------------------------------------------
 # COLOR CONSTANTS
@@ -266,150 +265,152 @@ _SINGLE_COLORS = {'B': 'BLUE', 'G': 'GREEN', 'R': 'RED',
 # colors = [c for c in colors.split() if c.startswith('staticconstant')]
 # colors = [c.split('.')[-1] for c in colors]
 
-_COLORS = ['ALICEBLUE',
-           'ANTIQUEWHITE',
-           'AQUA',
-           'AQUAMARINE',
-           'AZURE',
-           'BEIGE',
-           'BISQUE',
-           'BLACK',
-           'BLANCHEDALMOND',
-           'BLUE',
-           'BLUEVIOLET',
-           'BROWN',
-           'BURLYWOOD',
-           'CADETBLUE',
-           'CHARTREUSE',
-           'CHOCOLATE',
-           'CORAL',
-           'CORNFLOWERBLUE',
-           'CORNSILK',
-           'CRIMSON',
-           'CYAN',
-           'DARKBLUE',
-           'DARKCYAN',
-           'DARKGOLDENROD',
-           'DARKGRAY',
-           'DARKGREEN',
-           'DARKGREY',
-           'DARKKHAKI',
-           'DARKMAGENTA',
-           'DARKOLIVEGREEN',
-           'DARKORANGE',
-           'DARKORCHID',
-           'DARKRED',
-           'DARKSALMON',
-           'DARKSEAGREEN',
-           'DARKSLATEBLUE',
-           'DARKSLATEGRAY',
-           'DARKSLATEGREY',
-           'DARKTURQUOISE',
-           'DARKVIOLET',
-           'DEEPPINK',
-           'DEEPSKYBLUE',
-           'DIMGRAY',
-           'DIMGREY',
-           'DODGERBLUE',
-           'FIREBRICK',
-           'FLORALWHITE',
-           'FORESTGREEN',
-           'FUSCHIA',
-           'GAINSBORO',
-           'GHOSTWHITE',
-           'GOLD',
-           'GOLDENROD',
-           'GRAY',
-           'GREEN',
-           'GREENYELLOW',
-           'GREY',
-           'HONEYDEW',
-           'HOTPINK',
-           'INDIANRED',
-           'INDIGO',
-           'IVORY',
-           'KHAKI',
-           'LAVENDAR_BLUSH',
-           'LAVENDER',
-           'LAWNGREEN',
-           'LEMONCHIFFON',
-           'LIGHTBLUE',
-           'LIGHTCORAL',
-           'LIGHTCYAN',
-           'LIGHTGOLDENRODYELLOW',
-           'LIGHTGRAY',
-           'LIGHTGREEN',
-           'LIGHTGREY',
-           'LIGHTPINK',
-           'LIGHTSEAGREEN',
-           'LIGHTSKYBLUE',
-           'LIGHTSLATEGRAY',
-           'LIGHTSLATEGREY',
-           'LIGHTSTEELBLUE',
-           'LIGHTYELLOW',
-           'LIME',
-           'LIMEGREEN',
-           'LINEN',
-           'MAGENTA',
-           'MAROON',
-           'MEDIUMAQUAMARINE',
-           'MEDIUMBLUE',
-           'MEDIUMORCHID',
-           'MEDIUMPURPLE',
-           'MEDIUMSEAGREEN',
-           'MEDIUMSLATEBLUE',
-           'MEDIUMSPRINGGREEN',
-           'MEDIUMTURQUOISE',
-           'MEDIUMVIOLETRED',
-           'MIDNIGHTBLUE',
-           'MINTCREAM',
-           'MISTYROSE',
-           'MOCCASIN',
-           'NAVAJOWHITE',
-           'NAVY',
-           'OLDLACE',
-           'OLIVE',
-           'OLIVEDRAB',
-           'ORANGE',
-           'ORANGERED',
-           'ORCHID',
-           'PALEGOLDENROD',
-           'PALEGREEN',
-           'PALETURQUOISE',
-           'PALEVIOLETRED',
-           'PAPAYAWHIP',
-           'PEACHPUFF',
-           'PERU',
-           'PINK',
-           'PLUM',
-           'POWDERBLUE',
-           'PURPLE',
-           'RED',
-           'ROSYBROWN',
-           'ROYALBLUE',
-           'SADDLEBROWN',
-           'SALMON',
-           'SANDYBROWN',
-           'SEAGREEN',
-           'SEASHELL',
-           'SIENNA',
-           'SILVER',
-           'SKYBLUE',
-           'SLATEBLUE',
-           'SLATEGRAY',
-           'SLATEGREY',
-           'SNOW',
-           'SPRINGGREEN',
-           'STEELBLUE',
-           'TAN',
-           'TEAL',
-           'THISTLE',
-           'TOMATO',
-           'TRANSPARENT',
-           'TURQUOISE',
-           'VIOLET',
-           'WHEAT',
-           'WHITE',
-           'WHITESMOKE',
-           'YELLOW',
-           'YELLOWGREEN']
+_COLORS = [
+    "ALICEBLUE",
+    "ANTIQUEWHITE",
+    "AQUA",
+    "AQUAMARINE",
+    "AZURE",
+    "BEIGE",
+    "BISQUE",
+    "BLACK",
+    "BLANCHEDALMOND",
+    "BLUE",
+    "BLUEVIOLET",
+    "BROWN",
+    "BURLYWOOD",
+    "CADETBLUE",
+    "CHARTREUSE",
+    "CHOCOLATE",
+    "CORAL",
+    "CORNFLOWERBLUE",
+    "CORNSILK",
+    "CRIMSON",
+    "CYAN",
+    "DARKBLUE",
+    "DARKCYAN",
+    "DARKGOLDENROD",
+    "DARKGRAY",
+    "DARKGREEN",
+    "DARKGREY",
+    "DARKKHAKI",
+    "DARKMAGENTA",
+    "DARKOLIVEGREEN",
+    "DARKORANGE",
+    "DARKORCHID",
+    "DARKRED",
+    "DARKSALMON",
+    "DARKSEAGREEN",
+    "DARKSLATEBLUE",
+    "DARKSLATEGRAY",
+    "DARKSLATEGREY",
+    "DARKTURQUOISE",
+    "DARKVIOLET",
+    "DEEPPINK",
+    "DEEPSKYBLUE",
+    "DIMGRAY",
+    "DIMGREY",
+    "DODGERBLUE",
+    "FIREBRICK",
+    "FLORALWHITE",
+    "FORESTGREEN",
+    "FUSCHIA",
+    "GAINSBORO",
+    "GHOSTWHITE",
+    "GOLD",
+    "GOLDENROD",
+    "GRAY",
+    "GREEN",
+    "GREENYELLOW",
+    "GREY",
+    "HONEYDEW",
+    "HOTPINK",
+    "INDIANRED",
+    "INDIGO",
+    "IVORY",
+    "KHAKI",
+    "LAVENDAR_BLUSH",
+    "LAVENDER",
+    "LAWNGREEN",
+    "LEMONCHIFFON",
+    "LIGHTBLUE",
+    "LIGHTCORAL",
+    "LIGHTCYAN",
+    "LIGHTGOLDENRODYELLOW",
+    "LIGHTGRAY",
+    "LIGHTGREEN",
+    "LIGHTGREY",
+    "LIGHTPINK",
+    "LIGHTSEAGREEN",
+    "LIGHTSKYBLUE",
+    "LIGHTSLATEGRAY",
+    "LIGHTSLATEGREY",
+    "LIGHTSTEELBLUE",
+    "LIGHTYELLOW",
+    "LIME",
+    "LIMEGREEN",
+    "LINEN",
+    "MAGENTA",
+    "MAROON",
+    "MEDIUMAQUAMARINE",
+    "MEDIUMBLUE",
+    "MEDIUMORCHID",
+    "MEDIUMPURPLE",
+    "MEDIUMSEAGREEN",
+    "MEDIUMSLATEBLUE",
+    "MEDIUMSPRINGGREEN",
+    "MEDIUMTURQUOISE",
+    "MEDIUMVIOLETRED",
+    "MIDNIGHTBLUE",
+    "MINTCREAM",
+    "MISTYROSE",
+    "MOCCASIN",
+    "NAVAJOWHITE",
+    "NAVY",
+    "OLDLACE",
+    "OLIVE",
+    "OLIVEDRAB",
+    "ORANGE",
+    "ORANGERED",
+    "ORCHID",
+    "PALEGOLDENROD",
+    "PALEGREEN",
+    "PALETURQUOISE",
+    "PALEVIOLETRED",
+    "PAPAYAWHIP",
+    "PEACHPUFF",
+    "PERU",
+    "PINK",
+    "PLUM",
+    "POWDERBLUE",
+    "PURPLE",
+    "RED",
+    "ROSYBROWN",
+    "ROYALBLUE",
+    "SADDLEBROWN",
+    "SALMON",
+    "SANDYBROWN",
+    "SEAGREEN",
+    "SEASHELL",
+    "SIENNA",
+    "SILVER",
+    "SKYBLUE",
+    "SLATEBLUE",
+    "SLATEGRAY",
+    "SLATEGREY",
+    "SNOW",
+    "SPRINGGREEN",
+    "STEELBLUE",
+    "TAN",
+    "TEAL",
+    "THISTLE",
+    "TOMATO",
+    "TRANSPARENT",
+    "TURQUOISE",
+    "VIOLET",
+    "WHEAT",
+    "WHITE",
+    "WHITESMOKE",
+    "YELLOW",
+    "YELLOWGREEN",
+]

@@ -17,9 +17,9 @@ def _check_uri(sourceUri):
 
 
 def _wrap_uri(sourceUri):
-    if sourceUri.endswith('.js'):
+    if sourceUri.endswith(".js"):
         return '<script src="{0}"></script>'.format(sourceUri)
-    elif sourceUri.endswith('.css'):
+    elif sourceUri.endswith(".css"):
         return '<link rel="stylesheet" href="{0}" type="text/css">'.format(sourceUri)
     else:
         raise ValueError(sourceUri)
@@ -28,12 +28,12 @@ def _wrap_uri(sourceUri):
 def _wrap_async_init(scripts: List[str]) -> List[str]:
 
     before: List[str] = [
-        'async function init() {',
+        "async function init() {",
     ]
 
     after: List[str] = [
-        '}',
-        'init();',
+        "}",
+        "init();",
     ]
 
     return before + _add_indent(scripts) + after
@@ -50,18 +50,18 @@ def _wrap_scripts(scripts: List[str]) -> List[str]:
     ]
 
     after: List[str] = [
-        '</script>',
+        "</script>",
     ]
 
     return before + _add_indent(_wrap_async_init(scripts)) + after
 
 
 def _add_indent(script, indent=2):
-    """ Indent list of script with specfied number of spaces """
+    """Indent list of script with specfied number of spaces"""
     if not isinstance(script, list):
         script = [script]
 
-    indent = ' ' * indent
+    indent = " " * indent
     return [indent + s for s in script]
 
 

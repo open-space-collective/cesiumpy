@@ -1,10 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
+######################################################################################################################################################
+
+# @project        CesiumPy
+# @file           cesiumpy/position.py
+# @license        Apache 2.0
+
+######################################################################################################################################################
 
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Optional
+from typing import Optional
 
 import traitlets
 
@@ -12,11 +17,16 @@ from cesiumpy.base import _CesiumEnum
 import cesiumpy.entities.cartesian as cartesian
 from cesiumpy.property import Property, SampledProperty
 
+######################################################################################################################################################
+
 
 class ReferenceFrame(_CesiumEnum):
 
-    FIXED = 'Cesium.ReferenceFrame.FIXED'  # The fixed frame.
-    INERTIAL = 'Cesium.ReferenceFrame.INERTIAL'  # The inertial frame.
+    FIXED = "Cesium.ReferenceFrame.FIXED"  # The fixed frame.
+    INERTIAL = "Cesium.ReferenceFrame.INERTIAL"  # The inertial frame.
+
+
+######################################################################################################################################################
 
 
 class PositionProperty(Property):
@@ -24,11 +34,11 @@ class PositionProperty(Property):
     # Definitions
 
     _props = [
-        'reference_frame',
+        "reference_frame",
     ]
 
     # The reference frame in which the position is defined.
-    reference_frame = traitlets.Instance(klass = ReferenceFrame, allow_none = True)
+    reference_frame = traitlets.Instance(klass=ReferenceFrame, allow_none=True)
 
     # Constructor
 
@@ -40,35 +50,46 @@ class PositionProperty(Property):
         self.reference_frame = reference_frame
 
 
+######################################################################################################################################################
+
+
 class SampledPositionProperty(PositionProperty, SampledProperty):
 
     # Definitions
 
     _props = [
-        'number_of_derivatives',
+        "number_of_derivatives",
     ]
 
     # The number of derivatives that accompany each position; i.e. velocity, acceleration, etc...
-    number_of_derivatives = traitlets.Float(allow_none = True)
+    number_of_derivatives = traitlets.Float(allow_none=True)
 
     # Constructor
 
     def __init__(
         self,
-        property_name: str,
+        name: Optional[str] = None,
+        samples: Optional[
+            list[
+                tuple[
+                    datetime, cartesian.Cartesian3, Optional[list[cartesian.Cartesian3]]
+                ]
+            ]
+        ] = None,
         reference_frame: Optional[ReferenceFrame] = None,
         number_of_derivatives: Optional[float] = None,
     ) -> None:
 
         PositionProperty.__init__(
-            self = self,
-            reference_frame = reference_frame,
+            self=self,
+            reference_frame=reference_frame,
         )
 
         SampledProperty.__init__(
-            self = self,
-            property_name = property_name,
-            type = cartesian.Cartesian3,
+            self=self,
+            type=cartesian.Cartesian3,
+            name=name,
+            samples=samples,
         )
 
         self.number_of_derivatives = number_of_derivatives
@@ -79,7 +100,10 @@ class SampledPositionProperty(PositionProperty, SampledProperty):
         self,
         time: datetime,
         position: cartesian.Cartesian3,
-        derivatives: Optional[List[cartesian.Cartesian3]] = None,
+        derivatives: Optional[list[cartesian.Cartesian3]] = None,
     ) -> None:
 
         super().add_sample(time, position, derivatives)
+
+
+######################################################################################################################################################

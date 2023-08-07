@@ -15,7 +15,7 @@ class IonResource(_CesiumObject):
     # Definitions
 
     _props = [
-        'asset_id',
+        "asset_id",
     ]
 
     asset_id = traitlets.Int()
@@ -33,30 +33,30 @@ class IonResource(_CesiumObject):
 
     # Methods
 
-    def generate_script(self, widget = None) -> str:
-        return f'await Cesium.IonResource.fromAssetId({self.asset_id})'
+    def generate_script(self, widget=None) -> str:
+        return f"await Cesium.IonResource.fromAssetId({self.asset_id})"
 
 
 class Model(_CesiumEntity):
 
-    '''
+    """
     ModelGraphics
 
     Parameters
     ----------
 
 
-    '''
+    """
 
     # Definitions
 
-    _klass = 'model'
+    _klass = "model"
 
     _props = [
-        'uri',
+        "uri",
     ]
 
-    uri = traitlets.Instance(klass = IonResource)
+    uri = traitlets.Instance(klass=IonResource)
 
     # Constructor
 

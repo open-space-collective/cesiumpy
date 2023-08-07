@@ -15,7 +15,6 @@ import cesiumpy.util.html as html
 
 
 class MaybeTrait(traitlets.Instance):
-
     def validate(self, obj, value):
         if self.allow_none is True and value is None:
             return super(MaybeTrait, self).validate(obj, value)
@@ -28,7 +27,6 @@ class MaybeTrait(traitlets.Instance):
 
 
 class URITrait(traitlets.Unicode):
-
     def validate(self, obj, value):
         if self.allow_none is True and value is None:
             return super(URITrait, self).validate(obj, value)
@@ -39,7 +37,7 @@ class URITrait(traitlets.Unicode):
 
 
 class DateTimeTrait(traitlets.TraitType):
-    info_text = 'a datetime'
+    info_text = "a datetime"
 
     def validate(self, obj, value):
         if isinstance(value, datetime.datetime):
@@ -65,7 +63,7 @@ class _HTMLObject(traitlets.HasTraits):
 
     # Methods
 
-    def generate_script(self, widget = None):
+    def generate_script(self, widget=None):
         return self.script
 
     def __eq__(self, other):
@@ -76,20 +74,20 @@ class _HTMLObject(traitlets.HasTraits):
 
 
 class _JavaScriptObject(_HTMLObject):
-    '''
+    """
     Base class for JavaScript instances, which can be converted to
     JavaScript instance
-    '''
+    """
 
     # Properties
 
     @property
     def _klass(self):
-        raise NotImplementedError('Must be overriden in child classes.')
+        raise NotImplementedError("Must be overriden in child classes.")
 
     @property
     def _props(self):
-        raise NotImplementedError('Must be overriden in child classes.')
+        raise NotImplementedError("Must be overriden in child classes.")
 
     @property
     def _property_dict(self) -> collections.OrderedDict:
@@ -100,8 +98,8 @@ class _JavaScriptObject(_HTMLObject):
 
     # Methods
 
-    def generate_script(self, widget = None) -> str:
-        return ''.join(com.to_jsobject(self._property_dict, widget = widget))
+    def generate_script(self, widget=None) -> str:
+        return "".join(com.to_jsobject(self._property_dict, widget=widget))
 
 
 class _JavaScriptEnum(Enum):
@@ -114,7 +112,7 @@ class _JavaScriptEnum(Enum):
 
     # Methods
 
-    def generate_script(self, widget = None) -> str:
+    def generate_script(self, widget=None) -> str:
         return self.value
 
 
@@ -131,13 +129,13 @@ class _DIV(_HTMLObject):
     def __init__(
         self,
         id: Optional[str] = None,
-        width: str = '100%',
-        height: str = '100%',
+        width: str = "100%",
+        height: str = "100%",
     ) -> None:
 
         super().__init__()
 
-        self.id = id or 'cesiumContainer'
+        self.id = id or "cesiumContainer"
         self.width = width
         self.height = height
 
@@ -146,7 +144,5 @@ class _DIV(_HTMLObject):
     @property
     def script(self) -> str:
         return '<div id="{id}" style="width:{width}; height:{height};"><div>'.format(
-            id = self.id,
-            width = self.width,
-            height = self.height
+            id=self.id, width=self.width, height=self.height
         )

@@ -15,7 +15,7 @@ from cesiumpy.util.trait import MaybeTrait
 
 class Polyline(_CesiumEntity):
 
-    '''
+    """
     PolylineGraphics
 
     Parameters
@@ -33,42 +33,42 @@ class Polyline(_CesiumEntity):
         A Property specifying the material used to draw the polyline.
     granularity : float, default cesiumpy.math.RADIANS_PER_DEGREE
         A numeric Property specifying the angular distance between each latitude and longitude if follow_surface is true.
-    '''
+    """
 
     # Definitions
 
-    _klass = 'polyline'
+    _klass = "polyline"
 
     _props = [
-        'positions',
-        'arc_type',
-        'follow_surface',
+        "positions",
+        "arc_type",
+        "follow_surface",
     ]
 
-    positions = traitlets.Instance(klass = cartesian.Cartesian3Array)
-    arc_type = traitlets.Instance(klass = constants.ArcType, allow_none = True)
-    follow_surface = traitlets.Bool(allow_none = True)
+    positions = traitlets.Instance(klass=cartesian.Cartesian3Array)
+    arc_type = traitlets.Instance(klass=constants.ArcType, allow_none=True)
+    follow_surface = traitlets.Bool(allow_none=True)
 
     # Constructor
 
     def __init__(
         self,
         positions,
-        arc_type = None,
-        follow_surface = None,
-        width = None,
-        show = None,
-        material = None,
-        granularity = None,
-        name = None,
+        arc_type=None,
+        follow_surface=None,
+        width=None,
+        show=None,
+        material=None,
+        granularity=None,
+        name=None,
     ) -> None:
 
         super().__init__(
-            width = width,
-            show = show,
-            material = material,
-            granularity = granularity,
-            name = name,
+            width=width,
+            show=show,
+            material=material,
+            granularity=granularity,
+            name=name,
         )
 
         if not isinstance(positions, cartesian.Cartesian3Array):
@@ -85,14 +85,14 @@ class PolylineArrowMaterialProperty(Material):
     # Definitions
 
     _props = [
-        'color',
+        "color",
     ]
 
-    color = MaybeTrait(klass = cesiumpy.color.Color, allow_none = True)
+    color = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
 
     # Constructor
 
-    def __init__(self, color = None) -> None:
+    def __init__(self, color=None) -> None:
 
         super().__init__()
 
@@ -100,5 +100,5 @@ class PolylineArrowMaterialProperty(Material):
 
     # Methods
 
-    def generate_script(self, widget = None) -> str:
-        return f'new {self._klass}({self.color.generate_script(widget = widget)})'
+    def generate_script(self, widget=None) -> str:
+        return f"new {self._klass}({self.color.generate_script(widget = widget)})"

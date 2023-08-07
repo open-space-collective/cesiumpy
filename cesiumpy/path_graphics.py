@@ -15,27 +15,27 @@ class PathGraphics(_CesiumObject):
     # Definitions
 
     _props = [
-        'show',
-        'lead_time',
-        'trail_time',
-        'width',
-        'resolution',
+        "show",
+        "lead_time",
+        "trail_time",
+        "width",
+        "resolution",
     ]
 
     # A boolean Property specifying the visibility of the path.
-    show = traitlets.Bool(allow_none = True)
+    show = traitlets.Bool(allow_none=True)
 
     # A Property specifying the number of seconds in front the object to show.
-    lead_time = traitlets.Float(allow_none = True)
+    lead_time = traitlets.Float(allow_none=True)
 
     # A Property specifying the number of seconds behind of the object to show.
-    trail_time = traitlets.Float(allow_none = True)
+    trail_time = traitlets.Float(allow_none=True)
 
     # A numeric Property specifying the width in pixels.
-    width = traitlets.Float(allow_none = True)
+    width = traitlets.Float(allow_none=True)
 
     # A numeric Property specifying the maximum number of seconds to step when sampling the position.
-    resolution = traitlets.Float(allow_none = True)
+    resolution = traitlets.Float(allow_none=True)
 
     # Constructor
 
@@ -58,5 +58,5 @@ class PathGraphics(_CesiumObject):
 
     # Properties
 
-    def generate_script(self, widget = None) -> str:
-        return f'new {self._klass}({super().generate_script(widget = widget)})'
+    def generate_script(self, widget=None) -> str:
+        return f"new {self._klass}({super().generate_script(widget = widget)})"

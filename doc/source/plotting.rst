@@ -150,11 +150,11 @@ Also, you can pass RGB or RGBA values to instanciate ``Color``.
   >>> cesiumpy.color.Color(1, 0, 0, 0.5)
   Color(1.0, 0.0, 0.0, 0.5)
 
-If you want to use ``str`` representation, use ``fromString`` method.
+If you want to use ``str`` representation, use ``from_string`` method.
 
 .. code-block:: python
 
-  >>> cesiumpy.color.Color.fromString("#FF0000")
+  >>> cesiumpy.color.Color.from_string("#FF0000")
   Color.fromCssColorString("#FF0000")
 
 There are 2 functions to prepare color at random.

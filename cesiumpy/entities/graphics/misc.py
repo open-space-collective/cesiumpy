@@ -54,26 +54,46 @@ class Label(_CesiumEntity):
     pixelOffsetScaleByDistance :
         A NearFarScalar Property used to set pixelOffset based on distance from the camera.
     """
-    _klass = 'label'
-    _props = ['text', 'style', 'fillColor']
+
+    _klass = "label"
+    _props = ["text", "style", "fillColor"]
 
     text = traitlets.Unicode()
     fillColor = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
 
-    def __init__(self, position, text, style=None, fillColor=None,
-                 outlineColor=None, outlineWidth=None, show=None,
-                 scale=None, horizontalOrigin=None, verticalOrigin=None,
-                 eyeOffset=None, pixelOffset=None, translucencyByDistance=None,
-                 pixelOffsetScaleByDistance=None, name=None):
+    def __init__(
+        self,
+        position,
+        text,
+        style=None,
+        fillColor=None,
+        outlineColor=None,
+        outlineWidth=None,
+        show=None,
+        scale=None,
+        horizontalOrigin=None,
+        verticalOrigin=None,
+        eyeOffset=None,
+        pixelOffset=None,
+        translucencyByDistance=None,
+        pixelOffsetScaleByDistance=None,
+        name=None,
+    ):
 
-        super(Label, self).__init__(show=show, outlineColor=outlineColor,
-                                    outlineWidth=outlineWidth,
-                                    translucencyByDistance=translucencyByDistance,
-                                    scale=scale, horizontalOrigin=horizontalOrigin,
-                                    verticalOrigin=verticalOrigin,
-                                    eyeOffset=eyeOffset, pixelOffset=pixelOffset,
-                                    pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
-                                    position=position, name=name)
+        super(Label, self).__init__(
+            show=show,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            translucencyByDistance=translucencyByDistance,
+            scale=scale,
+            horizontalOrigin=horizontalOrigin,
+            verticalOrigin=verticalOrigin,
+            eyeOffset=eyeOffset,
+            pixelOffset=pixelOffset,
+            pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
+            position=position,
+            name=name,
+        )
 
         self.text = text
         self.style = com.notimplemented(style)
@@ -124,28 +144,52 @@ class Billboard(_CesiumEntity):
     sizeInMeters : bool
         A boolean Property specifying whether this billboard's size should be measured in meters.
     """
-    _klass = 'billboard'
-    _props = ['image', 'alignedAxis', 'imageSubRegion', 'sizeInMeters']
+
+    _klass = "billboard"
+    _props = ["image", "alignedAxis", "imageSubRegion", "sizeInMeters"]
 
     image = traitlets.Instance(klass=cesiumpy.entities.pinbuilder._BillboardContents)
 
-    def __init__(self, position, image=None, show=None, scale=None,
-                 horizontalOrigin=None, verticalOrigin=None,
-                 eyeOffset=None, pixelOffset=None, rotation=None,
-                 alignedAxis=None, width=None, height=None, color=None,
-                 scaleByDistance=None, translucencyByDistance=None,
-                 pixelOffsetScaleByDistance=None, imageSubRegion=None,
-                 sizeInMeters=None, name=None):
+    def __init__(
+        self,
+        position,
+        image=None,
+        show=None,
+        scale=None,
+        horizontalOrigin=None,
+        verticalOrigin=None,
+        eyeOffset=None,
+        pixelOffset=None,
+        rotation=None,
+        alignedAxis=None,
+        width=None,
+        height=None,
+        color=None,
+        scaleByDistance=None,
+        translucencyByDistance=None,
+        pixelOffsetScaleByDistance=None,
+        imageSubRegion=None,
+        sizeInMeters=None,
+        name=None,
+    ):
 
-        super(Billboard, self).__init__(show=show, scale=scale, color=color,
-                                        horizontalOrigin=horizontalOrigin,
-                                        verticalOrigin=verticalOrigin,
-                                        eyeOffset=eyeOffset, pixelOffset=pixelOffset,
-                                        rotation=rotation, width=width, height=height,
-                                        scaleByDistance=scaleByDistance,
-                                        translucencyByDistance=translucencyByDistance,
-                                        pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
-                                        position=position, name=name)
+        super(Billboard, self).__init__(
+            show=show,
+            scale=scale,
+            color=color,
+            horizontalOrigin=horizontalOrigin,
+            verticalOrigin=verticalOrigin,
+            eyeOffset=eyeOffset,
+            pixelOffset=pixelOffset,
+            rotation=rotation,
+            width=width,
+            height=height,
+            scaleByDistance=scaleByDistance,
+            translucencyByDistance=translucencyByDistance,
+            pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
+            position=position,
+            name=name,
+        )
         if image is None:
             image = Pin()
 
@@ -197,25 +241,46 @@ class Ellipse(_CesiumEntity):
         A numeric Property specifying the angular distance between points on the ellipse.
     """
 
-    _klass = 'ellipse'
-    _props = ['semiMinorAxis', 'semiMajorAxis']
+    _klass = "ellipse"
+    _props = ["semiMinorAxis", "semiMajorAxis"]
 
     semiMinorAxis = traitlets.Float()
     semiMajorAxis = traitlets.Float()
 
-    def __init__(self, position, semiMinorAxis, semiMajorAxis, height=None,
-                 extrudedHeight=None, show=None, fill=None, material=None,
-                 outline=None, outlineColor=None, outlineWidth=None,
-                 numberOfVerticalLines=None, rotation=None, stRotation=None,
-                 name=None):
+    def __init__(
+        self,
+        position,
+        semiMinorAxis,
+        semiMajorAxis,
+        height=None,
+        extrudedHeight=None,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outlineColor=None,
+        outlineWidth=None,
+        numberOfVerticalLines=None,
+        rotation=None,
+        stRotation=None,
+        name=None,
+    ):
 
-        super(Ellipse, self).__init__(height=height, extrudedHeight=extrudedHeight,
-                                      show=show, fill=fill, material=material,
-                                      outline=outline, outlineColor=outlineColor,
-                                      outlineWidth=outlineWidth,
-                                      numberOfVerticalLines=numberOfVerticalLines,
-                                      rotation=rotation, stRotation=stRotation,
-                                      position=position, name=name)
+        super(Ellipse, self).__init__(
+            height=height,
+            extrudedHeight=extrudedHeight,
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            numberOfVerticalLines=numberOfVerticalLines,
+            rotation=rotation,
+            stRotation=stRotation,
+            position=position,
+            name=name,
+        )
 
         self.semiMinorAxis = semiMinorAxis
         self.semiMajorAxis = semiMajorAxis
@@ -251,22 +316,39 @@ class Ellipsoid(_CesiumEntity):
         A Property specifying the number of radial slices.
     """
 
-    _klass = 'ellipsoid'
-    _props = ['radii', 'subdivisions', 'stackPartitions', 'slicePartitions']
+    _klass = "ellipsoid"
+    _props = ["radii", "subdivisions", "stackPartitions", "slicePartitions"]
 
     radii = MaybeTrait(klass=cartesian.Cartesian3)
     subdivisions = traitlets.Float(allow_none=True)
     stackPartitions = traitlets.Float(allow_none=True)
     slicePartitions = traitlets.Float(allow_none=True)
 
-    def __init__(self, position, radii, show=None, fill=None, material=None,
-                 outline=None, outlineColor=None, outlineWidth=None,
-                 subdivisions=None, stackPartitions=None, slicePartitions=None,
-                 name=None):
-        super(Ellipsoid, self).__init__(show=show, fill=fill, material=material,
-                                        outline=outline, outlineColor=outlineColor,
-                                        outlineWidth=outlineWidth,
-                                        position=position, name=name)
+    def __init__(
+        self,
+        position,
+        radii,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outlineColor=None,
+        outlineWidth=None,
+        subdivisions=None,
+        stackPartitions=None,
+        slicePartitions=None,
+        name=None,
+    ):
+        super(Ellipsoid, self).__init__(
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            position=position,
+            name=name,
+        )
         self.radii = radii
         self.subdivisions = subdivisions
         self.stackPartitions = stackPartitions
@@ -302,25 +384,42 @@ class PolylineVolume(_CesiumEntity):
         A numeric Property specifying the angular distance between each latitude and longitude point.
     """
 
-    _klass = 'polylineVolume'
-    _props = ['positions', 'shape', 'cornerType']
+    _klass = "polylineVolume"
+    _props = ["positions", "shape", "cornerType"]
 
     positions = traitlets.Instance(klass=cartesian.Cartesian3Array)
     shape = traitlets.List(minlen=2)
     cornerType = traitlets.Instance(klass=constants.CornerType, allow_none=True)
 
-    def __init__(self, positions, shape, cornerType=None, show=None,
-                 fill=None, material=None, outline=None, outlineColor=None,
-                 outlineWidth=None, granularity=None, name=None):
+    def __init__(
+        self,
+        positions,
+        shape,
+        cornerType=None,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outlineColor=None,
+        outlineWidth=None,
+        granularity=None,
+        name=None,
+    ):
         # polylineVolume uses "positions", not "position"
 
-        super(PolylineVolume, self).__init__(show=show, fill=fill, material=material,
-                                             outline=outline, outlineColor=outlineColor,
-                                             outlineWidth=outlineWidth, granularity=granularity,
-                                             name=name)
+        super(PolylineVolume, self).__init__(
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            granularity=granularity,
+            name=name,
+        )
 
         self.positions = cartesian.Cartesian3.fromDegreesArray(positions)
-        self.shape = cartesian._maybe_cartesian2_list(shape, key='shape')
+        self.shape = cartesian._maybe_cartesian2_list(shape, key="shape")
         self.cornerType = cornerType
 
 
@@ -357,24 +456,43 @@ class Corridor(_CesiumEntity):
         A numeric Property specifying the distance between each latitude and longitude.
     """
 
-    _klass = 'corridor'
-    _props = ['positions', 'cornerType']
+    _klass = "corridor"
+    _props = ["positions", "cornerType"]
 
     positions = traitlets.Instance(klass=cartesian.Cartesian3Array)
     cornerType = traitlets.Instance(klass=constants.CornerType, allow_none=True)
 
-    def __init__(self, positions, width, cornerType=None, height=None,
-                 extrudedHeight=None, show=None, fill=None, material=None,
-                 outline=None, outlineColor=None, outlineWidth=None,
-                 granularity=None, name=None):
+    def __init__(
+        self,
+        positions,
+        width,
+        cornerType=None,
+        height=None,
+        extrudedHeight=None,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outlineColor=None,
+        outlineWidth=None,
+        granularity=None,
+        name=None,
+    ):
         # corridor uses "positions", not "position"
 
-        super(Corridor, self).__init__(width=width, height=height,
-                                       extrudedHeight=extrudedHeight,
-                                       show=show, fill=fill, material=material,
-                                       outline=outline, outlineColor=outlineColor,
-                                       outlineWidth=outlineWidth,
-                                       granularity=granularity, name=name)
+        super(Corridor, self).__init__(
+            width=width,
+            height=height,
+            extrudedHeight=extrudedHeight,
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            granularity=granularity,
+            name=name,
+        )
 
         self.positions = cartesian.Cartesian3.fromDegreesArray(positions)
         self.cornerType = cornerType
@@ -409,19 +527,36 @@ class Wall(_CesiumEntity):
         A numeric Property specifying the angular distance between each latitude and longitude point.
     """
 
-    _klass = 'wall'
-    _props = ['positions', 'maximumHeights', 'minimumHeights']
+    _klass = "wall"
+    _props = ["positions", "maximumHeights", "minimumHeights"]
 
     positions = traitlets.Instance(klass=cartesian.Cartesian3Array)
 
-    def __init__(self, positions, maximumHeights, minimumHeights, show=None,
-                 fill=None, material=None, outline=None, outlineColor=None,
-                 outlineWidth=None, granularity=None, name=None):
+    def __init__(
+        self,
+        positions,
+        maximumHeights,
+        minimumHeights,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outlineColor=None,
+        outlineWidth=None,
+        granularity=None,
+        name=None,
+    ):
         # Wall uses "positions", not "position"
-        super(Wall, self).__init__(show=show, fill=fill, material=material,
-                                   outline=outline, outlineColor=outlineColor,
-                                   outlineWidth=outlineWidth, granularity=granularity,
-                                   name=name)
+        super(Wall, self).__init__(
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            granularity=granularity,
+            name=name,
+        )
 
         # ToDo: Support fromDegreesArrayHeights
         self.positions = cartesian.Cartesian3.fromDegreesArray(positions)
@@ -432,12 +567,14 @@ class Wall(_CesiumEntity):
                 com.validate_numeric(x, key=key)
                 x = [x] * pos_len
             if len(x) != pos_len:
-                msg = '{key} must has the half length ({pos_len}) of positions: {x}'
-                raise ValueError(msg.format(key=key, pos_len=pos_len, x=len(maximumHeights)))
+                msg = "{key} must has the half length ({pos_len}) of positions: {x}"
+                raise ValueError(
+                    msg.format(key=key, pos_len=pos_len, x=len(maximumHeights))
+                )
             return x
 
-        self.maximumHeights = _init_heights(maximumHeights, key='maximumHeights')
-        self.minimumHeights = _init_heights(minimumHeights, key='minimumHeights')
+        self.maximumHeights = _init_heights(maximumHeights, key="maximumHeights")
+        self.minimumHeights = _init_heights(minimumHeights, key="minimumHeights")
 
 
 class Rectangle(_CesiumEntity):
@@ -477,41 +614,64 @@ class Rectangle(_CesiumEntity):
         A numeric Property specifying the angular distance between points on the rectangle.
     """
 
-    _klass = 'rectangle'
-    _props = ['coordinates', 'closeTop', 'closeBottom']
+    _klass = "rectangle"
+    _props = ["coordinates", "closeTop", "closeBottom"]
 
     coordinates = MaybeTrait(klass=cartesian.Rectangle)
     closeTop = traitlets.Bool(allow_none=True)
     closeBottom = traitlets.Bool(allow_none=True)
 
-    def __init__(self, coordinates, height=None, extrudedHeight=None,
-                 closeTop=None, closeBottom=None, show=None,
-                 fill=None, material=None, outline=None, outlineColor=None,
-                 outlineWidth=None, stRotation=None, granularity=None,
-                 name=None):
+    def __init__(
+        self,
+        coordinates,
+        height=None,
+        extrudedHeight=None,
+        closeTop=None,
+        closeBottom=None,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outlineColor=None,
+        outlineWidth=None,
+        stRotation=None,
+        granularity=None,
+        name=None,
+    ):
 
-        super(Rectangle, self).__init__(height=height, extrudedHeight=extrudedHeight,
-                                        show=show, fill=fill, material=material,
-                                        outline=outline, outlineColor=outlineColor,
-                                        outlineWidth=outlineWidth, stRotation=stRotation,
-                                        granularity=granularity, name=name)
+        super(Rectangle, self).__init__(
+            height=height,
+            extrudedHeight=extrudedHeight,
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            stRotation=stRotation,
+            granularity=granularity,
+            name=name,
+        )
 
         self.coordinates = coordinates
         self.closeTop = closeTop
         self.closeBottom = closeBottom
 
     def __repr__(self):
-        rep = """{klass}({rep})""".format(klass=self.__class__.__name__,
-                                          rep=self.coordinates._inner_repr)
+        rep = """{klass}({rep})""".format(
+            klass=self.__class__.__name__, rep=self.coordinates._inner_repr
+        )
         return rep
 
 
 class ShadowMode(_CesiumEnum):
 
-    DISABLED = 'Cesium.ShadowMode.DISABLED'  # The object does not cast or receive shadows.
-    ENABLED = 'Cesium.ShadowMode.ENABLED'  # The object casts and receives shadows.
-    CAST_ONLY = 'Cesium.ShadowMode.CAST_ONLY'  # The object casts shadows only.
-    RECEIVE_ONLY = 'Cesium.ShadowMode.RECEIVE_ONLY'  # The object receives shadows only.
+    DISABLED = (
+        "Cesium.ShadowMode.DISABLED"  # The object does not cast or receive shadows.
+    )
+    ENABLED = "Cesium.ShadowMode.ENABLED"  # The object casts and receives shadows.
+    CAST_ONLY = "Cesium.ShadowMode.CAST_ONLY"  # The object casts shadows only.
+    RECEIVE_ONLY = "Cesium.ShadowMode.RECEIVE_ONLY"  # The object receives shadows only.
 
 
 class Polygon(_CesiumEntity):
@@ -547,21 +707,41 @@ class Polygon(_CesiumEntity):
         A boolean specifying whether or not the the height of each position is used.
     """
 
-    _klass = 'polygon'
-    _props = ['hierarchy', 'perPositionHeight']
+    _klass = "polygon"
+    _props = ["hierarchy", "perPositionHeight"]
 
     perPositionHeight = traitlets.Bool(allow_none=True)
 
-    def __init__(self, hierarchy, height=None, extrudedHeight=None, show=None,
-                 fill=None, material=None, outline=None, outlineColor=None,
-                 outlineWidth=None, stRotation=None, granularity=None,
-                 perPositionHeight=None, name=None):
+    def __init__(
+        self,
+        hierarchy,
+        height=None,
+        extrudedHeight=None,
+        show=None,
+        fill=None,
+        material=None,
+        outline=None,
+        outlineColor=None,
+        outlineWidth=None,
+        stRotation=None,
+        granularity=None,
+        perPositionHeight=None,
+        name=None,
+    ):
 
-        super(Polygon, self).__init__(height=height, extrudedHeight=extrudedHeight,
-                                      show=show, fill=fill, material=material,
-                                      outline=outline, outlineColor=outlineColor,
-                                      outlineWidth=outlineWidth, stRotation=stRotation,
-                                      granularity=granularity, name=name)
+        super(Polygon, self).__init__(
+            height=height,
+            extrudedHeight=extrudedHeight,
+            show=show,
+            fill=fill,
+            material=material,
+            outline=outline,
+            outlineColor=outlineColor,
+            outlineWidth=outlineWidth,
+            stRotation=stRotation,
+            granularity=granularity,
+            name=name,
+        )
 
         self.hierarchy = cartesian.Cartesian3.fromDegreesArray(hierarchy)
         self.perPositionHeight = perPositionHeight

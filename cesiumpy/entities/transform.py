@@ -23,8 +23,7 @@ class Transforms(_CesiumObject):
     @property
     def script(self):
         script = "Cesium.Transforms.{transform}({script})"
-        return script.format(transform=self.transform,
-                             script=self.origin.script)
+        return script.format(transform=self.transform, script=self.origin.script)
 
     @classmethod
     def eastNorthUpToFixedFrame(cls, origin):
@@ -44,7 +43,7 @@ class Transforms(_CesiumObject):
         origin : Cartesian3
             The center point of the local reference frame.
         """
-        return Transforms(origin, transform='eastNorthUpToFixedFrame')
+        return Transforms(origin, transform="eastNorthUpToFixedFrame")
 
     @classmethod
     def northEastDownToFixedFrame(cls, origin):
@@ -64,7 +63,7 @@ class Transforms(_CesiumObject):
         origin : Cartesian3
             The center point of the local reference frame.
         """
-        return Transforms(origin, transform='northEastDownToFixedFrame')
+        return Transforms(origin, transform="northEastDownToFixedFrame")
 
     @classmethod
     def northUpEastToFixedFrame(cls, origin):
@@ -84,4 +83,4 @@ class Transforms(_CesiumObject):
         origin : Cartesian3
             The center point of the local reference frame.
         """
-        return Transforms(origin, transform='northUpEastToFixedFrame')
+        return Transforms(origin, transform="northUpEastToFixedFrame")

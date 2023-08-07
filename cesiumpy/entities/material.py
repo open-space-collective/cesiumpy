@@ -15,7 +15,6 @@ from cesiumpy.util.trait import URITrait
 
 
 class Material(_CesiumObject):
-
     @classmethod
     def maybe(cls, x):
         try:
@@ -42,7 +41,7 @@ class ImageMaterialProperty(Material):
         A Cartesian2 Property specifying the number of times
     """
 
-    _props = ['image', 'repeat']
+    _props = ["image", "repeat"]
     image = URITrait()
 
     def __init__(self, image, repeat=None):
@@ -58,8 +57,9 @@ class ImageMaterialProperty(Material):
     @property
     def script(self):
         props = super(ImageMaterialProperty, self).script
-        return 'new Cesium.{klass}({props})'.format(klass=self.__class__.__name__,
-                                                    props=props)
+        return "new Cesium.{klass}({props})".format(
+            klass=self.__class__.__name__, props=props
+        )
 
 
 class TemporaryImage(_CesiumObject):
@@ -80,24 +80,30 @@ class TemporaryImage(_CesiumObject):
     trim = traitlets.Bool()
 
     def __init__(self, figure, trim=True):
-        _, tmp = tempfile.mkstemp(dir='.', suffix='.png')
+        _, tmp = tempfile.mkstemp(dir=".", suffix=".png")
         # store full path
         self.path = tmp
         self.trim = trim
 
         import matplotlib
+
         if not isinstance(figure, matplotlib.figure.Figure):
             # retrieve figure from Axes and AxesImage
-            figure = getattr(figure, 'figure', figure)
+            figure = getattr(figure, "figure", figure)
 
         if isinstance(figure, matplotlib.figure.Figure):
             if trim and len(figure.axes) > 1:
-                raise ValueError('Unable to trim a Figure contains multiple Axes')
+                raise ValueError("Unable to trim a Figure contains multiple Axes")
             if trim:
                 # result contains axis labels without this
                 figure.axes[0].set_axis_off()
-                figure.savefig(self.path, format="png", transparent=True,
-                               bbox_inches='tight', pad_inches=0)
+                figure.savefig(
+                    self.path,
+                    format="png",
+                    transparent=True,
+                    bbox_inches="tight",
+                    pad_inches=0,
+                )
             else:
                 figure.savefig(self.path, format="png", transparent=True)
         else:
@@ -105,7 +111,7 @@ class TemporaryImage(_CesiumObject):
 
     @property
     def script(self):
-        return '{0}'.format(os.path.basename(self.path))
+        return "{0}".format(os.path.basename(self.path))
 
     def __del__(self):
         if os.path.exists(self.path):

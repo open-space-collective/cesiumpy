@@ -46,10 +46,21 @@ class Model(_CesiumObject):
         For debugging only. Draws the model in wireframe.
     """
 
-    _props = ['url', 'basePath', 'show', 'modelMatrix', 'scale',
-              'minimumPixelSize', 'maximumScale', 'id', 'allowPicking',
-              'incrementallyLoadTextures', 'asynchronous',
-              'debugShowBoundingVolume', 'debugWireframe']
+    _props = [
+        "url",
+        "basePath",
+        "show",
+        "modelMatrix",
+        "scale",
+        "minimumPixelSize",
+        "maximumScale",
+        "id",
+        "allowPicking",
+        "incrementallyLoadTextures",
+        "asynchronous",
+        "debugShowBoundingVolume",
+        "debugWireframe",
+    ]
 
     url = URITrait()
     modelMatrix = traitlets.Instance(klass=Transforms)
@@ -66,11 +77,22 @@ class Model(_CesiumObject):
     debugShowBoundingVolume = traitlets.Bool(allow_none=True)
     debugWireframe = traitlets.Bool(allow_none=True)
 
-    def __init__(self, url, modelMatrix, basePath=None, show=None,
-                 scale=None, minimumPixelSize=None, maximumScale=None,
-                 id=None, allowPicking=None, incrementallyLoadTextures=None,
-                 asynchronous=None, debugShowBoundingVolume=None,
-                 debugWireframe=None):
+    def __init__(
+        self,
+        url,
+        modelMatrix,
+        basePath=None,
+        show=None,
+        scale=None,
+        minimumPixelSize=None,
+        maximumScale=None,
+        id=None,
+        allowPicking=None,
+        incrementallyLoadTextures=None,
+        asynchronous=None,
+        debugShowBoundingVolume=None,
+        debugWireframe=None,
+    ):
 
         self.url = url
 

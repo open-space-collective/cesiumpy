@@ -14,7 +14,7 @@ from cesiumpy.util.trait import MaybeTrait
 
 class _CesiumProvider(_CesiumObject):
 
-    _props = ['url']
+    _props = ["url"]
 
     def __repr__(self):
         if self.url is None:
@@ -37,13 +37,14 @@ class _CesiumProvider(_CesiumObject):
 
 class TerrainProvider(_CesiumProvider):
 
-    _props = ['url', 'proxy', 'ellipsoid', 'credit']
+    _props = ["url", "proxy", "ellipsoid", "credit"]
 
     url = traitlets.Unicode()
     credit = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, url=None, proxy=None, tilingScheme=None,
-                 ellipsoid=None, credit=None):
+    def __init__(
+        self, url=None, proxy=None, tilingScheme=None, ellipsoid=None, credit=None
+    ):
         self.url = url
         self.proxy = com.notimplemented(proxy)
         self.tilingScheme = com.notimplemented(tilingScheme)
@@ -72,14 +73,20 @@ class ArcGisImageServerTerrainProvider(TerrainProvider):
         The credit, which will is displayed on the canvas.
     """
 
-    _props = ['url', 'token', 'proxy', 'tilingScheme', 'ellipsoid', 'credit']
+    _props = ["url", "token", "proxy", "tilingScheme", "ellipsoid", "credit"]
 
     token = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, url, token, proxy=None, tilingScheme=None,
-                 ellipsoid=None, credit=None):
-        super(ArcGisImageServerTerrainProvider, self).__init__(url=url, proxy=proxy, tilingScheme=tilingScheme,
-                                                               ellipsoid=ellipsoid, credit=credit)
+    def __init__(
+        self, url, token, proxy=None, tilingScheme=None, ellipsoid=None, credit=None
+    ):
+        super(ArcGisImageServerTerrainProvider, self).__init__(
+            url=url,
+            proxy=proxy,
+            tilingScheme=tilingScheme,
+            ellipsoid=ellipsoid,
+            credit=credit,
+        )
         self.token = token
 
 
@@ -104,15 +111,30 @@ class CesiumTerrainProvider(TerrainProvider):
         A credit for the data source, which is displayed on the canvas.
     """
 
-    _props = ['url', 'proxy', 'requestVertexNormals', 'requestWaterMask', 'ellipsoid', 'credit']
+    _props = [
+        "url",
+        "proxy",
+        "requestVertexNormals",
+        "requestWaterMask",
+        "ellipsoid",
+        "credit",
+    ]
 
     requestVertexNormals = traitlets.Bool(allow_none=True)
     requestWaterMask = traitlets.Bool(allow_none=True)
 
-    def __init__(self, url, proxy=None, requestVertexNormals=None,
-                 requestWaterMask=None, ellipsoid=None, credit=None):
-        super(CesiumTerrainProvider, self).__init__(url=url, proxy=proxy,
-                                                    ellipsoid=ellipsoid, credit=credit)
+    def __init__(
+        self,
+        url,
+        proxy=None,
+        requestVertexNormals=None,
+        requestWaterMask=None,
+        ellipsoid=None,
+        credit=None,
+    ):
+        super(CesiumTerrainProvider, self).__init__(
+            url=url, proxy=proxy, ellipsoid=ellipsoid, credit=credit
+        )
         self.requestVertexNormals = requestVertexNormals
         self.requestWaterMask = requestWaterMask
 
@@ -134,8 +156,9 @@ class EllipsoidTerrainProvider(TerrainProvider):
 
     def __init__(self, tilingScheme=None, ellipsoid=None):
 
-        super(EllipsoidTerrainProvider, self).__init__(tilingScheme=tilingScheme,
-                                                       ellipsoid=ellipsoid)
+        super(EllipsoidTerrainProvider, self).__init__(
+            tilingScheme=tilingScheme, ellipsoid=ellipsoid
+        )
 
 
 class VRTheWorldTerrainProvider(TerrainProvider):
@@ -153,11 +176,12 @@ class VRTheWorldTerrainProvider(TerrainProvider):
     credit : Credit or str
         A credit for the data source, which is displayed on the canvas.
     """
+
     def __init__(self, url, proxy=None, ellipsoid=None, credit=None):
 
-        super(VRTheWorldTerrainProvider, self).__init__(url=url, proxy=proxy,
-                                                        ellipsoid=ellipsoid,
-                                                        credit=credit)
+        super(VRTheWorldTerrainProvider, self).__init__(
+            url=url, proxy=proxy, ellipsoid=ellipsoid, credit=credit
+        )
 
 
 # --------------------------------------------------
@@ -167,10 +191,21 @@ class VRTheWorldTerrainProvider(TerrainProvider):
 
 class ImageryProvider(_CesiumProvider):
 
-    _props = ['url', 'fileExtension', 'rectangle', 'tillingScheme', 'ellipsoid',
-              'tileWidth', 'tileHeight', 'tileDiscardPolicy',
-              'minimumLevel', 'maximumLevel',
-              'credit', 'proxy', 'subdomains']
+    _props = [
+        "url",
+        "fileExtension",
+        "rectangle",
+        "tillingScheme",
+        "ellipsoid",
+        "tileWidth",
+        "tileHeight",
+        "tileDiscardPolicy",
+        "minimumLevel",
+        "maximumLevel",
+        "credit",
+        "proxy",
+        "subdomains",
+    ]
 
     url = traitlets.Unicode(allow_none=True)
     fileExtension = traitlets.Unicode(allow_none=True)
@@ -184,9 +219,22 @@ class ImageryProvider(_CesiumProvider):
 
     credit = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, url=None, fileExtension=None, rectangle=None, tillingScheme=None,
-                 ellipsoid=None, tileWidth=None, tileHeight=None, tileDiscardPolicy=None,
-                 minimumLevel=None, maximumLevel=None, credit=None, proxy=None, subdomains=None):
+    def __init__(
+        self,
+        url=None,
+        fileExtension=None,
+        rectangle=None,
+        tillingScheme=None,
+        ellipsoid=None,
+        tileWidth=None,
+        tileHeight=None,
+        tileDiscardPolicy=None,
+        minimumLevel=None,
+        maximumLevel=None,
+        credit=None,
+        proxy=None,
+        subdomains=None,
+    ):
 
         self.url = url
         self.fileExtension = fileExtension
@@ -243,28 +291,55 @@ class ArcGisMapServerImageryProvider(ImageryProvider):
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
     """
 
-    _props = ['url', 'token', 'usePreCachedTilesIfAvailable', 'layers',
-              'enablePickFeatures', 'rectangle', 'tillingScheme', 'ellipsoid',
-              'tileWidth', 'tileHeight', 'tileDiscardPolicy', 'minimumLevel',
-              'proxy']
+    _props = [
+        "url",
+        "token",
+        "usePreCachedTilesIfAvailable",
+        "layers",
+        "enablePickFeatures",
+        "rectangle",
+        "tillingScheme",
+        "ellipsoid",
+        "tileWidth",
+        "tileHeight",
+        "tileDiscardPolicy",
+        "minimumLevel",
+        "proxy",
+    ]
 
     token = traitlets.Unicode(allow_none=True)
     usePreCachedTilesIfAvailable = traitlets.Bool(allow_none=True)
     layers = traitlets.Unicode(allow_none=True)
     enablePickFeatures = traitlets.Bool(allow_none=True)
 
-    def __init__(self, url, token=None, usePreCachedTilesIfAvailable=None,
-                 layers=None, enablePickFeatures=None, rectangle=None, tillingScheme=None,
-                 ellipsoid=None, tileWidth=None, tileHeight=None, tileDiscardPolicy=None,
-                 minimumLevel=None, proxy=None):
+    def __init__(
+        self,
+        url,
+        token=None,
+        usePreCachedTilesIfAvailable=None,
+        layers=None,
+        enablePickFeatures=None,
+        rectangle=None,
+        tillingScheme=None,
+        ellipsoid=None,
+        tileWidth=None,
+        tileHeight=None,
+        tileDiscardPolicy=None,
+        minimumLevel=None,
+        proxy=None,
+    ):
 
-        super(ArcGisMapServerImageryProvider, self).__init__(url=url, rectangle=rectangle,
-                                                             tillingScheme=tillingScheme,
-                                                             ellipsoid=ellipsoid,
-                                                             tileWidth=tileWidth,
-                                                             tileHeight=tileHeight,
-                                                             tileDiscardPolicy=tileDiscardPolicy,
-                                                             minimumLevel=minimumLevel, proxy=proxy)
+        super(ArcGisMapServerImageryProvider, self).__init__(
+            url=url,
+            rectangle=rectangle,
+            tillingScheme=tillingScheme,
+            ellipsoid=ellipsoid,
+            tileWidth=tileWidth,
+            tileHeight=tileHeight,
+            tileDiscardPolicy=tileDiscardPolicy,
+            minimumLevel=minimumLevel,
+            proxy=proxy,
+        )
 
         self.token = token
         self.usePreCachedTilesIfAvailable = usePreCachedTilesIfAvailable
@@ -297,20 +372,40 @@ class BingMapsImageryProvider(ImageryProvider):
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
     """
 
-    _props = ['url', 'key', 'tileProtocol', 'mapStyle', 'culture',
-              'ellipsoid', 'tileDiscardPolicy', 'proxy']
+    _props = [
+        "url",
+        "key",
+        "tileProtocol",
+        "mapStyle",
+        "culture",
+        "ellipsoid",
+        "tileDiscardPolicy",
+        "proxy",
+    ]
 
     key = traitlets.Unicode()
     tileProtocol = traitlets.Unicode()
     mapStyle = traitlets.Unicode(allow_none=True)
     culture = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, url, key, tileProtocol, mapStyle=None, culture=None,
-                 ellipsoid=None, tileDiscardPolicy=None, proxy=None):
+    def __init__(
+        self,
+        url,
+        key,
+        tileProtocol,
+        mapStyle=None,
+        culture=None,
+        ellipsoid=None,
+        tileDiscardPolicy=None,
+        proxy=None,
+    ):
 
-        super(BingMapsImageryProvider, self).__init__(url=url, ellipsoid=ellipsoid,
-                                                      tileDiscardPolicy=tileDiscardPolicy,
-                                                      proxy=proxy)
+        super(BingMapsImageryProvider, self).__init__(
+            url=url,
+            ellipsoid=ellipsoid,
+            tileDiscardPolicy=tileDiscardPolicy,
+            proxy=proxy,
+        )
 
         self.key = key
         self.tileProtocol = key
@@ -341,26 +436,43 @@ class GoogleEarthImageryProvider(ImageryProvider):
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
     """
 
-    _props = ['url', 'channel', 'path', 'ellipsoid', 'tileDiscardPolicy',
-              'maximumLevel', 'proxy']
+    _props = [
+        "url",
+        "channel",
+        "path",
+        "ellipsoid",
+        "tileDiscardPolicy",
+        "maximumLevel",
+        "proxy",
+    ]
 
     channel = traitlets.Float()
     path = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, url, channel, path=None, ellipsoid=None,
-                 tileDiscardPolicy=None, maximumLevel=None, proxy=None):
+    def __init__(
+        self,
+        url,
+        channel,
+        path=None,
+        ellipsoid=None,
+        tileDiscardPolicy=None,
+        maximumLevel=None,
+        proxy=None,
+    ):
 
-        super(GoogleEarthImageryProvider, self).__init__(url=url,
-                                                         ellipsoid=ellipsoid,
-                                                         tileDiscardPolicy=tileDiscardPolicy,
-                                                         maximumLevel=maximumLevel, proxy=proxy)
+        super(GoogleEarthImageryProvider, self).__init__(
+            url=url,
+            ellipsoid=ellipsoid,
+            tileDiscardPolicy=tileDiscardPolicy,
+            maximumLevel=maximumLevel,
+            proxy=proxy,
+        )
 
         self.channel = channel
         self.path = path
 
 
 class GridImageryProvider(ImageryProvider):
-
     def __init__(self):
         # this accepts other kw than options
         raise NotImplementedError
@@ -395,21 +507,47 @@ class MapboxImageryProvider(ImageryProvider):
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL.
     """
 
-    _props = ['url', 'mapId', 'accessToken', 'format', 'rectangle', 'ellipsoid',
-              'minimumLevel', 'maximumLevel', 'credit', 'proxy']
+    _props = [
+        "url",
+        "mapId",
+        "accessToken",
+        "format",
+        "rectangle",
+        "ellipsoid",
+        "minimumLevel",
+        "maximumLevel",
+        "credit",
+        "proxy",
+    ]
 
     url = traitlets.Unicode()
     mapId = traitlets.Unicode()
     accessToken = traitlets.Unicode()
     format = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, url, mapId, accessToken, format=None,
-                 rectangle=None, ellipsoid=None, minimumLevel=None,
-                 maximumLevel=None, credit=None, proxy=None):
+    def __init__(
+        self,
+        url,
+        mapId,
+        accessToken,
+        format=None,
+        rectangle=None,
+        ellipsoid=None,
+        minimumLevel=None,
+        maximumLevel=None,
+        credit=None,
+        proxy=None,
+    ):
 
-        super(MapboxImageryProvider, self).__init__(url=url, rectangle=rectangle, ellipsoid=ellipsoid,
-                                                    minimumLevel=minimumLevel, maximumLevel=maximumLevel,
-                                                    credit=credit, proxy=proxy)
+        super(MapboxImageryProvider, self).__init__(
+            url=url,
+            rectangle=rectangle,
+            ellipsoid=ellipsoid,
+            minimumLevel=minimumLevel,
+            maximumLevel=maximumLevel,
+            credit=credit,
+            proxy=proxy,
+        )
 
         self.mapId = mapId
         self.accessToken = accessToken
@@ -441,16 +579,28 @@ class OpenStreetMapImageryProvider(ImageryProvider):
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL.
     """
 
-    def __init__(self, url=None, fileExtension=None, rectangle=None, ellipsoid=None,
-                 minimumLevel=None, maximumLevel=None, credit=None, proxy=None):
+    def __init__(
+        self,
+        url=None,
+        fileExtension=None,
+        rectangle=None,
+        ellipsoid=None,
+        minimumLevel=None,
+        maximumLevel=None,
+        credit=None,
+        proxy=None,
+    ):
 
-        super(OpenStreetMapImageryProvider, self).__init__(url=url,
-                                                           fileExtension=fileExtension,
-                                                           rectangle=rectangle,
-                                                           ellipsoid=ellipsoid,
-                                                           minimumLevel=minimumLevel,
-                                                           maximumLevel=maximumLevel,
-                                                           credit=credit, proxy=proxy)
+        super(OpenStreetMapImageryProvider, self).__init__(
+            url=url,
+            fileExtension=fileExtension,
+            rectangle=rectangle,
+            ellipsoid=ellipsoid,
+            minimumLevel=minimumLevel,
+            maximumLevel=maximumLevel,
+            credit=credit,
+            proxy=proxy,
+        )
 
 
 class SingleTileImageryProvider(ImageryProvider):
@@ -475,12 +625,17 @@ class SingleTileImageryProvider(ImageryProvider):
     def __init__(self, url, rectangle=None, ellipsoid=None, credit=None, proxy=None):
 
         from cesiumpy.entities.material import TemporaryImage
+
         if isinstance(url, TemporaryImage):
             url = url.script
 
-        super(SingleTileImageryProvider, self).__init__(url=url, rectangle=rectangle,
-                                                        ellipsoid=ellipsoid,
-                                                        credit=credit, proxy=proxy)
+        super(SingleTileImageryProvider, self).__init__(
+            url=url,
+            rectangle=rectangle,
+            ellipsoid=ellipsoid,
+            credit=credit,
+            proxy=proxy,
+        )
 
 
 class TileCoordinatesImageryProvider(ImageryProvider):
@@ -502,18 +657,28 @@ class TileCoordinatesImageryProvider(ImageryProvider):
         The height of the tile for level-of-detail selection purposes.
     """
 
-    _props = ['color', 'tillingScheme', 'ellipsoid', 'tileWidth', 'tileHeight']
+    _props = ["color", "tillingScheme", "ellipsoid", "tileWidth", "tileHeight"]
 
-    def __init__(self, color=None, tillingScheme=None, ellipsoid=None,
-                 tileWidth=None, tileHeight=None):
+    def __init__(
+        self,
+        color=None,
+        tillingScheme=None,
+        ellipsoid=None,
+        tileWidth=None,
+        tileHeight=None,
+    ):
 
-        super(TileCoordinatesImageryProvider, self).__init__(tillingScheme=tillingScheme, ellipsoid=ellipsoid,
-                                                             tileWidth=tileWidth, tileHeight=tileHeight)
+        super(TileCoordinatesImageryProvider, self).__init__(
+            tillingScheme=tillingScheme,
+            ellipsoid=ellipsoid,
+            tileWidth=tileWidth,
+            tileHeight=tileHeight,
+        )
 
         if color is not None:
             color = cesiumpy.color._maybe_color(color)
             if not isinstance(color, cesiumpy.color.Color):
-                msg = 'color must be a Color instance: {0}'
+                msg = "color must be a Color instance: {0}"
                 raise ValueError(msg.format(type(color)))
         self.color = color
 
@@ -549,24 +714,37 @@ class TileMapServiceImageryProvider(ImageryProvider):
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL.
     """
 
-    def __init__(self, url=None, fileExtension=None, rectangle=None, tillingScheme=None,
-                 ellipsoid=None, tileWidth=None, tileHeight=None,
-                 minimumLevel=None, maximumLevel=None, credit=None, proxy=None):
+    def __init__(
+        self,
+        url=None,
+        fileExtension=None,
+        rectangle=None,
+        tillingScheme=None,
+        ellipsoid=None,
+        tileWidth=None,
+        tileHeight=None,
+        minimumLevel=None,
+        maximumLevel=None,
+        credit=None,
+        proxy=None,
+    ):
 
-        super(TileMapServiceImageryProvider, self).__init__(url=url,
-                                                            fileExtension=fileExtension,
-                                                            rectangle=rectangle,
-                                                            tillingScheme=tillingScheme,
-                                                            ellipsoid=ellipsoid,
-                                                            tileWidth=tileWidth,
-                                                            tileHeight=tileHeight,
-                                                            minimumLevel=minimumLevel,
-                                                            maximumLevel=maximumLevel,
-                                                            credit=credit, proxy=proxy)
+        super(TileMapServiceImageryProvider, self).__init__(
+            url=url,
+            fileExtension=fileExtension,
+            rectangle=rectangle,
+            tillingScheme=tillingScheme,
+            ellipsoid=ellipsoid,
+            tileWidth=tileWidth,
+            tileHeight=tileHeight,
+            minimumLevel=minimumLevel,
+            maximumLevel=maximumLevel,
+            credit=credit,
+            proxy=proxy,
+        )
 
 
 class UrlTemplateImageryProvider(ImageryProvider):
-
     def __init__(self):
         raise NotImplementedError
 
@@ -611,31 +789,64 @@ class WebMapServiceImageryProvider(ImageryProvider):
     subdomains : str or list of str, default 'abc'
     """
 
-    _props = ['url', 'layers', 'parameters', 'getFeatureInfoParameters',
-              'enablePickFeatures', 'getFeatureInfoFormats', 'rectangle',
-              'tillingScheme', 'ellipsoid', 'tileWidth', 'tileHeight',
-              'tileDiscardPolicy', 'minimumLevel', 'maximumLevel',
-              'credit', 'proxy', 'subdomains']
+    _props = [
+        "url",
+        "layers",
+        "parameters",
+        "getFeatureInfoParameters",
+        "enablePickFeatures",
+        "getFeatureInfoFormats",
+        "rectangle",
+        "tillingScheme",
+        "ellipsoid",
+        "tileWidth",
+        "tileHeight",
+        "tileDiscardPolicy",
+        "minimumLevel",
+        "maximumLevel",
+        "credit",
+        "proxy",
+        "subdomains",
+    ]
 
     layers = traitlets.Unicode()
     enablePickFeatures = traitlets.Bool(allow_none=True)
 
-    def __init__(self, url, layers, parameters=None, getFeatureInfoParameters=None,
-                 enablePickFeatures=None, getFeatureInfoFormats=None,
-                 rectangle=None, tillingScheme=None, ellipsoid=None, tileWidth=None,
-                 tileHeight=None, tileDiscardPolicy=None, minimumLevel=None,
-                 maximumLevel=None, credit=None, proxy=None, subdomains=None):
+    def __init__(
+        self,
+        url,
+        layers,
+        parameters=None,
+        getFeatureInfoParameters=None,
+        enablePickFeatures=None,
+        getFeatureInfoFormats=None,
+        rectangle=None,
+        tillingScheme=None,
+        ellipsoid=None,
+        tileWidth=None,
+        tileHeight=None,
+        tileDiscardPolicy=None,
+        minimumLevel=None,
+        maximumLevel=None,
+        credit=None,
+        proxy=None,
+        subdomains=None,
+    ):
 
-        super(WebMapServiceImageryProvider, self).__init__(url=url, rectangle=rectangle,
-                                                           tillingScheme=tillingScheme,
-                                                           ellipsoid=ellipsoid,
-                                                           tileWidth=tileWidth,
-                                                           tileHeight=tileHeight,
-                                                           tileDiscardPolicy=tileDiscardPolicy,
-                                                           minimumLevel=minimumLevel,
-                                                           maximumLevel=maximumLevel,
-                                                           credit=credit, proxy=proxy,
-                                                           subdomains=subdomains)
+        super(WebMapServiceImageryProvider, self).__init__(
+            url=url,
+            rectangle=rectangle,
+            tillingScheme=tillingScheme,
+            ellipsoid=ellipsoid,
+            tileWidth=tileWidth,
+            tileHeight=tileHeight,
+            tileDiscardPolicy=tileDiscardPolicy,
+            minimumLevel=minimumLevel,
+            maximumLevel=maximumLevel,
+            credit=credit,
+            proxy=proxy,
+            subdomains=subdomains,
+        )
 
         self.layers = layers
 
@@ -688,31 +899,66 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
         The subdomains to use for the {s} placeholder in the URL template. If this parameter is a single string, each character in the string is a subdomain. If it is an array, each element in the array is a subdomain.
     """
 
-    _props = ['url', 'layer', 'style', 'format', 'tileMatrixLabels', 'tileMatrixLabels',
-              'rectangle', 'tillingScheme', 'ellipsoid', 'tileWidth', 'tileHeight',
-              'tileDiscardPolicy', 'minimumLevel', 'maximumLevel', 'credit', 'proxy',
-              'subdomains']
+    _props = [
+        "url",
+        "layer",
+        "style",
+        "format",
+        "tileMatrixLabels",
+        "tileMatrixLabels",
+        "rectangle",
+        "tillingScheme",
+        "ellipsoid",
+        "tileWidth",
+        "tileHeight",
+        "tileDiscardPolicy",
+        "minimumLevel",
+        "maximumLevel",
+        "credit",
+        "proxy",
+        "subdomains",
+    ]
 
     layer = traitlets.Unicode()
     style = traitlets.Unicode()
     format = traitlets.Unicode(allow_none=True)
     tileMatrixSetID = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, url, layer, style, format=None, tileMatrixSetID=None,
-                 tileMatrixLabels=None, rectangle=None, tillingScheme=None,
-                 ellipsoid=None, tileWidth=None, tileHeight=None, tileDiscardPolicy=None,
-                 minimumLevel=None, maximumLevel=None, credit=None, proxy=None, subdomains=None):
+    def __init__(
+        self,
+        url,
+        layer,
+        style,
+        format=None,
+        tileMatrixSetID=None,
+        tileMatrixLabels=None,
+        rectangle=None,
+        tillingScheme=None,
+        ellipsoid=None,
+        tileWidth=None,
+        tileHeight=None,
+        tileDiscardPolicy=None,
+        minimumLevel=None,
+        maximumLevel=None,
+        credit=None,
+        proxy=None,
+        subdomains=None,
+    ):
 
-        super(WebMapTileServiceImageryProvider, self).__init__(url=url, rectangle=rectangle,
-                                                               tillingScheme=tillingScheme,
-                                                               ellipsoid=ellipsoid,
-                                                               tileWidth=tileWidth,
-                                                               tileHeight=tileHeight,
-                                                               tileDiscardPolicy=tileDiscardPolicy,
-                                                               minimumLevel=minimumLevel,
-                                                               maximumLevel=maximumLevel,
-                                                               credit=credit, proxy=proxy,
-                                                               subdomains=subdomains)
+        super(WebMapTileServiceImageryProvider, self).__init__(
+            url=url,
+            rectangle=rectangle,
+            tillingScheme=tillingScheme,
+            ellipsoid=ellipsoid,
+            tileWidth=tileWidth,
+            tileHeight=tileHeight,
+            tileDiscardPolicy=tileDiscardPolicy,
+            minimumLevel=minimumLevel,
+            maximumLevel=maximumLevel,
+            credit=credit,
+            proxy=proxy,
+            subdomains=subdomains,
+        )
         self.layer = layer
         self.style = style
         self.format = format
