@@ -33,7 +33,7 @@ class Satellite:
         name: Optional[str] = None,
     ) -> None:
 
-        if not name.isidentifier():
+        if name is not None and not name.isidentifier():
             msg: str = f"Name [{name}] is invalid"
             msg += "Must only contain alphanumeric letters (a-z) and (0-9), or underscores (_)"
             raise ValueError(msg)
