@@ -7,13 +7,11 @@ import traitlets
 from cesiumpy.base import _CesiumObject
 import cesiumpy.entities.color
 import cesiumpy.util.common as com
-from cesiumpy.util.trait import MaybeTrait, URITrait
+from cesiumpy.util.trait import MaybeTrait
 
 
 class DataSource(_CesiumObject):
     _props = []
-
-    sourceUri = URITrait()
 
     def __init__(self, sourceUri):
         self.sourceUri = sourceUri
@@ -32,6 +30,9 @@ class DataSource(_CesiumObject):
             script = script.format(klass=self._klass, source=self.sourceUri)
         return script
 
+    def generate_script(self, widget=None) -> str:
+        return self.script
+
     @classmethod
     def load(cls, sourceUri, *args, **kwargs):
         return cls(sourceUri, *args, **kwargs)
@@ -42,7 +43,6 @@ class CustomDataSource(DataSource):
 
 
 class CzmlDataSource(DataSource):
-    pass
 
     def __init__(self, sourceUri):
         super(CzmlDataSource, self).__init__(sourceUri=sourceUri)

@@ -65,7 +65,7 @@ class TestDataSource:
 <script type="text/javascript">
   async function init() {
     var widget = new Cesium.Viewer("viewertest");
-    widget.dataSources.add();
+    widget.dataSources.add(Cesium.CzmlDataSource.load("data/simple.czml"));
   }
   init();
 </script>"""
@@ -86,7 +86,7 @@ class TestDataSource:
 <script type="text/javascript">
   async function init() {
     var widget = new Cesium.Viewer("viewertest");
-    widget.dataSources.add({markerSymbol: "?"});
+    widget.dataSources.add(Cesium.GeoJsonDataSource.load("./test.geojson", {markerSymbol: "?"}));
     widget.camera.flyTo({destination: Cesium.Cartesian3.fromDegrees(-105.01621, 39.57422, 1000.0)});
   }
   init();
