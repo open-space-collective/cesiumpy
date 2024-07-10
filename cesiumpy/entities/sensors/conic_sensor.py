@@ -82,7 +82,6 @@ class ConicSensor(_CesiumEntity):
         name=None,
         **kwargs,
     ) -> None:
-
         super().__init__(
             show=show,
             fill=fill,
@@ -117,7 +116,6 @@ class ConicSensor(_CesiumEntity):
 
     @property
     def _property_dict(self) -> dict:
-
         props = collections.OrderedDict()
 
         props["name"] = self.name
@@ -135,7 +133,6 @@ class ConicSensor(_CesiumEntity):
 
 
 class ConicSensorGraphics(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -182,7 +179,6 @@ class ConicSensorGraphics(_CesiumObject):
         intersection_width: Optional[float] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         self.radius: float = radius
 
         self.inner_half_angle: float = inner_half_angle

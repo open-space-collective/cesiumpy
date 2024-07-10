@@ -26,7 +26,6 @@ def _wrap_uri(sourceUri):
 
 
 def _wrap_async_init(scripts: List[str]) -> List[str]:
-
     before: List[str] = [
         "async function init() {",
     ]

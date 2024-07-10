@@ -45,7 +45,6 @@ class Spherical(_CesiumObject):
         cone: Optional[float] = None,
         magnitude: Optional[float] = None,
     ) -> None:
-
         self.clock: Optional[float] = clock
         self.cone: Optional[float] = cone
         self.magnitude: Optional[float] = magnitude

@@ -7,14 +7,12 @@ from cesiumpy.base import _CesiumEnum
 
 
 class VerticalOrigin(_CesiumEnum):
-
     BOTTOM = "Cesium.VerticalOrigin.BOTTOM"
     CENTER = "Cesium.VerticalOrigin.CENTER"
     TOP = "Cesium.VerticalOrigin.TOP"
 
 
 class HorizontalOrigin(_CesiumEnum):
-
     CENTER = "Cesium.HorizontalOrigin.CENTER"
     LEFT = "Cesium.HorizontalOrigin.LEFT"
     RIGHT = "Cesium.HorizontalOrigin.RIGHT"
@@ -27,7 +25,6 @@ class CornerType(_CesiumEnum):
 
 
 class Math(_CesiumEnum):
-
     EPSILON1 = "Cesium.Math.EPSILON1"
     EPSILON2 = "Cesium.Math.EPSILON2"
     EPSILON3 = "Cesium.Math.EPSILON3"
@@ -83,14 +80,12 @@ class Math(_CesiumEnum):
 
 
 class HeightReference(_CesiumEnum):
-
     NONE = "Cesium.HeightReference.NONE"
     CLAMP_TO_GROUND = "Cesium.HeightReference.CLAMP_TO_GROUND"
     RELATIVE_TO_GROUND = "Cesium.HeightReference.RELATIVE_TO_GROUND"
 
 
 class ArcType(_CesiumEnum):
-
     NONE = "Cesium.ArcType.NONE"
     GEODESIC = "Cesium.ArcType.GEODESIC"
     RHUMB = "Cesium.ArcType.RHUMB"

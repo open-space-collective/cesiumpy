@@ -62,7 +62,6 @@ class Polyline(_CesiumEntity):
         granularity=None,
         name=None,
     ) -> None:
-
         super().__init__(
             width=width,
             show=show,
@@ -81,7 +80,6 @@ class Polyline(_CesiumEntity):
 
 
 class PolylineArrowMaterialProperty(Material):
-
     # Definitions
 
     _props = [
@@ -93,7 +91,6 @@ class PolylineArrowMaterialProperty(Material):
     # Constructor
 
     def __init__(self, color=None) -> None:
-
         super().__init__()
 
         self.color = color

@@ -190,7 +190,6 @@ class Viewer(_CesiumBase):
         track_entity=None,
         **kwargs,
     ) -> None:
-
         super().__init__(
             id=id,
             width=width,

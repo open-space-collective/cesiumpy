@@ -28,7 +28,6 @@ class TestCountry:
         "shapely.geometry" not in sys.modules, reason="requires Shapely"
     )
     def test_country_jpn(self):
-
         jpn = cesiumpy.countries.jpn
         assert isinstance(jpn, list)
         assert all([isinstance(e, cesiumpy.Polygon) for e in jpn]) is True
@@ -56,7 +55,6 @@ class TestCountry:
         "shapely.geometry" not in sys.modules, reason="requires Shapely"
     )
     def test_country_get_jpn(self):
-
         jpn = cesiumpy.countries.get("jpn")
         assert isinstance(jpn, list)
         assert all([isinstance(e, cesiumpy.Polygon) for e in jpn]) is True

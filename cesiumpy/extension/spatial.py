@@ -34,7 +34,6 @@ class Voronoi(_Spatial):
     """
 
     def __init__(self, vor):
-
         if isinstance(vor, self._spatial.qhull.Voronoi):
             pass
         else:
@@ -56,7 +55,6 @@ class Voronoi(_Spatial):
         return polygons
 
     def _get_coordinates(self):
-
         # based on:
         # http://stackoverflow.com/questions/20515554/colorize-voronoi-diagram
         # http://stackoverflow.com/questions/28665491/getting-a-bounded-polygon-coordinates-from-voronoi-cells
@@ -143,7 +141,6 @@ class ConvexHull(_Spatial):
     """
 
     def __init__(self, hull):
-
         if isinstance(hull, self._spatial.qhull.ConvexHull):
             pass
         else:
@@ -161,7 +158,6 @@ class ConvexHull(_Spatial):
         return Polyline(positions=coordinates)
 
     def _get_coordinates(self):
-
         points = self.hull.points[self.hull.vertices].tolist()
         # append 1st element to last to make loop
         points.append(points[0])

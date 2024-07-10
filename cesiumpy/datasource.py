@@ -12,7 +12,6 @@ from cesiumpy.util.trait import MaybeTrait, URITrait
 
 
 class DataSource(_CesiumObject):
-
     _props = []
 
     sourceUri = URITrait()

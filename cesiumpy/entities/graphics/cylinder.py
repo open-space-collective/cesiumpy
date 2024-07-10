@@ -85,7 +85,6 @@ class Cylinder(_CesiumEntity):
         name=None,
         **kwargs,
     ) -> None:
-
         super().__init__(
             show=show,
             fill=fill,

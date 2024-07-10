@@ -10,7 +10,6 @@ from cesiumpy.testing import _skip_if_no_shapely
 
 class TestShapelyCartesian:
     def test_point_to_cartesian(self):
-
         _skip_if_no_shapely()
         import shapely.geometry
 
@@ -34,7 +33,6 @@ class TestShapelyCartesian:
         # self.assertEqual(res.script, exp.script)
 
     def test_point_to_cartesian_degrees(self):
-
         _skip_if_no_shapely()
         import shapely.geometry
 
@@ -59,7 +57,6 @@ class TestShapelyCartesian:
         self.assertEqual(res, [0.0, 1.0, 3.0])
 
     def test_line_to_cartesian_array(self):
-
         _skip_if_no_shapely()
         import shapely.geometry
 
@@ -79,7 +76,6 @@ class TestShapelyCartesian:
         self.assertEqual(res.script, exp.script)
 
     def test_polygon_to_cartesian_array(self):
-
         _skip_if_no_shapely()
         import shapely.geometry
 
@@ -94,7 +90,6 @@ class TestShapelyCartesian:
 
 class TestShapelyEntity:
     def test_point_to_entity(self):
-
         _skip_if_no_shapely()
         import shapely.geometry
 
@@ -123,7 +118,6 @@ class TestShapelyEntity:
         self.assertEqual([e.script for e in res], exp)
 
     def test_line_to_entity(self):
-
         _skip_if_no_shapely()
         import shapely.geometry
 
@@ -151,7 +145,6 @@ class TestShapelyEntity:
         self.assertEqual([e.script for e in res], exp)
 
     def test_polygon_to_entity(self):
-
         _skip_if_no_shapely()
         import shapely.geometry
 

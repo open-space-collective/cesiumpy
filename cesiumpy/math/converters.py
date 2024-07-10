@@ -12,7 +12,6 @@ import math
 
 
 def to_radians(value: float) -> float:
-
     """
     Convert value from degrees to radians.
     """

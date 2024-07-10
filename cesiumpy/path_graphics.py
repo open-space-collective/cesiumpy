@@ -11,7 +11,6 @@ from cesiumpy.base import _CesiumObject
 
 
 class PathGraphics(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -49,7 +48,6 @@ class PathGraphics(_CesiumObject):
         # material: Optional[Color] = None,
         # distance_display_condition: Optional[DistanceDisplayCondition] = None,
     ) -> None:
-
         self.show = show
         self.lead_time = lead_time
         self.trail_time = trail_time

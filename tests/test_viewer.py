@@ -22,7 +22,6 @@ class TestViewer:
         sampled_orientation: cesiumpy.SampledProperty,
         cesium_token: Optional[str],
     ):
-
         viewer = cesiumpy.Viewer(
             width="1000px",
             height="600px",

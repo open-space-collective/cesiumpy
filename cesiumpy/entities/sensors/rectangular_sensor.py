@@ -75,7 +75,6 @@ class RectangularSensor(_CesiumEntity):
         name=None,
         **kwargs,
     ) -> None:
-
         super().__init__(
             show=show,
             fill=fill,
@@ -107,7 +106,6 @@ class RectangularSensor(_CesiumEntity):
 
     @property
     def _property_dict(self) -> dict:
-
         props = collections.OrderedDict()
 
         props["name"] = self.name
@@ -125,7 +123,6 @@ class RectangularSensor(_CesiumEntity):
 
 
 class RectangularSensorGraphics(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -165,7 +162,6 @@ class RectangularSensorGraphics(_CesiumObject):
         intersection_width: Optional[float] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         self.radius: float = radius
 
         self.x_half_angle: float = x_half_angle

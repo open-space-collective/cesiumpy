@@ -11,7 +11,6 @@ from cesiumpy.util.trait import MaybeTrait
 
 
 class Transforms(_CesiumObject):
-
     origin = MaybeTrait(klass=cesiumpy.Cartesian3)
     transform = traitlets.Unicode()
 

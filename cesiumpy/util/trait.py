@@ -54,7 +54,6 @@ class DateTimeTrait(traitlets.TraitType):
 
 
 class _HTMLObject(traitlets.HasTraits):
-
     # Properties
 
     @property
@@ -103,7 +102,6 @@ class _JavaScriptObject(_HTMLObject):
 
 
 class _JavaScriptEnum(Enum):
-
     # Properties
 
     @property
@@ -117,7 +115,6 @@ class _JavaScriptEnum(Enum):
 
 
 class _DIV(_HTMLObject):
-
     # Definitions
 
     id = traitlets.Unicode()
@@ -132,7 +129,6 @@ class _DIV(_HTMLObject):
         width: str = "100%",
         height: str = "100%",
     ) -> None:
-
         super().__init__()
 
         self.id = id or "cesiumContainer"

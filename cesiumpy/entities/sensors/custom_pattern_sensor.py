@@ -72,7 +72,6 @@ class CustomPatternSensor(_CesiumEntity):
         name=None,
         **kwargs,
     ) -> None:
-
         super().__init__(
             show=show,
             fill=fill,
@@ -103,7 +102,6 @@ class CustomPatternSensor(_CesiumEntity):
 
     @property
     def _property_dict(self) -> dict:
-
         props = collections.OrderedDict()
 
         props["name"] = self.name
@@ -121,7 +119,6 @@ class CustomPatternSensor(_CesiumEntity):
 
 
 class CustomPatternSensorGraphics(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -158,7 +155,6 @@ class CustomPatternSensorGraphics(_CesiumObject):
         intersection_width: Optional[float] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         self.radius: float = radius
 
         self.directions: list[cesiumpy.Spherical] = directions

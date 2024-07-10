@@ -101,7 +101,6 @@ class _CesiumBase(_CesiumObject):
         track_entity=None,
         default_access_token: Optional[str] = None,
     ) -> None:
-
         self.div = _DIV(
             id=id,
             width=width,
@@ -181,7 +180,6 @@ class _CesiumBase(_CesiumObject):
 
     @property
     def script(self):
-
         self._property_map = {}
 
         entities_scripts = self._entities.generate_script(widget=self)
@@ -212,7 +210,6 @@ class _CesiumBase(_CesiumObject):
 
     @property
     def _load_scripts(self) -> List[str]:
-
         return [
             '<meta charset="utf-8">',
             f'<script src="https://cesium.com/downloads/cesiumjs/releases/{CESIUM_VERSION}/Build/Cesium/Cesium.js"></script>',
@@ -222,7 +219,6 @@ class _CesiumBase(_CesiumObject):
 
     @property
     def _setup_scripts(self) -> List[str]:
-
         setup_scripts: List[str] = []
 
         if self._default_access_token:
@@ -253,7 +249,6 @@ class _CesiumBase(_CesiumObject):
 
     @property
     def _camera_scripts(self) -> List[str]:
-
         camera_scripts: List[str] = []
 
         camera = self.camera.generate_script(widget=self)
@@ -308,7 +303,6 @@ class _CesiumBase(_CesiumObject):
 
 
 class RestrictedList(_CesiumObject):
-
     widget = traitlets.Instance(klass=_CesiumBase)
 
     def __init__(self, widget, allowed, propertyname):
@@ -346,7 +340,6 @@ class RestrictedList(_CesiumObject):
         return self._items[item]
 
     def generate_script(self, widget=None):
-
         """
         Return list of scripts built from entities
         each script may be a list of commands also
