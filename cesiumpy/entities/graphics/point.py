@@ -60,7 +60,6 @@ class Point(_CesiumEntity):
         name=None,
         **kwargs,
     ) -> None:
-
         super().__init__(
             show=show,
             color=color or cesiumpy.color.WHITE,

@@ -14,17 +14,14 @@ from cesiumpy.util.trait import DateTimeTrait
 
 
 class Clock(_CesiumObject):
-
     # Definitions
 
     class Step(_CesiumEnum):
-
         TICK_DEPENDENT = "Cesium.ClockStep.TICK_DEPENDENT"  # Tick advances the current time by a fixed step, which is the number of seconds specified by Clock#multiplier.
         SYSTEM_CLOCK_MULTIPLIER = "Cesium.ClockStep.SYSTEM_CLOCK_MULTIPLIER"  # Tick advances the current time by the amount of system time elapsed since the previous call multiplied by Clock#multiplier.
         SYSTEM_CLOCK = "Cesium.ClockStep.SYSTEM_CLOCK"  # Tick sets the clock to the current system time; ignoring all other settings.
 
     class Range(_CesiumEnum):
-
         UNBOUNDED = "Cesium.ClockRange.UNBOUNDED"  # Tick will always advances the clock in its current direction.
         CLAMPED = "Cesium.ClockRange.CLAMPED"  # When Clock#startTime or Clock#stopTime is reached, Clock#tick will not advance Clock#currentTime any further.
         LOOP_STOP = "Cesium.ClockRange.LOOP_STOP"  # When Clock#stopTime is reached, Clock#tick will advance Clock#currentTime to the opposite end of the interval. When time is moving backwards, Clock#tick will not advance past Clock#startTime
@@ -62,7 +59,6 @@ class Clock(_CesiumObject):
         can_animate: Optional[bool] = None,
         should_animate: Optional[bool] = None,
     ) -> None:
-
         """
         start_time: The start time of the clock.
         stop_time: The stop time of the clock.
@@ -90,7 +86,6 @@ class Clock(_CesiumObject):
 
 
 class ClockViewModel(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -105,7 +100,6 @@ class ClockViewModel(_CesiumObject):
         self,
         clock: Clock,
     ) -> None:
-
         self.clock: Clock = clock
 
     # Properties

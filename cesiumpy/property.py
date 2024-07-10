@@ -19,7 +19,6 @@ from cesiumpy.util.name import generate_name
 
 
 class ReferenceFrame(_CesiumEnum):
-
     FIXED = "Cesium.ReferenceFrame.FIXED"  # The fixed frame.
     INERTIAL = "Cesium.ReferenceFrame.INERTIAL"  # The inertial frame.
 
@@ -28,14 +27,12 @@ class ReferenceFrame(_CesiumEnum):
 
 
 class Property(_CesiumObject):
-
     # Constructor
 
     def __init__(
         self,
         name: Optional[str] = None,
     ) -> None:
-
         super().__init__()
 
         self._name: str = name or generate_name()
@@ -56,7 +53,6 @@ class Property(_CesiumObject):
 
 
 class SampledProperty(Property):
-
     # Constructor
 
     def __init__(
@@ -66,7 +62,6 @@ class SampledProperty(Property):
         samples: Optional[list[tuple[datetime, Any, Optional[list[Any]]]]] = None,
         derivative_types=None,  # TBI
     ) -> None:
-
         assert derivative_types is None, NotImplementedError  # TBI
 
         super().__init__(
@@ -91,11 +86,9 @@ class SampledProperty(Property):
         value: Any,
         derivatives: Optional[list[Any]] = None,
     ) -> None:
-
         self._samples.append((time, value, derivatives))
 
     def generate_script(self, widget=None):
-
         # TBI: derivatives not supported
 
         assert widget is not None
@@ -110,8 +103,7 @@ class SampledProperty(Property):
             )
         )
 
-        for (time, value, _) in self._samples:
-
+        for time, value, _ in self._samples:
             pre_script: str = "{widget}.{name}.addSample({time}, {value});".format(
                 widget=widget._varname,
                 name=self.name,

@@ -9,7 +9,6 @@ from cesiumpy.testing import _skip_if_no_scipy, _skip_if_no_shapely
 
 class TestVoronoi:
     def test_voronoi(self):
-
         _skip_if_no_scipy()
         _skip_if_no_shapely()
 
@@ -254,7 +253,6 @@ class TestVoronoi:
 
 class TestConvex:
     def test_convexhull(self):
-
         _skip_if_no_scipy()
         _skip_if_no_shapely()
 

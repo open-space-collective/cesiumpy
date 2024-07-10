@@ -47,7 +47,6 @@ class Quaternion(_CesiumObject):
         z: float,
         w: float,
     ) -> None:
-
         self.x: float = x
         self.y: float = y
         self.z: float = z
@@ -71,7 +70,6 @@ class Quaternion(_CesiumObject):
 
     @staticmethod
     def unit() -> Quaternion:
-
         return Quaternion(
             x=0.0,
             y=0.0,
@@ -84,7 +82,6 @@ class Quaternion(_CesiumObject):
         axis: cesiumpy.Cartesian3,
         angle: float,
     ) -> Quaternion:
-
         return _QuaternionFromAxisAngle(
             axis=axis,
             angle=angle,
@@ -94,7 +91,6 @@ class Quaternion(_CesiumObject):
     def from_heading_pitch_roll(
         heading_pitch_roll: HeadingPitchRoll,
     ) -> Quaternion:
-
         return _QuaternionFromHeadingPitchRoll(
             heading_pitch_roll=heading_pitch_roll,
         )
@@ -129,7 +125,6 @@ class HeadingPitchRoll(_CesiumObject):
         pitch: float,
         roll: float,
     ) -> None:
-
         self.heading: float = heading
         self.pitch: float = pitch
         self.roll: float = roll
@@ -147,7 +142,6 @@ class HeadingPitchRoll(_CesiumObject):
         pitch: float,
         roll: float,
     ) -> HeadingPitchRoll:
-
         return _HeadingPitchRollFromDegrees(
             heading=heading,
             pitch=pitch,
@@ -158,7 +152,6 @@ class HeadingPitchRoll(_CesiumObject):
     def from_quaternion(
         quaternion: Quaternion,
     ) -> HeadingPitchRoll:
-
         return _HeadingPitchRollFromQuaternion(
             quaternion=quaternion,
         )
@@ -168,7 +161,6 @@ class HeadingPitchRoll(_CesiumObject):
 
 
 class _QuaternionFromProduct(Quaternion):
-
     # Constructor
 
     def __init__(
@@ -176,7 +168,6 @@ class _QuaternionFromProduct(Quaternion):
         quaternion_1: Quaternion,
         quaternion_2: Quaternion,
     ) -> None:
-
         super().__init__(
             x=0.0,
             y=0.0,
@@ -197,7 +188,6 @@ class _QuaternionFromProduct(Quaternion):
 
 
 class _QuaternionFromAxisAngle(Quaternion):
-
     # Constructor
 
     def __init__(
@@ -205,7 +195,6 @@ class _QuaternionFromAxisAngle(Quaternion):
         axis: cesiumpy.Cartesian3,
         angle: float,
     ) -> None:
-
         super().__init__(
             x=0.0,
             y=0.0,
@@ -226,14 +215,12 @@ class _QuaternionFromAxisAngle(Quaternion):
 
 
 class _QuaternionFromHeadingPitchRoll(Quaternion):
-
     # Constructor
 
     def __init__(
         self,
         heading_pitch_roll: HeadingPitchRoll,
     ) -> None:
-
         super().__init__(
             x=0.0,
             y=0.0,
@@ -253,7 +240,6 @@ class _QuaternionFromHeadingPitchRoll(Quaternion):
 
 
 class _HeadingPitchRollFromDegrees(HeadingPitchRoll):
-
     # Constructor
 
     def __init__(
@@ -262,7 +248,6 @@ class _HeadingPitchRollFromDegrees(HeadingPitchRoll):
         pitch: float,
         roll: float,
     ) -> None:
-
         super().__init__(
             heading=heading,
             pitch=pitch,
@@ -279,14 +264,12 @@ class _HeadingPitchRollFromDegrees(HeadingPitchRoll):
 
 
 class _HeadingPitchRollFromQuaternion(HeadingPitchRoll):
-
     # Constructor
 
     def __init__(
         self,
         quaternion: Quaternion,
     ) -> None:
-
         super().__init__(
             heading=0.0,
             pitch=0.0,

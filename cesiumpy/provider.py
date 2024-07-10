@@ -13,7 +13,6 @@ from cesiumpy.util.trait import MaybeTrait
 
 
 class _CesiumProvider(_CesiumObject):
-
     _props = ["url"]
 
     def __repr__(self):
@@ -36,7 +35,6 @@ class _CesiumProvider(_CesiumObject):
 
 
 class TerrainProvider(_CesiumProvider):
-
     _props = ["url", "proxy", "ellipsoid", "credit"]
 
     url = traitlets.Unicode()
@@ -155,7 +153,6 @@ class EllipsoidTerrainProvider(TerrainProvider):
     url = traitlets.Unicode(allow_none=True)
 
     def __init__(self, tilingScheme=None, ellipsoid=None):
-
         super(EllipsoidTerrainProvider, self).__init__(
             tilingScheme=tilingScheme, ellipsoid=ellipsoid
         )
@@ -178,7 +175,6 @@ class VRTheWorldTerrainProvider(TerrainProvider):
     """
 
     def __init__(self, url, proxy=None, ellipsoid=None, credit=None):
-
         super(VRTheWorldTerrainProvider, self).__init__(
             url=url, proxy=proxy, ellipsoid=ellipsoid, credit=credit
         )
@@ -190,7 +186,6 @@ class VRTheWorldTerrainProvider(TerrainProvider):
 
 
 class ImageryProvider(_CesiumProvider):
-
     _props = [
         "url",
         "fileExtension",
@@ -235,7 +230,6 @@ class ImageryProvider(_CesiumProvider):
         proxy=None,
         subdomains=None,
     ):
-
         self.url = url
         self.fileExtension = fileExtension
         self.rectangle = rectangle
@@ -328,7 +322,6 @@ class ArcGisMapServerImageryProvider(ImageryProvider):
         minimumLevel=None,
         proxy=None,
     ):
-
         super(ArcGisMapServerImageryProvider, self).__init__(
             url=url,
             rectangle=rectangle,
@@ -399,7 +392,6 @@ class BingMapsImageryProvider(ImageryProvider):
         tileDiscardPolicy=None,
         proxy=None,
     ):
-
         super(BingMapsImageryProvider, self).__init__(
             url=url,
             ellipsoid=ellipsoid,
@@ -459,7 +451,6 @@ class GoogleEarthImageryProvider(ImageryProvider):
         maximumLevel=None,
         proxy=None,
     ):
-
         super(GoogleEarthImageryProvider, self).__init__(
             url=url,
             ellipsoid=ellipsoid,
@@ -538,7 +529,6 @@ class MapboxImageryProvider(ImageryProvider):
         credit=None,
         proxy=None,
     ):
-
         super(MapboxImageryProvider, self).__init__(
             url=url,
             rectangle=rectangle,
@@ -590,7 +580,6 @@ class OpenStreetMapImageryProvider(ImageryProvider):
         credit=None,
         proxy=None,
     ):
-
         super(OpenStreetMapImageryProvider, self).__init__(
             url=url,
             fileExtension=fileExtension,
@@ -623,7 +612,6 @@ class SingleTileImageryProvider(ImageryProvider):
     """
 
     def __init__(self, url, rectangle=None, ellipsoid=None, credit=None, proxy=None):
-
         from cesiumpy.entities.material import TemporaryImage
 
         if isinstance(url, TemporaryImage):
@@ -667,7 +655,6 @@ class TileCoordinatesImageryProvider(ImageryProvider):
         tileWidth=None,
         tileHeight=None,
     ):
-
         super(TileCoordinatesImageryProvider, self).__init__(
             tillingScheme=tillingScheme,
             ellipsoid=ellipsoid,
@@ -728,7 +715,6 @@ class TileMapServiceImageryProvider(ImageryProvider):
         credit=None,
         proxy=None,
     ):
-
         super(TileMapServiceImageryProvider, self).__init__(
             url=url,
             fileExtension=fileExtension,
@@ -832,7 +818,6 @@ class WebMapServiceImageryProvider(ImageryProvider):
         proxy=None,
         subdomains=None,
     ):
-
         super(WebMapServiceImageryProvider, self).__init__(
             url=url,
             rectangle=rectangle,
@@ -944,7 +929,6 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
         proxy=None,
         subdomains=None,
     ):
-
         super(WebMapTileServiceImageryProvider, self).__init__(
             url=url,
             rectangle=rectangle,

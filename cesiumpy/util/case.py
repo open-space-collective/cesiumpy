@@ -3,7 +3,6 @@ from typing import List, Pattern
 
 
 def camel_case_to_snake_case(name: str) -> str:
-
     """
     Convert camelCase string to snake_case.
     """
@@ -17,7 +16,6 @@ def camel_case_to_snake_case(name: str) -> str:
 
 
 def snake_case_to_camel_case(name: str) -> str:
-
     """
     Convert snake_case string to camelCase.
     """

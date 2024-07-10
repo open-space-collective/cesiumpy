@@ -32,7 +32,6 @@ class Satellite:
         sensors: Optional[list["cesiumpy.Sensor"]] = None,
         name: Optional[str] = None,
     ) -> None:
-
         if name is not None and not name.isidentifier():
             msg: str = f"Name [{name}] is invalid"
             msg += "Must only contain alphanumeric letters (a-z) and (0-9), or underscores (_)"
@@ -77,7 +76,6 @@ class Satellite:
         self._sensors.append(sensor)
 
     def render(self, viewer: cesiumpy.Viewer) -> None:
-
         # Add orbital track
         # viewer.entities.add(
         #     cesiumpy.Polyline(

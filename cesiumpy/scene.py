@@ -10,7 +10,6 @@ from cesiumpy.base import _CesiumObject, _CesiumBase, RestrictedList
 
 
 class Scene(_CesiumObject):
-
     widget = traitlets.Instance(klass=_CesiumBase)
 
     def __init__(self, widget):

@@ -79,7 +79,6 @@ class Label(_CesiumEntity):
         pixelOffsetScaleByDistance=None,
         name=None,
     ):
-
         super(Label, self).__init__(
             show=show,
             outlineColor=outlineColor,
@@ -172,7 +171,6 @@ class Billboard(_CesiumEntity):
         sizeInMeters=None,
         name=None,
     ):
-
         super(Billboard, self).__init__(
             show=show,
             scale=scale,
@@ -265,7 +263,6 @@ class Ellipse(_CesiumEntity):
         stRotation=None,
         name=None,
     ):
-
         super(Ellipse, self).__init__(
             height=height,
             extrudedHeight=extrudedHeight,
@@ -638,7 +635,6 @@ class Rectangle(_CesiumEntity):
         granularity=None,
         name=None,
     ):
-
         super(Rectangle, self).__init__(
             height=height,
             extrudedHeight=extrudedHeight,
@@ -665,7 +661,6 @@ class Rectangle(_CesiumEntity):
 
 
 class ShadowMode(_CesiumEnum):
-
     DISABLED = (
         "Cesium.ShadowMode.DISABLED"  # The object does not cast or receive shadows.
     )
@@ -728,7 +723,6 @@ class Polygon(_CesiumEntity):
         perPositionHeight=None,
         name=None,
     ):
-
         super(Polygon, self).__init__(
             height=height,
             extrudedHeight=extrudedHeight,

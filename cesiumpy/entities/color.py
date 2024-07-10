@@ -16,7 +16,6 @@ from cesiumpy.entities.material import Material
 
 
 class Color(Material):
-
     _props = ["red", "green", "blue", "alpha"]
 
     red = traitlets.Float(min=0.0, max=1.0)
@@ -25,7 +24,6 @@ class Color(Material):
     alpha = traitlets.Float(min=0.0, max=1.0, allow_none=True)
 
     def __init__(self, red, green, blue, alpha=None):
-
         self.red = red
         self.green = green
         self.blue = blue
@@ -60,7 +58,6 @@ class Color(Material):
 
     @staticmethod
     def from_alpha(color: Color, alpha: float) -> Color:
-
         return Color(
             red=color.red,
             green=color.green,
@@ -148,7 +145,6 @@ class Color(Material):
 
 
 class CSSColor(Color):
-
     # Definitions
 
     name = traitlets.Unicode()
@@ -157,7 +153,6 @@ class CSSColor(Color):
     # Constructor
 
     def __init__(self, name: str, alpha: float = None) -> None:
-
         self.name = name
         self.alpha = alpha
 
@@ -186,7 +181,6 @@ class ColorConstant(CSSColor):
 
 
 class ColorMap(_CesiumObject):
-
     name = traitlets.Unicode()
 
     def __init__(self, name):
@@ -209,7 +203,6 @@ class ColorMap(_CesiumObject):
 
 
 class ColorFactory(object):
-
     # mapped to cesiumpy.color
 
     @property

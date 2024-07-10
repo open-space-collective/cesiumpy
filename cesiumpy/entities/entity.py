@@ -18,7 +18,6 @@ from cesiumpy.util.trait import MaybeTrait
 
 
 class _CesiumEntity(_CesiumObject):
-
     # name and position should not be included,
     # because these are handled separetedly in _properties_dict
     _common_props = [
@@ -121,7 +120,6 @@ class _CesiumEntity(_CesiumObject):
         availability=None,
         path=None,
     ) -> None:
-
         self.width = width
         self.height = height
         self.extruded_height = extruded_height
@@ -204,7 +202,6 @@ class _CesiumEntity(_CesiumObject):
 
     def __repr__(self):
         if self.position is not None:
-
             if isinstance(self.position, cartesian.Cartesian3):
                 return "{klass}({x}, {y}, {z})".format(
                     klass=self.__class__.__name__,

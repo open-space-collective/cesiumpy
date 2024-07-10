@@ -21,7 +21,6 @@ from cesiumpy.property import Property, SampledProperty
 
 
 class ReferenceFrame(_CesiumEnum):
-
     FIXED = "Cesium.ReferenceFrame.FIXED"  # The fixed frame.
     INERTIAL = "Cesium.ReferenceFrame.INERTIAL"  # The inertial frame.
 
@@ -30,7 +29,6 @@ class ReferenceFrame(_CesiumEnum):
 
 
 class PositionProperty(Property):
-
     # Definitions
 
     _props = [
@@ -46,7 +44,6 @@ class PositionProperty(Property):
         self,
         reference_frame: Optional[ReferenceFrame] = None,
     ) -> None:
-
         self.reference_frame = reference_frame
 
 
@@ -54,7 +51,6 @@ class PositionProperty(Property):
 
 
 class SampledPositionProperty(PositionProperty, SampledProperty):
-
     # Definitions
 
     _props = [
@@ -79,7 +75,6 @@ class SampledPositionProperty(PositionProperty, SampledProperty):
         reference_frame: Optional[ReferenceFrame] = None,
         number_of_derivatives: Optional[float] = None,
     ) -> None:
-
         PositionProperty.__init__(
             self=self,
             reference_frame=reference_frame,
@@ -102,7 +97,6 @@ class SampledPositionProperty(PositionProperty, SampledProperty):
         position: cartesian.Cartesian3,
         derivatives: Optional[list[cartesian.Cartesian3]] = None,
     ) -> None:
-
         super().add_sample(time, position, derivatives)
 
 

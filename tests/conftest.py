@@ -19,36 +19,31 @@ import cesiumpy
 
 @pytest.fixture
 def cesium_token() -> Optional[str]:
-
     return os.environ.get("CESIUM_TOKEN")
 
 
 @pytest.fixture
 def asset_id() -> int:
-
     # return 669199 # OLD
     # return 1250090
-    return 1359555 # FIX
+    return 1359555  # FIX
     # return 1191175
     # return 1359352
 
 
 @pytest.fixture
 def epoch() -> timedelta:
-
     return datetime(2022, 1, 1, 0, 0, 0, 0, timezone.utc)
 
 
 @pytest.fixture
 def duration() -> timedelta:
-
     return timedelta(hours=1.0)
     # return timedelta(seconds=30.0)
 
 
 @pytest.fixture
 def step() -> timedelta:
-
     return timedelta(seconds=30.0)
 
 
@@ -57,7 +52,6 @@ def time_interval(
     epoch: datetime,
     duration: timedelta,
 ) -> cesiumpy.TimeInterval:
-
     return cesiumpy.TimeInterval(
         start=epoch,
         stop=epoch + duration,
@@ -69,7 +63,6 @@ def instants(
     time_interval: cesiumpy.TimeInterval,
     step: timedelta,
 ) -> list[datetime]:
-
     instants = [
         time_interval.start + timedelta(seconds=i * step.total_seconds())
         for i in range(
@@ -94,7 +87,6 @@ def instants(
 def sampled_position(
     instants: list[datetime],
 ) -> cesiumpy.SampledPositionProperty:
-
     return cesiumpy.SampledPositionProperty(
         samples=[
             (
@@ -111,7 +103,6 @@ def sampled_position(
 def sampled_orientation(
     instants: list[datetime],
 ) -> cesiumpy.SampledProperty:
-
     return cesiumpy.SampledProperty(
         type=cesiumpy.Quaternion,
         samples=[

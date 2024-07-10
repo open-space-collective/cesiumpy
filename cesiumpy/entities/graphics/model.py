@@ -11,7 +11,6 @@ from cesiumpy.entities.entity import _CesiumEntity
 
 
 class IonResource(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -26,7 +25,6 @@ class IonResource(_CesiumObject):
         self,
         asset_id: int,
     ) -> None:
-
         super().__init__()
 
         self.asset_id = asset_id
@@ -65,7 +63,6 @@ class Model(_CesiumEntity):
         uri,
         **kwargs,
     ) -> None:
-
         super().__init__(
             **kwargs,
         )

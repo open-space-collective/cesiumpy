@@ -11,7 +11,6 @@ import cesiumpy.util.common as com
 
 
 class Camera(_CesiumObject):
-
     _props = ["destination", "orientation"]
 
     destination = traitlets.Instance(klass=cartesian._Cartesian, allow_none=True)

@@ -15,7 +15,6 @@ class _BillboardContents(_CesiumObject):
 
 
 class Icon(_BillboardContents):
-
     # different from ImageMaterialProperty
 
     image = URITrait()
@@ -29,14 +28,12 @@ class Icon(_BillboardContents):
 
 
 class Pin(_BillboardContents):
-
     # default color, all attrs are mandatory
     color = MaybeTrait(klass=cesiumpy.color.Color)
     size = traitlets.Float()
     text = traitlets.Unicode(allow_none=True)
 
     def __init__(self, color=None, size=48, text=None):
-
         if color is None:
             # default color, all attrs are mandatory
             color = cesiumpy.color.ROYALBLUE

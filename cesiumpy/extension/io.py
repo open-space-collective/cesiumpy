@@ -10,7 +10,6 @@ import cesiumpy.util.common as com
 
 
 def read_geojson(path):
-
     sp = com._check_package("shapely.geometry")
 
     with open(path) as f:

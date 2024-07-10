@@ -42,7 +42,6 @@ class Sensor(abc.ABC):
         name: Optional[str] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         self._direction: cesiumpy.Cartesian3 = direction
         self._material: cesiumpy.entities.color.Color = material or DEFAULT_COLOR
 
@@ -90,7 +89,6 @@ class Sensor(abc.ABC):
         viewer: cesiumpy.Viewer,
         satellite: cesiumpy.Satellite,
     ) -> None:
-
         raise NotImplementedError
 
     # Private methods
@@ -99,13 +97,11 @@ class Sensor(abc.ABC):
         self,
         satellite: cesiumpy.Satellite,
     ) -> cesiumpy.SampledPositionProperty:
-
         sampled_position = cesiumpy.SampledPositionProperty(
             name=f"{self.name}_position",
         )
 
-        for (time, lla_B, _) in satellite.position.samples:
-
+        for time, lla_B, _ in satellite.position.samples:
             lla_S = lla_B  # TBI
 
             sampled_position.add_sample(
@@ -119,7 +115,6 @@ class Sensor(abc.ABC):
         self,
         satellite: cesiumpy.Satellite,
     ) -> cesiumpy.SampledProperty:
-
         sampled_orientation = cesiumpy.SampledProperty(
             type=cesiumpy.Quaternion,
             name=f"{self.name}_orientation",
@@ -130,23 +125,19 @@ class Sensor(abc.ABC):
         q_S_B: Optional[cesiumpy.Quaternion] = None
 
         if self.direction.dot(x_direction) != 1.0:
-
             if self.direction.dot(x_direction) != -1.0:
-
                 q_S_B = cesiumpy.Quaternion.from_axis_angle(
                     axis=x_direction.cross(self.direction).normalized(),
                     angle=self.direction.angle_with(x_direction),
                 )
 
             else:
-
                 q_S_B = cesiumpy.Quaternion.from_axis_angle(
                     axis=cesiumpy.Cartesian3(1.0, 0.0, 0.0),
                     angle=cesiumpy.math.to_radians(180.0),
                 )
 
-        for (time, q_B_ECEF, _) in satellite.orientation.samples:
-
+        for time, q_B_ECEF, _ in satellite.orientation.samples:
             if q_S_B is not None:
                 q_S_ECEF = q_S_B * q_B_ECEF
 
@@ -183,7 +174,6 @@ class CustomPatternSensor(Sensor):
         name: Optional[str] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         super().__init__(
             direction=direction,
             material=material,
@@ -213,7 +203,6 @@ class CustomPatternSensor(Sensor):
         viewer: cesiumpy.Viewer,
         satellite: cesiumpy.Satellite,
     ) -> None:
-
         from cesiumpy.entities.sensors.custom_pattern_sensor import (
             CustomPatternSensor as CustomPatternSensorEntity,
         )
@@ -257,7 +246,6 @@ class RectangularSensor(CustomPatternSensor):
         intersection_color: Optional[cesiumpy.color.Color] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         super().__init__(
             direction=direction,
             radius=radius,
@@ -291,7 +279,6 @@ class RectangularSensor(CustomPatternSensor):
         x_half_angle: float,
         y_half_angle: float,
     ) -> list[cesiumpy.Spherical]:
-
         tan_x: float = math.tan(min(x_half_angle, cesiumpy.math.to_radians(89.0)))
         tan_y: float = math.tan(min(y_half_angle, cesiumpy.math.to_radians(89.0)))
         theta: float = math.atan(tan_x / tan_y)
@@ -329,7 +316,6 @@ class CylindricalSensor(Sensor):
         intersection_color: Optional[cesiumpy.color.Color] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         super().__init__(
             direction=direction,
             material=material,
@@ -369,7 +355,6 @@ class CylindricalSensor(Sensor):
         viewer: cesiumpy.Viewer,
         satellite: cesiumpy.Satellite,
     ) -> None:
-
         viewer.entities.add(
             cesiumpy.Cylinder(
                 position=self._generate_position(satellite),
@@ -407,7 +392,6 @@ class ConicSensor(CylindricalSensor):
         intersection_color: Optional[cesiumpy.color.Color] = None,
         show: Optional[bool] = None,
     ) -> None:
-
         length = length or DEFAULT_LENGTH
 
         super().__init__(
@@ -438,7 +422,6 @@ class ConicSensor(CylindricalSensor):
         viewer: cesiumpy.Viewer,
         satellite: cesiumpy.Satellite,
     ) -> None:
-
         from cesiumpy.entities.sensors.conic_sensor import (
             ConicSensor as ConicSensorEntity,
         )

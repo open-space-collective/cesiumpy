@@ -21,7 +21,6 @@ import cesiumpy.util.common as com
 
 
 class _Cartesian(_CesiumObject):
-
     _is_degrees = traitlets.Bool()
 
     # class property
@@ -60,7 +59,6 @@ def _maybe_cartesian2_list(x, key):
 
 
 class Cartesian2(_Cartesian):
-
     # Definitions
 
     x = traitlets.Float()
@@ -74,7 +72,6 @@ class Cartesian2(_Cartesian):
         y: float,
         degrees: bool = False,
     ) -> None:
-
         self.x: float = x
         self.y: float = y
 
@@ -119,7 +116,6 @@ class Cartesian2(_Cartesian):
 
 
 class Cartesian3(_Cartesian):
-
     # Definitions
 
     x = traitlets.Float()
@@ -135,7 +131,6 @@ class Cartesian3(_Cartesian):
         z: float,
         degrees: bool = False,
     ) -> None:
-
         self.x: float = x
         self.y: float = y
         self.z: float = z
@@ -149,7 +144,6 @@ class Cartesian3(_Cartesian):
     # Methods
 
     def __eq__(self, other: Cartesian3) -> bool:
-
         """
         Return True if two vectors are equal.
         """
@@ -157,7 +151,6 @@ class Cartesian3(_Cartesian):
         return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __mul__(self, scalar: float) -> Cartesian3:
-
         """
         Return vector multiplied by scalar.
         """
@@ -169,7 +162,6 @@ class Cartesian3(_Cartesian):
         )
 
     def __truediv__(self, scalar: float) -> Cartesian3:
-
         """
         Return vector divided by scalar.
         """
@@ -181,7 +173,6 @@ class Cartesian3(_Cartesian):
         )
 
     def angle_with(self, other: Cartesian3) -> float:
-
         """
         Return angle between two vectors in radians.
         """
@@ -189,7 +180,6 @@ class Cartesian3(_Cartesian):
         return math.acos(self.dot(other) / (self.magnitude() * other.magnitude()))
 
     def magnitude(self) -> float:
-
         """
         Return magnitude of vector.
         """
@@ -197,7 +187,6 @@ class Cartesian3(_Cartesian):
         return (self.x**2 + self.y**2 + self.z**2) ** 0.5
 
     def normalized(self) -> Cartesian3:
-
         """
         Return normalized vector.
         """
@@ -205,7 +194,6 @@ class Cartesian3(_Cartesian):
         return self / self.magnitude()
 
     def dot(self, other: Cartesian3) -> float:
-
         """
         Return dot product of two vectors.
         """
@@ -216,7 +204,6 @@ class Cartesian3(_Cartesian):
         return self.x * other.x + self.y * other.y + self.z * other.z
 
     def cross(self, other: Cartesian3) -> Cartesian3:
-
         """
         Return cross product of two vectors.
         """
@@ -231,7 +218,6 @@ class Cartesian3(_Cartesian):
         )
 
     def __repr__(self) -> str:
-
         """
         Return string representation of Cartesian3.
         """
@@ -285,7 +271,6 @@ class Cartesian3(_Cartesian):
 
 
 class Cartesian3Array(_Cartesian):
-
     _is_array = True
 
     def __init__(self, x):
@@ -308,14 +293,12 @@ class Cartesian3Array(_Cartesian):
 
 
 class Cartesian4(_Cartesian):
-
     x = traitlets.Float()
     y = traitlets.Float()
     z = traitlets.Float()
     w = traitlets.Float()
 
     def __init__(self, x, y, z, w, degrees=False):
-
         self.x = x
         self.y = y
         self.z = z
@@ -356,14 +339,12 @@ class Cartesian4(_Cartesian):
 
 
 class Rectangle(_Cartesian):
-
     west = traitlets.Float()
     south = traitlets.Float()
     east = traitlets.Float()
     north = traitlets.Float()
 
     def __init__(self, west, south, east, north, degrees=False):
-
         self.west = west
         self.south = south
         self.east = east

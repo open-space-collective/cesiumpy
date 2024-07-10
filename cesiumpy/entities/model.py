@@ -93,7 +93,6 @@ class Model(_CesiumObject):
         debugShowBoundingVolume=None,
         debugWireframe=None,
     ):
-
         self.url = url
 
         self.modelMatrix = Transforms.eastNorthUpToFixedFrame(modelMatrix)

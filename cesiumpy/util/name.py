@@ -13,7 +13,6 @@ from typing import Optional
 
 
 def generate_name(prefix: Optional[str] = None) -> str:
-
     return f'{prefix or "property_"}{str(uuid4())[0:8]}'
 
 

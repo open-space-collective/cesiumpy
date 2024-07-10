@@ -14,7 +14,6 @@ from cesiumpy.util.trait import DateTimeTrait
 
 
 class TimeInterval(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -41,7 +40,6 @@ class TimeInterval(_CesiumObject):
         is_stop_included: Optional[bool] = None,
         data: Optional[dict] = None,
     ) -> None:
-
         """
         start: The start time of the interval.
         stop: The stop time of the interval.
@@ -59,12 +57,10 @@ class TimeInterval(_CesiumObject):
     # Properties
 
     def generate_script(self, widget=None) -> str:
-
         return f"new {self._klass}({super().generate_script(widget = widget)})"
 
 
 class TimeIntervalCollection(_CesiumObject):
-
     # Definitions
 
     _props = [
@@ -80,11 +76,9 @@ class TimeIntervalCollection(_CesiumObject):
         self,
         intervals: List[TimeInterval],
     ) -> None:
-
         self.intervals: List[TimeInterval] = intervals
 
     # Properties
 
     def generate_script(self, widget=None) -> str:
-
         return f"new {self._klass}({super().generate_script(widget = widget)})"
