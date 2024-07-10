@@ -13,7 +13,7 @@ from cesiumpy.testing import (
 
 class TestScatter:
     def test_scatter_xy(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         res = v.plot.scatter([130, 140, 150], [30, 40, 50])
         self.assertIsInstance(v, cesiumpy.Viewer)
 
@@ -32,7 +32,7 @@ class TestScatter:
         self.assertEqual(v.to_html(), exp)
 
     def test_scatter_xyz(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter([130, 140, 150], [30, 40, 50], [1e05, 2e05, 3e05])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -47,7 +47,7 @@ class TestScatter:
         self.assertEqual(v.to_html(), exp)
 
     def test_scatter_xy_color_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter([130, 140, 150], [30, 40, 50], color=cesiumpy.color.BLUE)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -62,7 +62,7 @@ class TestScatter:
         self.assertEqual(v.to_html(), exp)
 
     def test_scatter_xy_color_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter(
             [130, 140, 150],
             [30, 40, 50],
@@ -81,7 +81,7 @@ class TestScatter:
         self.assertEqual(v.to_html(), exp)
 
     def test_scatter_xy_size_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter([130, 140, 150], [30, 40, 50], size=50)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -96,7 +96,7 @@ class TestScatter:
         self.assertEqual(v.to_html(), exp)
 
     def test_scatter_xy_size_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter([130, 140, 150], [30, 40, 50], size=[20, 30, 40])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -111,7 +111,7 @@ class TestScatter:
         self.assertEqual(v.to_html(), exp)
 
     def test_scatter_errors(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
 
         msg = "y must be list-likes: 0"
         with pytest.raises_regexp(ValueError, msg):
@@ -138,7 +138,7 @@ class TestScatter:
             }
         )
         # we can't use size column
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter(x=df.lon, y=df.lat, size=df.r)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -152,7 +152,7 @@ class TestScatter:
 </script>"""
         self.assertEqual(v.to_html(), exp)
 
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter(x=df.lon, y=df.lat, size=df.r, color=df.c)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -169,7 +169,7 @@ class TestScatter:
 
 class TestBar:
     def test_bar_xyz(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.bar([130, 140, 150], [30, 40, 50], [10e5, 20e5, 30e5])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -184,7 +184,7 @@ class TestBar:
         self.assertEqual(v.to_html(), exp)
 
     def test_bar_color_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.bar(
             [130, 140, 150], [30, 40, 50], [10e5, 20e5, 30e5], color=cesiumpy.color.BLUE
         )
@@ -201,7 +201,7 @@ class TestBar:
         self.assertEqual(v.to_html(), exp)
 
     def test_bar_color_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.bar(
             [130, 140, 150],
             [30, 40, 50],
@@ -221,7 +221,7 @@ class TestBar:
         self.assertEqual(v.to_html(), exp)
 
     def test_bar_size_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.bar([130, 140, 150], [30, 40, 50], [10e5, 20e5, 30e5], size=1e5)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -236,7 +236,7 @@ class TestBar:
         self.assertEqual(v.to_html(), exp)
 
     def test_bar_size_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.bar(
             [130, 140, 150], [30, 40, 50], [10e5, 20e5, 30e5], size=[1e3, 1e4, 1e5]
         )
@@ -291,7 +291,7 @@ class TestBar:
                 "c": ["r", "g", "b"],
             }
         )
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.bar(x=df.lon, y=df.lat, z=df.h, color=df.c)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -308,7 +308,7 @@ class TestBar:
 
 class TestLabel:
     def test_label_xy(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(["A", "B", "C"], [130, 140, 150], [30, 40, 50])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -323,7 +323,7 @@ class TestLabel:
         self.assertEqual(v.to_html(), exp)
 
     def test_label_xyz(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(["A", "B", "C"], [130, 140, 150], [30, 40, 50], 10e5)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -338,7 +338,7 @@ class TestLabel:
         self.assertEqual(v.to_html(), exp)
 
     def test_label_xyz_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(["A", "B", "C"], [130, 140, 150], [30, 40, 50], [10e4, 10e5, 10e4])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -353,7 +353,7 @@ class TestLabel:
         self.assertEqual(v.to_html(), exp)
 
     def test_label_color_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(
             ["A", "B", "C"], [130, 140, 150], [30, 40, 50], color=cesiumpy.color.GREEN
         )
@@ -370,7 +370,7 @@ class TestLabel:
         self.assertEqual(v.to_html(), exp)
 
     def test_label_color_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(
             ["A", "B", "C"],
             [130, 140, 150],
@@ -390,7 +390,7 @@ class TestLabel:
         self.assertEqual(v.to_html(), exp)
 
     def test_label_size_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(["A", "B", "C"], [130, 140, 150], [30, 40, 50], size=2)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -405,7 +405,7 @@ class TestLabel:
         self.assertEqual(v.to_html(), exp)
 
     def test_label_size_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(["A", "B", "C"], [130, 140, 150], [30, 40, 50], size=[2, 3, 0.5])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -432,7 +432,7 @@ class TestLabel:
                 "c": ["r", "g", "b"],
             }
         )
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.label(df.label, x=df.lon, y=df.lat, size=df.s, color=df.c)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -449,7 +449,7 @@ class TestLabel:
 
 class TestPin:
     def test_pin_xy(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -464,7 +464,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_xyz(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50], z=1e6)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -479,7 +479,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_xyz_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50], [10e4, 10e5, 10e4])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -494,7 +494,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_color_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50], color=cesiumpy.color.GREEN)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -509,7 +509,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_color_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin(
             [130, 140, 150],
             [30, 40, 50],
@@ -528,7 +528,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_size_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50], size=24)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -543,7 +543,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_size_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50], size=[12, 24, 48])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -558,7 +558,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_label_scalar(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50], text="!")
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -573,7 +573,7 @@ class TestPin:
         self.assertEqual(v.to_html(), exp)
 
     def test_pin_label_list(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin([130, 140, 150], [30, 40, 50], text=["!", "?", "XXX"])
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">
@@ -593,7 +593,7 @@ class TestNumpyLike:
         _skip_if_no_numpy()
         import numpy as np
 
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         res = v.plot.scatter(np.array([130, 140, 150]), np.array([30, 40, 50]))
         self.assertIsInstance(v, cesiumpy.Viewer)
 
@@ -622,7 +622,7 @@ class TestNumpyLike:
             def __array__(self):
                 return np.array(self.values)
 
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         res = v.plot.scatter(
             ExtendedArray([130, 140, 150]), ExtendedArray([30, 40, 50])
         )
@@ -679,7 +679,7 @@ class TestContour:
                 "c": ["r", "g", "b"],
             }
         )
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.plot.pin(x=df.lon, y=df.lat, size=df.s, color=df.c, text=df.label)
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>
 <link rel="stylesheet" href="https://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">

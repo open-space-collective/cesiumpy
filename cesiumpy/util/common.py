@@ -55,7 +55,7 @@ def validate_longitude(x, key):
         raise ValueError(
             "{key} must be longitude, between -180 to 180: {x}".format(key=key, x=x)
         )
-    return x
+    return True
 
 
 def validate_latitude(x, key):
@@ -64,7 +64,7 @@ def validate_latitude(x, key):
         raise ValueError(
             "{key} must be latitude, between -90 to 90: {x}".format(key=key, x=x)
         )
-    return x
+    return True
 
 
 def validate_listlike(x, key):

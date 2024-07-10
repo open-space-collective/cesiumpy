@@ -65,7 +65,7 @@ class TestCountry:
         "shapely.geometry" not in sys.modules, reason="requires Shapely"
     )
     def test_viewer(self):
-        v = cesiumpy.Viewer(divid="viewertest")
+        v = cesiumpy.Viewer(id="viewertest")
         v.entities.add(cesiumpy.countries.abw)
         res = v.to_html()
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>

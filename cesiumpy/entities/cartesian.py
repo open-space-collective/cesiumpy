@@ -353,10 +353,10 @@ class Rectangle(_Cartesian):
         self._is_degrees = degrees
 
         if degrees:
-            self.west = com.validate_longitude(west, key="west")
-            self.south = com.validate_latitude(south, key="south")
-            self.east = com.validate_longitude(east, key="east")
-            self.north = com.validate_latitude(north, key="north")
+            com.validate_longitude(west, key="west")
+            com.validate_latitude(south, key="south")
+            com.validate_longitude(east, key="east")
+            com.validate_latitude(north, key="north")
 
     @classmethod
     def fromDegrees(cls, west, south, east, north):

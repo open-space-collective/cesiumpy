@@ -30,6 +30,13 @@ class Camera(_CesiumObject):
                 klass=self.__class__.__name__, destination=self.destination
             )
 
+    @property
+    def script(self):
+        if self.destination is not None:
+            return "{" + f"destination : {self.destination.generate_script()}" + "}"
+
+        return ""
+
     def flyTo(self, destination, orientation=None):
         from cesiumpy.entities.entity import _CesiumEntity
         import cesiumpy.extension.geocode as geocode

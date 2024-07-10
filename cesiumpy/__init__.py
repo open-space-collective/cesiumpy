@@ -29,11 +29,11 @@ from cesiumpy.entities.graphics import (
     ShadowMode,
     Box,
     Polygon,
-    Model,
+    Model as ModelGraphic,
     IonResource,
 )  # noqa
 
-# from cesiumpy.entities.model import Model                                       # noqa
+from cesiumpy.entities.model import Model  # noqa
 from cesiumpy.entities.pinbuilder import Pin  # noqa
 from cesiumpy.entities.transform import Transforms  # noqa
 

@@ -15,7 +15,7 @@ class Scene(_CesiumObject):
     def __init__(self, widget):
         self.widget = widget
         self._primitives = RestrictedList(
-            self.widget, allowed=cesiumpy.Model, propertyname="scene.primitives"
+            self.widget, allowed=cesiumpy.ModelGraphic, propertyname="scene.primitives"
         )
 
     @property

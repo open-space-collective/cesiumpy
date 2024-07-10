@@ -141,7 +141,7 @@ class TestGeocode:
 
     def test_viewer(self):
         try:
-            viewer = cesiumpy.Viewer(divid="viewertest")
+            viewer = cesiumpy.Viewer(id="viewertest")
             cyl = cesiumpy.Cylinder(
                 position="Los Angeles",
                 length=30000,

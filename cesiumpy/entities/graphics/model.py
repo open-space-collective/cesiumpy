@@ -36,9 +36,8 @@ class IonResource(_CesiumObject):
 
 
 class Model(_CesiumEntity):
-
     """
-    ModelGraphics
+    ModelGraphic
 
     Parameters
     ----------
