@@ -1132,12 +1132,11 @@ def example_czml() -> list[dict]:
 
 class TestDataSource:
 
-    def test_czmldatasource(self):
+    def test_czmldatasource(self, example_czml: list[dict]):
         ds = cesiumpy.CzmlDataSource.from_file("xxx.czml")
         exp = 'Cesium.CzmlDataSource.load("xxx.czml")'
         assert ds.script == exp
 
-    def test_czmldatasource(self, example_czml: list[dict]):
         ds = cesiumpy.CzmlDataSource(example_czml)
 
         assert ds.script == 'Cesium.CzmlDataSource.load("PLACEHOLDER")'
