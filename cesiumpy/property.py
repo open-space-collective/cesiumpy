@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/property.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import annotations
 
@@ -15,15 +9,10 @@ from cesiumpy.base import _CesiumEnum
 from cesiumpy.base import _CesiumObject
 from cesiumpy.util.name import generate_name
 
-######################################################################################################################################################
-
 
 class ReferenceFrame(_CesiumEnum):
     FIXED = "Cesium.ReferenceFrame.FIXED"  # The fixed frame.
     INERTIAL = "Cesium.ReferenceFrame.INERTIAL"  # The inertial frame.
-
-
-######################################################################################################################################################
 
 
 class Property(_CesiumObject):
@@ -47,9 +36,6 @@ class Property(_CesiumObject):
 
     def get_value(self, time: datetime) -> Any:
         raise NotImplementedError
-
-
-######################################################################################################################################################
 
 
 class SampledProperty(Property):
@@ -116,6 +102,3 @@ class SampledProperty(Property):
         widget.register_property(self.name, property_scripts)
 
         return f"{widget._varname}.{self.name}"
-
-
-######################################################################################################################################################

@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -31,7 +30,7 @@ class Label(_CesiumEntity):
         A Property specifying the CSS font.
     style : LabeStyle, default LabelStyle.FILL
         A Property specifying the LabelStyle.
-    fillColor : Color, default Color.WHITE
+    fill_color : Color, default Color.WHITE
         A Property specifying the fill Color.
     outline_color : Color, default, Color.BLACK
         A Property specifying the outline Color.
@@ -41,62 +40,62 @@ class Label(_CesiumEntity):
         A boolean Property specifying the visibility of the label.
     scale : float, default 1.
         A numeric Property specifying the scale to apply to the text.
-    horizontalOrigin : HorizontalOrigin, default HorizontalOrigin.CENTER
-        A Property specifying the HorizontalOrigin.
-    verticalOrigin : VerticalOrigin, default VerticalOrigin.CENTER
-        A Property specifying the VerticalOrigin.
-    eyeOffset : Cartesian3, default Cartesian3.ZERO
+    horizontal_origin : horizontal_origin, default horizontal_origin.CENTER
+        A Property specifying the horizontal_origin.
+    vertical_origin : vertical_origin, default vertical_origin.CENTER
+        A Property specifying the vertical_origin.
+    eye_offset : Cartesian3, default Cartesian3.ZERO
         A Cartesian3 Property specifying the eye offset.
-    pixelOffset : Cartesian2, default Cartesian2.ZERO
+    pixel_offset : Cartesian2, default Cartesian2.ZERO
         A Cartesian2 Property specifying the pixel offset.
-    translucencyByDistance :
+    translucency_by_distance :
         A NearFarScalar Property used to set translucency based on distance from the camera.
-    pixelOffsetScaleByDistance :
-        A NearFarScalar Property used to set pixelOffset based on distance from the camera.
+    pixel_offset_scale_by_distance :
+        A NearFarScalar Property used to set pixel_offset based on distance from the camera.
     """
 
     _klass = "label"
-    _props = ["text", "style", "fillColor"]
+    _props = ["text", "style", "fill_color"]
 
     text = traitlets.Unicode()
-    fillColor = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
+    fill_color = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
 
     def __init__(
         self,
         position,
         text,
         style=None,
-        fillColor=None,
+        fill_color=None,
         outline_color=None,
         outline_width=None,
         show=None,
         scale=None,
-        horizontalOrigin=None,
-        verticalOrigin=None,
-        eyeOffset=None,
-        pixelOffset=None,
-        translucencyByDistance=None,
-        pixelOffsetScaleByDistance=None,
+        horizontal_origin=None,
+        vertical_origin=None,
+        eye_offset=None,
+        pixel_offset=None,
+        translucency_by_distance=None,
+        pixel_offset_scale_by_distance=None,
         name=None,
     ):
         super(Label, self).__init__(
             show=show,
             outline_color=outline_color,
             outline_width=outline_width,
-            translucencyByDistance=translucencyByDistance,
+            translucency_by_distance=translucency_by_distance,
             scale=scale,
-            horizontalOrigin=horizontalOrigin,
-            verticalOrigin=verticalOrigin,
-            eyeOffset=eyeOffset,
-            pixelOffset=pixelOffset,
-            pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
+            horizontal_origin=horizontal_origin,
+            vertical_origin=vertical_origin,
+            eye_offset=eye_offset,
+            pixel_offset=pixel_offset,
+            pixel_offset_scale_by_distance=pixel_offset_scale_by_distance,
             position=position,
             name=name,
         )
 
         self.text = text
         self.style = com.notimplemented(style)
-        self.fillColor = fillColor
+        self.fill_color = fill_color
 
 
 class Billboard(_CesiumEntity):
@@ -114,17 +113,17 @@ class Billboard(_CesiumEntity):
         A boolean Property specifying the visibility of the billboard.
     scale : float, default 1.
         A numeric Property specifying the scale to apply to the image size.
-    horizontalOrigin : HorizontalOrigin, default HorizontalOrigin.CENTER
-        A Property specifying the HorizontalOrigin.
-    verticalOrigin : VerticalOrigin, default VerticalOrigin.CENTER
-        A Property specifying the VerticalOrigin.
-    eyeOffset : Cartesian3, default Cartesian3.ZERO
+    horizontal_origin : horizontal_origin, default horizontal_origin.CENTER
+        A Property specifying the horizontal_origin.
+    vertical_origin : vertical_origin, default vertical_origin.CENTER
+        A Property specifying the vertical_origin.
+    eye_offset : Cartesian3, default Cartesian3.ZERO
         A Cartesian3 Property specifying the eye offset.
-    pixelOffset : Cartesian2, default Cartesian2.ZERO
+    pixel_offset : Cartesian2, default Cartesian2.ZERO
         A Cartesian2 Property specifying the pixel offset.
     rotation : float, default 0.
-        A numeric Property specifying the rotation about the alignedAxis.
-    alignedAxis : Cartesian3, default Cartesian3.ZERO
+        A numeric Property specifying the rotation about the aligned_axis.
+    aligned_axis : Cartesian3, default Cartesian3.ZERO
         A Cartesian3 Property specifying the axis of rotation.
     width : float
         A numeric Property specifying the width of the billboard in pixels, overriding the native size.
@@ -132,20 +131,20 @@ class Billboard(_CesiumEntity):
         A numeric Property specifying the height of the billboard in pixels, overriding the native size.
     color : Color, default Color.WHITE
         A Property specifying the tint Color of the image.
-    scaleByDistance :
+    scale_by_distance :
         A NearFarScalar Property used to scale the point based on distance from the camera.
-    translucencyByDistance :
+    translucency_by_distance :
         optional A NearFarScalar Property used to set translucency based on distance from the camera.
-    pixelOffsetScaleByDistance :
-        optional A NearFarScalar Property used to set pixelOffset based on distance from the camera.
-    imageSubRegion :
+    pixel_offset_scale_by_distance :
+        optional A NearFarScalar Property used to set pixel_offset based on distance from the camera.
+    image_sub_region :
         A Property specifying a BoundingRectangle that defines a sub-region of the image to use for the billboard, rather than the entire image.
-    sizeInMeters : bool
+    size_in_meters : bool
         A boolean Property specifying whether this billboard's size should be measured in meters.
     """
 
     _klass = "billboard"
-    _props = ["image", "alignedAxis", "imageSubRegion", "sizeInMeters"]
+    _props = ["image", "aligned_axis", "image_sub_region", "size_in_meters"]
 
     image = traitlets.Instance(klass=cesiumpy.entities.pinbuilder._BillboardContents)
 
@@ -155,36 +154,36 @@ class Billboard(_CesiumEntity):
         image=None,
         show=None,
         scale=None,
-        horizontalOrigin=None,
-        verticalOrigin=None,
-        eyeOffset=None,
-        pixelOffset=None,
+        horizontal_origin=None,
+        vertical_origin=None,
+        eye_offset=None,
+        pixel_offset=None,
         rotation=None,
-        alignedAxis=None,
+        aligned_axis=None,
         width=None,
         height=None,
         color=None,
-        scaleByDistance=None,
-        translucencyByDistance=None,
-        pixelOffsetScaleByDistance=None,
-        imageSubRegion=None,
-        sizeInMeters=None,
+        scale_by_distance=None,
+        translucency_by_distance=None,
+        pixel_offset_scale_by_distance=None,
+        image_sub_region=None,
+        size_in_meters=None,
         name=None,
     ):
         super(Billboard, self).__init__(
             show=show,
             scale=scale,
             color=color,
-            horizontalOrigin=horizontalOrigin,
-            verticalOrigin=verticalOrigin,
-            eyeOffset=eyeOffset,
-            pixelOffset=pixelOffset,
+            horizontal_origin=horizontal_origin,
+            vertical_origin=vertical_origin,
+            eye_offset=eye_offset,
+            pixel_offset=pixel_offset,
             rotation=rotation,
             width=width,
             height=height,
-            scaleByDistance=scaleByDistance,
-            translucencyByDistance=translucencyByDistance,
-            pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
+            scale_by_distance=scale_by_distance,
+            translucency_by_distance=translucency_by_distance,
+            pixel_offset_scale_by_distance=pixel_offset_scale_by_distance,
             position=position,
             name=name,
         )
@@ -195,9 +194,9 @@ class Billboard(_CesiumEntity):
             image = cesiumpy.entities.pinbuilder.Icon(image)
         self.image = image
 
-        self.alignedAxis = com.notimplemented(alignedAxis)
-        self.imageSubRegion = com.notimplemented(imageSubRegion)
-        self.sizeInMeters = com.notimplemented(sizeInMeters)
+        self.aligned_axis = com.notimplemented(aligned_axis)
+        self.image_sub_region = com.notimplemented(image_sub_region)
+        self.size_in_meters = com.notimplemented(size_in_meters)
 
 
 class Ellipse(_CesiumEntity):
@@ -557,7 +556,7 @@ class Wall(_CesiumEntity):
 
         # ToDo: Support fromDegreesArrayHeights
         self.positions = cartesian.Cartesian3.fromDegreesArray(positions)
-        pos_len = len(self.positions) // 2
+        pos_len = len(self.positions) // 3
 
         def _init_heights(x, key):
             if not isinstance(x, list):

@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 # data
 import cesiumpy.data.country  # noqa

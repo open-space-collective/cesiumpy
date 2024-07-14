@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -48,19 +47,19 @@ def to_entity(shape):
     Result may be a list if geometry is consists from multiple instances.
     """
     if isinstance(shape, ShapelyMultiPoint):
-        return [cesiumpy.Point(position=e) for e in shape]
+        return [cesiumpy.Point(position=e) for e in shape.geoms]
 
     elif isinstance(shape, ShapelyPoint):
         return cesiumpy.Point(position=shape)
 
     elif isinstance(shape, ShapelyMultiLineString):
-        return [cesiumpy.Polyline(positions=e) for e in shape]
+        return [cesiumpy.Polyline(positions=e) for e in shape.geoms]
 
     elif isinstance(shape, (ShapelyLineString, ShapelyLinearRing)):
         return cesiumpy.Polyline(positions=shape)
 
     elif isinstance(shape, ShapelyMultiPolygon):
-        return [cesiumpy.Polygon(hierarchy=e) for e in shape]
+        return [cesiumpy.Polygon(hierarchy=e) for e in shape.geoms]
 
     elif isinstance(shape, ShapelyPolygon):
         return cesiumpy.Polygon(hierarchy=shape)
@@ -84,21 +83,30 @@ def _maybe_shapely_point(x):
 
 def _maybe_shapely_line(x):
     if isinstance(x, ShapelyMultiLineString):
-        raise NotImplementedError(x)
+        results = []
+        for line in x:
+            results.extend(list(itertools.chain(*[(*l, 0.0) for l in line.coords[:]])))
+        return results
     elif isinstance(x, (ShapelyLineString, ShapelyLinearRing)):
-        return list(itertools.chain(*x.coords[:]))
+        return list(itertools.chain(*[(*l, 0.0) for l in x.coords[:]]))
     return x
 
 
 def _maybe_shapely_polygon(x):
-    if isinstance(x, ShapelyMultiPolygon):
-        raise NotImplementedError(x)
-    elif isinstance(x, ShapelyPolygon):
+    if not isinstance(x, (ShapelyMultiPolygon, ShapelyPolygon)):
+        return x
+
+    if isinstance(x, ShapelyPolygon):
         polygons = [x]
     else:
-        return x
+        polygons = x
 
     results = []
     for p in polygons:
-        results.extend(list(itertools.chain(*p.exterior.coords)))
+        if not x.has_z:
+            data = [(*c, 0.0) for c in list(p.exterior.coords)]
+        else:
+            data = p.exterior.coords
+        results.extend(list(itertools.chain(*data)))
+
     return results

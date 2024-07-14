@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -33,7 +32,7 @@ class Camera(_CesiumObject):
     @property
     def script(self):
         if self.destination is not None:
-            return "{" + f"destination : {self.destination.generate_script()}" + "}"
+            return "{" + f"destination: {self.destination.generate_script()}" + "}"
 
         return ""
 

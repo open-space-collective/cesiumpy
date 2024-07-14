@@ -221,7 +221,7 @@ class TestImageProvider:
             url=url, rectangle=rectangle
         )
         result = imageryProvider.script
-        exp = """new Cesium.SingleTileImageryProvider({url: "../images/Cesium_Logo_overlay.png", rectangle: Cesium.Rectangle.fromDegrees(west=-75.0, south=28.0, east=-67.0, north=29.75)})"""
+        exp = """new Cesium.SingleTileImageryProvider({url: "../images/Cesium_Logo_overlay.png", rectangle: Cesium.Rectangle.fromDegrees(-75.0, 28.0, -67.0, 29.75)})"""
         assert result == exp
 
         url = "../images/Cesium_Logo_overlay.png"
@@ -232,7 +232,7 @@ class TestImageProvider:
             url=url, rectangle=rectangle
         )
         result = imageryProvider.script
-        exp = """new Cesium.SingleTileImageryProvider({url: "../images/Cesium_Logo_overlay.png", rectangle: Cesium.Rectangle.fromDegrees(west=-115.0, south=38.0, east=-107.0, north=39.75)})"""
+        exp = """new Cesium.SingleTileImageryProvider({url: "../images/Cesium_Logo_overlay.png", rectangle: Cesium.Rectangle.fromDegrees(-115.0, 38.0, -107.0, 39.75)})"""
         assert result == exp
 
     # def test_SingleTimeImageryProvider_tempfile(self):

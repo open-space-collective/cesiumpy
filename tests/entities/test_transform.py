@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-import pytest
+# Apache License 2.0
 
 import cesiumpy
 
@@ -10,17 +7,13 @@ class TestTransform:
     def test_transform(self):
         c = cesiumpy.Cartesian3(1, 1, 1)
         res = cesiumpy.Transforms.eastNorthUpToFixedFrame(c)
-        exp = """Cesium.Transforms.eastNorthUpToFixedFrame(new Cesium.Cartesian3(1.0, 1.0, 1.0))"""
-        self.assertEqual(res.script, exp)
+        exp = """Cesium.Transforms.eastNorthUpToFixedFrame(Cesium.Cartesian3(1.0, 1.0, 1.0))"""
+        assert res.script == exp
 
         res = cesiumpy.Transforms.northEastDownToFixedFrame(c)
-        exp = """Cesium.Transforms.northEastDownToFixedFrame(new Cesium.Cartesian3(1.0, 1.0, 1.0))"""
-        self.assertEqual(res.script, exp)
+        exp = """Cesium.Transforms.northEastDownToFixedFrame(Cesium.Cartesian3(1.0, 1.0, 1.0))"""
+        assert res.script == exp
 
         res = cesiumpy.Transforms.northUpEastToFixedFrame(c)
-        exp = """Cesium.Transforms.northUpEastToFixedFrame(new Cesium.Cartesian3(1.0, 1.0, 1.0))"""
-        self.assertEqual(res.script, exp)
-
-
-if __name__ == "__main__":
-    nose.runmodule(argv=[__file__, "-vvs", "-x", "--pdb", "--pdb-failure"], exit=False)
+        exp = """Cesium.Transforms.northUpEastToFixedFrame(Cesium.Cartesian3(1.0, 1.0, 1.0))"""
+        assert res.script == exp

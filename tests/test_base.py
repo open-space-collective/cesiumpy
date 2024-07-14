@@ -234,8 +234,8 @@ class TestViewer:
 
         wall = cesiumpy.Wall(
             positions=[-60, 40, 0, -65, 40, 0, -65, 45, 0, -60, 45, 0],
-            maximum_heights=[10e4] * 6,
-            minimum_heights=[0] * 6,
+            maximum_heights=[10e4] * 4,
+            minimum_heights=[0] * 4,
             material=cesiumpy.color.RED,
         )
         viewer.entities.add(wall)
@@ -278,9 +278,9 @@ class TestViewer:
     widget.entities.add({position: Cesium.Cartesian3.fromDegrees(-110.0, 40.0, 0.0), ellipse: {semiMinorAxis: 250000.0, semiMajorAxis: 400000.0, material: Cesium.Color.BLUE}});
     widget.entities.add({position: Cesium.Cartesian3.fromDegrees(-100.0, 40.0, 500000.0), cylinder: {length: 1000000.0, topRadius: 100000.0, bottomRadius: 100000.0, material: Cesium.Color.AQUA}});
     widget.entities.add({polygon: {hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights([-90, 40, 0, -95, 40, 0, -95, 45, 0, -90, 40, 0]), material: Cesium.Color.ORANGE}});
-    widget.entities.add({rectangle: {coordinates: Cesium.Rectangle.fromDegrees(west=-85.0, south=40.0, east=-80.0, north=45.0), material: Cesium.Color.GREEN}});
+    widget.entities.add({rectangle: {coordinates: Cesium.Rectangle.fromDegrees(-85.0, 40.0, -80.0, 45.0), material: Cesium.Color.GREEN}});
     widget.entities.add({position: Cesium.Cartesian3.fromDegrees(-70.0, 40.0, 0.0), ellipsoid: {radii: new Cesium.Cartesian3(200000.0, 200000.0, 300000.0), material: Cesium.Color.GREEN}});
-    widget.entities.add({wall: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-60, 40, 0, -65, 40, 0, -65, 45, 0, -60, 45, 0]), maximumHeights: [100000.0, 100000.0, 100000.0, 100000.0, 100000.0, 100000.0], minimumHeights: [0, 0, 0, 0, 0, 0], material: Cesium.Color.RED}});
+    widget.entities.add({wall: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-60, 40, 0, -65, 40, 0, -65, 45, 0, -60, 45, 0]), maximumHeights: [100000.0, 100000.0, 100000.0, 100000.0], minimumHeights: [0, 0, 0, 0], material: Cesium.Color.RED}});
     widget.entities.add({corridor: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-120, 30, 0, -90, 35, 0, -60, 30, 0]), width: 200000.0, material: Cesium.Color.RED}});
     widget.entities.add({polyline: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-120, 25, -90, 30, -60, 25]), width: 0.5, material: Cesium.Color.BLUE}});
     widget.entities.add({polylineVolume: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-120, 20, -90, 25, -60, 20]), shape: [new Cesium.Cartesian2(-50000.0, -50000.0), new Cesium.Cartesian2(50000.0, -50000.0), new Cesium.Cartesian2(50000.0, 50000.0), new Cesium.Cartesian2(-50000.0, 50000.0)], material: Cesium.Color.GREEN}});
@@ -333,9 +333,9 @@ class TestViewer:
     widget.entities.add({position: Cesium.Cartesian3.fromDegrees(-110.0, 40.0, 0.0), ellipse: {semiMinorAxis: 250000.0, semiMajorAxis: 400000.0, material: Cesium.Color.BLUE}});
     widget.entities.add({position: Cesium.Cartesian3.fromDegrees(-100.0, 40.0, 500000.0), cylinder: {length: 1000000.0, topRadius: 100000.0, bottomRadius: 100000.0, material: Cesium.Color.AQUA}});
     widget.entities.add({polygon: {hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights([-90, 40, 0, -95, 40, 0, -95, 45, 0, -90, 40, 0]), material: Cesium.Color.ORANGE}});
-    widget.entities.add({rectangle: {coordinates: Cesium.Rectangle.fromDegrees(west=-85.0, south=40.0, east=-80.0, north=45.0), material: Cesium.Color.GREEN}});
+    widget.entities.add({rectangle: {coordinates: Cesium.Rectangle.fromDegrees(-85.0, 40.0, -80.0, 45.0), material: Cesium.Color.GREEN}});
     widget.entities.add({position: Cesium.Cartesian3.fromDegrees(-70.0, 40.0, 0.0), ellipsoid: {radii: new Cesium.Cartesian3(200000.0, 200000.0, 300000.0), material: Cesium.Color.GREEN}});
-    widget.entities.add({wall: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-60, 40, 0, -65, 40, 0, -65, 45, 0, -60, 45, 0]), maximumHeights: [100000.0, 100000.0, 100000.0, 100000.0, 100000.0, 100000.0], minimumHeights: [0, 0, 0, 0, 0, 0], material: Cesium.Color.RED}});
+    widget.entities.add({wall: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-60, 40, 0, -65, 40, 0, -65, 45, 0, -60, 45, 0]), maximumHeights: [100000.0, 100000.0, 100000.0, 100000.0], minimumHeights: [0, 0, 0, 0], material: Cesium.Color.RED}});
     widget.entities.add({corridor: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-120, 30, 0, -90, 35, 0, -60, 30, 0]), width: 200000.0, material: Cesium.Color.RED}});
     widget.entities.add({polyline: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-120, 25, -90, 30, -60, 25]), width: 0.5, material: Cesium.Color.BLUE}});
     widget.entities.add({polylineVolume: {positions: Cesium.Cartesian3.fromDegreesArrayHeights([-120, 20, -90, 25, -60, 20]), shape: [new Cesium.Cartesian2(-50000.0, -50000.0), new Cesium.Cartesian2(50000.0, -50000.0), new Cesium.Cartesian2(50000.0, 50000.0), new Cesium.Cartesian2(-50000.0, 50000.0)], material: Cesium.Color.GREEN}});

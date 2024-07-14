@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -169,7 +168,7 @@ def is_listlike_2elem(x):
 
 def is_listlike_3elem(x):
     if is_listlike(x):
-        if all(is_listlike(e) and len(e) == 2 for e in x):
+        if all(is_listlike(e) and len(e) == 3 for e in x):
             return True
     return False
 
@@ -226,5 +225,5 @@ def to_jsobject(x, widget=None):
     return results
 
 
-def _flatten_list_of_listlike(x):
+def flatten_list_of_listlike(x):
     return list(itertools.chain(*x))

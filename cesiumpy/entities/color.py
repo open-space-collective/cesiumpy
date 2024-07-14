@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 from __future__ import annotations
@@ -46,8 +45,12 @@ class Color(Material):
             alpha=self.alpha,
         )
 
+    @property
+    def script(self) -> str:
+        return f"Cesium.{repr(self)}"
+
     def generate_script(self, widget=None) -> str:
-        return f"new Cesium.{repr(self)}"
+        return f"new {self.script}"
 
     def __repr__(self) -> str:
         if self.alpha is None:

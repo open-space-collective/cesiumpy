@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -10,7 +9,6 @@ from cesiumpy.entities.entity import _CesiumEntity
 
 
 class Cylinder(_CesiumEntity):
-
     """
     CylinderGraphics
 

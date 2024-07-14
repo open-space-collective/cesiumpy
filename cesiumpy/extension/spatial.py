@@ -1,7 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
+
+import numpy as np
 
 import collections
 
@@ -61,7 +62,7 @@ class Voronoi(_Spatial):
 
         # calculate the center of the area
         center = self.vor.points.mean(axis=0)
-        span = self.vor.points.ptp(axis=0)
+        span = np.ptp(self.vor.points, axis=0)
         radius = span.max()
         span = span / 1.5
 
@@ -130,7 +131,6 @@ class Voronoi(_Spatial):
 
 
 class ConvexHull(_Spatial):
-
     """
     Wrapper for scipy.spatial.ConvexHull
 

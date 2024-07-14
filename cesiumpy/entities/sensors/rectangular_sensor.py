@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/entities/sensors/cylinder.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -18,11 +12,8 @@ from cesiumpy.base import _CesiumObject
 from cesiumpy.entities.entity import _CesiumEntity
 from cesiumpy.util.trait import MaybeTrait
 
-######################################################################################################################################################
-
 
 class RectangularSensor(_CesiumEntity):
-
     """
     Rectangular Sensor.
     """
@@ -94,9 +85,9 @@ class RectangularSensor(_CesiumEntity):
         self.x_half_angle: float = x_half_angle
         self.y_half_angle: float = y_half_angle
 
-        self.lateral_surface_material: Optional[
-            cesiumpy.color.Color
-        ] = lateral_surface_material
+        self.lateral_surface_material: Optional[cesiumpy.color.Color] = (
+            lateral_surface_material
+        )
 
         self.show_intersection: Optional[bool] = show_intersection
         self.intersection_color: Optional[cesiumpy.color.Color] = intersection_color
@@ -117,9 +108,6 @@ class RectangularSensor(_CesiumEntity):
         )
 
         return props
-
-
-######################################################################################################################################################
 
 
 class RectangularSensorGraphics(_CesiumObject):
@@ -167,9 +155,9 @@ class RectangularSensorGraphics(_CesiumObject):
         self.x_half_angle: float = x_half_angle
         self.y_half_angle: float = y_half_angle
 
-        self.lateral_surface_material: Optional[
-            cesiumpy.color.Color
-        ] = lateral_surface_material
+        self.lateral_surface_material: Optional[cesiumpy.color.Color] = (
+            lateral_surface_material
+        )
 
         self.show_intersection: Optional[bool] = show_intersection
         self.intersection_color: Optional[cesiumpy.color.Color] = intersection_color
@@ -181,6 +169,3 @@ class RectangularSensorGraphics(_CesiumObject):
 
     def generate_script(self, widget=None) -> str:
         return f"new CesiumSensorVolumes.RectangularPyramidSensorVolume({super().generate_script(widget=widget)})"
-
-
-######################################################################################################################################################

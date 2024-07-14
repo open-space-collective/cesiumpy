@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -14,7 +13,6 @@ from cesiumpy.util.trait import MaybeTrait
 
 
 class Polyline(_CesiumEntity):
-
     """
     PolylineGraphics
 

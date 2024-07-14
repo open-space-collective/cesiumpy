@@ -14,23 +14,23 @@ class TestCamera:
         assert c.script == ""
 
         c.flyTo((1, 2, 3))
-        exp = "{destination : Cesium.Cartesian3.fromDegrees(1.0, 2.0, 3.0)}"
+        exp = "{destination: Cesium.Cartesian3.fromDegrees(1.0, 2.0, 3.0)}"
         assert c.script == exp
 
         c.flyTo((4, 5, 6))
-        exp = "{destination : Cesium.Cartesian3.fromDegrees(4.0, 5.0, 6.0)}"
+        exp = "{destination: Cesium.Cartesian3.fromDegrees(4.0, 5.0, 6.0)}"
         assert c.script == exp
 
         c.flyTo((4, 5, 6, 7))
-        exp = "{destination : Cesium.Rectangle.fromDegrees(west=4.0, south=5.0, east=6.0, north=7.0)}"
+        exp = "{destination: Cesium.Rectangle.fromDegrees(4.0, 5.0, 6.0, 7.0)}"
         assert c.script == exp
 
         msg = "x must be longitude, between -180 to 180"
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match=msg):
             c.flyTo((200, 2, 3))
 
         msg = "y must be latitude, between -90 to 90"
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match=msg):
             c.flyTo((1, 200, 3))
 
         msg = (
@@ -84,7 +84,7 @@ class TestCamera:
 <script type="text/javascript">
   async function init() {
     var widget = new Cesium.Viewer("viewertest");
-    widget.camera.flyTo({destination: Cesium.Rectangle.fromDegrees(west=135.0, south=30.0, east=145.0, north=45.0)});
+    widget.camera.flyTo({destination: Cesium.Rectangle.fromDegrees(135.0, 30.0, 145.0, 45.0)});
   }
   init();
 </script>"""
@@ -110,7 +110,7 @@ class TestCamera:
   async function init() {
     var widget = new Cesium.Viewer("viewertest");
     widget.entities.add({position: Cesium.Cartesian3.fromDegrees(120.0, 35.0, 5000.0), cylinder: {length: 10000.0, topRadius: 10000.0, bottomRadius: 20000.0, material: Cesium.Color.RED}});
-    widget.camera.flyTo({destination: Cesium.Rectangle.fromDegrees(west=135.0, south=30.0, east=145.0, north=45.0)});
+    widget.camera.flyTo({destination: Cesium.Rectangle.fromDegrees(135.0, 30.0, 145.0, 45.0)});
     widget.zoomTo(widget.entities);
   }
   init();
@@ -150,7 +150,7 @@ class TestCamera:
 <div id="viewertest" style="width:100%; height:100%;"><div>
 <script type="text/javascript">
   var widget = new Cesium.Viewer("viewertest");
-  widget.camera.flyTo({destination : Cesium.Cartesian3.fromDegrees(-118.2436849, 34.0522342, 100000.0)});
+  widget.camera.flyTo({destination: Cesium.Cartesian3.fromDegrees(-118.2436849, 34.0522342, 100000.0)});
 </script>"""
             assert result == exp
         except (geopy.exc.GeocoderQuotaExceeded, geopy.exc.GeocoderServiceError):

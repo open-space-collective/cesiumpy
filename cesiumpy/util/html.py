@@ -1,12 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
 import os
 import six
 import warnings
-from typing import List
+from typing import List, Union
 
 
 def _check_uri(sourceUri):
@@ -38,8 +37,9 @@ def _wrap_async_init(scripts: List[str]) -> List[str]:
     return before + _add_indent(scripts) + after
 
 
-def _wrap_scripts(scripts: List[str]) -> List[str]:
-    assert isinstance(scripts, list)
+def _wrap_scripts(scripts: Union[List[str], str]) -> List[str]:
+    if isinstance(scripts, str):
+        scripts = [scripts]
 
     # filter None and empty str
     scripts = [s for s in scripts if ((s is not None) and len(s) > 0)]
