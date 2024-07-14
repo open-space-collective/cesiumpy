@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -28,8 +27,7 @@ class _CesiumObject(_JavaScriptObject):
         return f"Cesium.{cls.__name__}"
 
 
-class _CesiumEnum(_JavaScriptEnum):
-    ...
+class _CesiumEnum(_JavaScriptEnum): ...
 
 
 DEFAULT_ZOOM_TO_ENTITY: bool = True
@@ -37,7 +35,6 @@ DEFAULT_TRACK_ENTITY: bool = False
 
 
 class _CesiumBase(_CesiumObject):
-
     """
     Base class for Cesium Widget / Viewer.
     """
@@ -161,7 +158,7 @@ class _CesiumBase(_CesiumObject):
         self._data_sources = RestrictedList(
             self,
             allowed=DataSource,
-            propertyname="data_sources",
+            propertyname="dataSources",
         )
 
         self._scripts = RestrictedList(

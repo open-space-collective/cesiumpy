@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -31,72 +30,72 @@ class Label(_CesiumEntity):
         A Property specifying the CSS font.
     style : LabeStyle, default LabelStyle.FILL
         A Property specifying the LabelStyle.
-    fillColor : Color, default Color.WHITE
+    fill_color : Color, default Color.WHITE
         A Property specifying the fill Color.
-    outlineColor : Color, default, Color.BLACK
+    outline_color : Color, default, Color.BLACK
         A Property specifying the outline Color.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the outline width.
     show : bool, default True
         A boolean Property specifying the visibility of the label.
     scale : float, default 1.
         A numeric Property specifying the scale to apply to the text.
-    horizontalOrigin : HorizontalOrigin, default HorizontalOrigin.CENTER
-        A Property specifying the HorizontalOrigin.
-    verticalOrigin : VerticalOrigin, default VerticalOrigin.CENTER
-        A Property specifying the VerticalOrigin.
-    eyeOffset : Cartesian3, default Cartesian3.ZERO
+    horizontal_origin : horizontal_origin, default horizontal_origin.CENTER
+        A Property specifying the horizontal_origin.
+    vertical_origin : vertical_origin, default vertical_origin.CENTER
+        A Property specifying the vertical_origin.
+    eye_offset : Cartesian3, default Cartesian3.ZERO
         A Cartesian3 Property specifying the eye offset.
-    pixelOffset : Cartesian2, default Cartesian2.ZERO
+    pixel_offset : Cartesian2, default Cartesian2.ZERO
         A Cartesian2 Property specifying the pixel offset.
-    translucencyByDistance :
+    translucency_by_distance :
         A NearFarScalar Property used to set translucency based on distance from the camera.
-    pixelOffsetScaleByDistance :
-        A NearFarScalar Property used to set pixelOffset based on distance from the camera.
+    pixel_offset_scale_by_distance :
+        A NearFarScalar Property used to set pixel_offset based on distance from the camera.
     """
 
     _klass = "label"
-    _props = ["text", "style", "fillColor"]
+    _props = ["text", "style", "fill_color"]
 
     text = traitlets.Unicode()
-    fillColor = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
+    fill_color = MaybeTrait(klass=cesiumpy.color.Color, allow_none=True)
 
     def __init__(
         self,
         position,
         text,
         style=None,
-        fillColor=None,
-        outlineColor=None,
-        outlineWidth=None,
+        fill_color=None,
+        outline_color=None,
+        outline_width=None,
         show=None,
         scale=None,
-        horizontalOrigin=None,
-        verticalOrigin=None,
-        eyeOffset=None,
-        pixelOffset=None,
-        translucencyByDistance=None,
-        pixelOffsetScaleByDistance=None,
+        horizontal_origin=None,
+        vertical_origin=None,
+        eye_offset=None,
+        pixel_offset=None,
+        translucency_by_distance=None,
+        pixel_offset_scale_by_distance=None,
         name=None,
     ):
         super(Label, self).__init__(
             show=show,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
-            translucencyByDistance=translucencyByDistance,
+            outline_color=outline_color,
+            outline_width=outline_width,
+            translucency_by_distance=translucency_by_distance,
             scale=scale,
-            horizontalOrigin=horizontalOrigin,
-            verticalOrigin=verticalOrigin,
-            eyeOffset=eyeOffset,
-            pixelOffset=pixelOffset,
-            pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
+            horizontal_origin=horizontal_origin,
+            vertical_origin=vertical_origin,
+            eye_offset=eye_offset,
+            pixel_offset=pixel_offset,
+            pixel_offset_scale_by_distance=pixel_offset_scale_by_distance,
             position=position,
             name=name,
         )
 
         self.text = text
         self.style = com.notimplemented(style)
-        self.fillColor = fillColor
+        self.fill_color = fill_color
 
 
 class Billboard(_CesiumEntity):
@@ -114,17 +113,17 @@ class Billboard(_CesiumEntity):
         A boolean Property specifying the visibility of the billboard.
     scale : float, default 1.
         A numeric Property specifying the scale to apply to the image size.
-    horizontalOrigin : HorizontalOrigin, default HorizontalOrigin.CENTER
-        A Property specifying the HorizontalOrigin.
-    verticalOrigin : VerticalOrigin, default VerticalOrigin.CENTER
-        A Property specifying the VerticalOrigin.
-    eyeOffset : Cartesian3, default Cartesian3.ZERO
+    horizontal_origin : horizontal_origin, default horizontal_origin.CENTER
+        A Property specifying the horizontal_origin.
+    vertical_origin : vertical_origin, default vertical_origin.CENTER
+        A Property specifying the vertical_origin.
+    eye_offset : Cartesian3, default Cartesian3.ZERO
         A Cartesian3 Property specifying the eye offset.
-    pixelOffset : Cartesian2, default Cartesian2.ZERO
+    pixel_offset : Cartesian2, default Cartesian2.ZERO
         A Cartesian2 Property specifying the pixel offset.
     rotation : float, default 0.
-        A numeric Property specifying the rotation about the alignedAxis.
-    alignedAxis : Cartesian3, default Cartesian3.ZERO
+        A numeric Property specifying the rotation about the aligned_axis.
+    aligned_axis : Cartesian3, default Cartesian3.ZERO
         A Cartesian3 Property specifying the axis of rotation.
     width : float
         A numeric Property specifying the width of the billboard in pixels, overriding the native size.
@@ -132,20 +131,20 @@ class Billboard(_CesiumEntity):
         A numeric Property specifying the height of the billboard in pixels, overriding the native size.
     color : Color, default Color.WHITE
         A Property specifying the tint Color of the image.
-    scaleByDistance :
+    scale_by_distance :
         A NearFarScalar Property used to scale the point based on distance from the camera.
-    translucencyByDistance :
+    translucency_by_distance :
         optional A NearFarScalar Property used to set translucency based on distance from the camera.
-    pixelOffsetScaleByDistance :
-        optional A NearFarScalar Property used to set pixelOffset based on distance from the camera.
-    imageSubRegion :
+    pixel_offset_scale_by_distance :
+        optional A NearFarScalar Property used to set pixel_offset based on distance from the camera.
+    image_sub_region :
         A Property specifying a BoundingRectangle that defines a sub-region of the image to use for the billboard, rather than the entire image.
-    sizeInMeters : bool
+    size_in_meters : bool
         A boolean Property specifying whether this billboard's size should be measured in meters.
     """
 
     _klass = "billboard"
-    _props = ["image", "alignedAxis", "imageSubRegion", "sizeInMeters"]
+    _props = ["image", "aligned_axis", "image_sub_region", "size_in_meters"]
 
     image = traitlets.Instance(klass=cesiumpy.entities.pinbuilder._BillboardContents)
 
@@ -155,36 +154,36 @@ class Billboard(_CesiumEntity):
         image=None,
         show=None,
         scale=None,
-        horizontalOrigin=None,
-        verticalOrigin=None,
-        eyeOffset=None,
-        pixelOffset=None,
+        horizontal_origin=None,
+        vertical_origin=None,
+        eye_offset=None,
+        pixel_offset=None,
         rotation=None,
-        alignedAxis=None,
+        aligned_axis=None,
         width=None,
         height=None,
         color=None,
-        scaleByDistance=None,
-        translucencyByDistance=None,
-        pixelOffsetScaleByDistance=None,
-        imageSubRegion=None,
-        sizeInMeters=None,
+        scale_by_distance=None,
+        translucency_by_distance=None,
+        pixel_offset_scale_by_distance=None,
+        image_sub_region=None,
+        size_in_meters=None,
         name=None,
     ):
         super(Billboard, self).__init__(
             show=show,
             scale=scale,
             color=color,
-            horizontalOrigin=horizontalOrigin,
-            verticalOrigin=verticalOrigin,
-            eyeOffset=eyeOffset,
-            pixelOffset=pixelOffset,
+            horizontal_origin=horizontal_origin,
+            vertical_origin=vertical_origin,
+            eye_offset=eye_offset,
+            pixel_offset=pixel_offset,
             rotation=rotation,
             width=width,
             height=height,
-            scaleByDistance=scaleByDistance,
-            translucencyByDistance=translucencyByDistance,
-            pixelOffsetScaleByDistance=pixelOffsetScaleByDistance,
+            scale_by_distance=scale_by_distance,
+            translucency_by_distance=translucency_by_distance,
+            pixel_offset_scale_by_distance=pixel_offset_scale_by_distance,
             position=position,
             name=name,
         )
@@ -195,9 +194,9 @@ class Billboard(_CesiumEntity):
             image = cesiumpy.entities.pinbuilder.Icon(image)
         self.image = image
 
-        self.alignedAxis = com.notimplemented(alignedAxis)
-        self.imageSubRegion = com.notimplemented(imageSubRegion)
-        self.sizeInMeters = com.notimplemented(sizeInMeters)
+        self.aligned_axis = com.notimplemented(aligned_axis)
+        self.image_sub_region = com.notimplemented(image_sub_region)
+        self.size_in_meters = com.notimplemented(size_in_meters)
 
 
 class Ellipse(_CesiumEntity):
@@ -209,13 +208,13 @@ class Ellipse(_CesiumEntity):
 
     position : Cartesian3
         A Property specifying the Cartesian3 positions.
-    semiMajorAxis : float
+    semi_major_axis : float
         The numeric Property specifying the semi-major axis.
-    semiMinorAxis : float
+    semi_minor_axis : float
         The numeric Property specifying the semi-minor axis.
     height : float, default 0.
         A numeric Property specifying the altitude of the ellipse.
-    extrudedHeight : float, default 0.
+    extruded_height : float, default 0.
         A numeric Property specifying the altitude of the ellipse extrusion.
     show : bool, default True
         A boolean Property specifying the visibility of the ellipse.
@@ -225,62 +224,62 @@ class Ellipse(_CesiumEntity):
         A Property specifying the material used to fill the ellipse.
     outline : bool, default False
         A boolean Property specifying whether the ellipse is outlined.
-    outlineColor : cesiumpy.cesiumpy.color.Color, default BLACK
+    outline_color : cesiumpy.cesiumpy.color.Color, default BLACK
         A Property specifying the Color of the outline.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the width of the outline.
-    numberOfVerticalLines : int, default 16
+    number_of_vertical_lines : int, default 16
         Property specifying the number of vertical lines to draw along the perimeter for the outline.
     rotation : float, default 0.
         A numeric property specifying the rotation of the ellipse counter-clockwise from north.
-    stRotation : float, default 0.
+    st_rotation : float, default 0.
         A numeric property specifying the rotation of the ellipse texture counter-clockwise from north.
     granularity : float, default cesiumpy.math.RADIANS_PER_DEGREE
         A numeric Property specifying the angular distance between points on the ellipse.
     """
 
     _klass = "ellipse"
-    _props = ["semiMinorAxis", "semiMajorAxis"]
+    _props = ["semi_minor_axis", "semi_major_axis"]
 
-    semiMinorAxis = traitlets.Float()
-    semiMajorAxis = traitlets.Float()
+    semi_minor_axis = traitlets.Float()
+    semi_major_axis = traitlets.Float()
 
     def __init__(
         self,
         position,
-        semiMinorAxis,
-        semiMajorAxis,
+        semi_minor_axis,
+        semi_major_axis,
         height=None,
-        extrudedHeight=None,
+        extruded_height=None,
         show=None,
         fill=None,
         material=None,
         outline=None,
-        outlineColor=None,
-        outlineWidth=None,
-        numberOfVerticalLines=None,
+        outline_color=None,
+        outline_width=None,
+        number_of_vertical_lines=None,
         rotation=None,
-        stRotation=None,
+        st_rotation=None,
         name=None,
     ):
         super(Ellipse, self).__init__(
             height=height,
-            extrudedHeight=extrudedHeight,
+            extruded_height=extruded_height,
             show=show,
             fill=fill,
             material=material,
             outline=outline,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
-            numberOfVerticalLines=numberOfVerticalLines,
+            outline_color=outline_color,
+            outline_width=outline_width,
+            number_of_vertical_lines=number_of_vertical_lines,
             rotation=rotation,
-            stRotation=stRotation,
+            st_rotation=st_rotation,
             position=position,
             name=name,
         )
 
-        self.semiMinorAxis = semiMinorAxis
-        self.semiMajorAxis = semiMajorAxis
+        self.semi_minor_axis = semi_minor_axis
+        self.semi_major_axis = semi_major_axis
 
 
 class Ellipsoid(_CesiumEntity):
@@ -301,9 +300,9 @@ class Ellipsoid(_CesiumEntity):
         A Property specifying the material used to fill the ellipsoid.
     outline : bool, default False
         A boolean Property specifying whether the ellipsoid is outlined.
-    outlineColor : CeciumColor, BLACK
+    outline_color : CeciumColor, BLACK
         A Property specifying the Color of the outline.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the width of the outline.
     subdivisions : int, default 128
         A Property specifying the number of samples per outline ring, determining the granularity of the curvature.
@@ -329,8 +328,8 @@ class Ellipsoid(_CesiumEntity):
         fill=None,
         material=None,
         outline=None,
-        outlineColor=None,
-        outlineWidth=None,
+        outline_color=None,
+        outline_width=None,
         subdivisions=None,
         stackPartitions=None,
         slicePartitions=None,
@@ -341,8 +340,8 @@ class Ellipsoid(_CesiumEntity):
             fill=fill,
             material=material,
             outline=outline,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
+            outline_color=outline_color,
+            outline_width=outline_width,
             position=position,
             name=name,
         )
@@ -373,9 +372,9 @@ class PolylineVolume(_CesiumEntity):
         A Property specifying the material used to fill the volume.
     outline : bool, default False
         A boolean Property specifying whether the volume is outlined.
-    outlineColor : cesiumpy.cesiumpy.color.Color, default BLACK
+    outline_color : cesiumpy.cesiumpy.color.Color, default BLACK
         A Property specifying the Color of the outline.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the width of the outline.
     granularity : float, default cesiumpy.math.RADIANS_PER_DEGREE
         A numeric Property specifying the angular distance between each latitude and longitude point.
@@ -397,8 +396,8 @@ class PolylineVolume(_CesiumEntity):
         fill=None,
         material=None,
         outline=None,
-        outlineColor=None,
-        outlineWidth=None,
+        outline_color=None,
+        outline_width=None,
         granularity=None,
         name=None,
     ):
@@ -409,8 +408,8 @@ class PolylineVolume(_CesiumEntity):
             fill=fill,
             material=material,
             outline=outline,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
+            outline_color=outline_color,
+            outline_width=outline_width,
             granularity=granularity,
             name=name,
         )
@@ -435,7 +434,7 @@ class Corridor(_CesiumEntity):
         A CornerType Property specifying the style of the corners.
     height : float, default 0.
         A numeric Property specifying the altitude of the corridor.
-    extrudedHeight : float, default 0.
+    extruded_height : float, default 0.
         A numeric Property specifying the altitude of the corridor extrusion.
     show : bool, default True
         A boolean Property specifying the visibility of the corridor.
@@ -445,9 +444,9 @@ class Corridor(_CesiumEntity):
         A Property specifying the material used to fill the corridor.
     outline : bool, default False
         A boolean Property specifying whether the corridor is outlined.
-    outlineColor : cesiumpy.cesiumpy.color.Color, default BLACK
+    outline_color : cesiumpy.cesiumpy.color.Color, default BLACK
         A Property specifying the Color of the outline.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the width of the outline.
     granularity : float, default cesiumpy.math.RADIANS_PER_DEGREE
         A numeric Property specifying the distance between each latitude and longitude.
@@ -465,13 +464,13 @@ class Corridor(_CesiumEntity):
         width,
         cornerType=None,
         height=None,
-        extrudedHeight=None,
+        extruded_height=None,
         show=None,
         fill=None,
         material=None,
         outline=None,
-        outlineColor=None,
-        outlineWidth=None,
+        outline_color=None,
+        outline_width=None,
         granularity=None,
         name=None,
     ):
@@ -480,13 +479,13 @@ class Corridor(_CesiumEntity):
         super(Corridor, self).__init__(
             width=width,
             height=height,
-            extrudedHeight=extrudedHeight,
+            extruded_height=extruded_height,
             show=show,
             fill=fill,
             material=material,
             outline=outline,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
+            outline_color=outline_color,
+            outline_width=outline_width,
             granularity=granularity,
             name=name,
         )
@@ -504,9 +503,9 @@ class Wall(_CesiumEntity):
 
     positions : Cartesian3
         A Property specifying the array of Cartesian3 positions which define the top of the wall.
-    maximumHeights : float or its list
+    maximum_heights : float or its list
         A Property specifying an array of heights to be used for the top of the wall instead of the height of each position.
-    minimumHeights : float or its list
+    minimum_heights : float or its list
         A Property specifying an array of heights to be used for the bottom of the wall instead of the globe surface.
     show : bool, default True
         A boolean Property specifying the visibility of the wall.
@@ -516,30 +515,30 @@ class Wall(_CesiumEntity):
         A Property specifying the material used to fill the wall.
     outline : bool, default False
         A boolean Property specifying whether the wall is outlined.
-    outlineColor : cesiumpy.cesiumpy.color.Color, default BLACK
+    outline_color : cesiumpy.cesiumpy.color.Color, default BLACK
         A Property specifying the Color of the outline.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the width of the outline.
     granularity : float, default cesiumpy.math.RADIANS_PER_DEGREE
         A numeric Property specifying the angular distance between each latitude and longitude point.
     """
 
     _klass = "wall"
-    _props = ["positions", "maximumHeights", "minimumHeights"]
+    _props = ["positions", "maximum_heights", "minimum_heights"]
 
     positions = traitlets.Instance(klass=cartesian.Cartesian3Array)
 
     def __init__(
         self,
         positions,
-        maximumHeights,
-        minimumHeights,
+        maximum_heights,
+        minimum_heights,
         show=None,
         fill=None,
         material=None,
         outline=None,
-        outlineColor=None,
-        outlineWidth=None,
+        outline_color=None,
+        outline_width=None,
         granularity=None,
         name=None,
     ):
@@ -549,15 +548,15 @@ class Wall(_CesiumEntity):
             fill=fill,
             material=material,
             outline=outline,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
+            outline_color=outline_color,
+            outline_width=outline_width,
             granularity=granularity,
             name=name,
         )
 
         # ToDo: Support fromDegreesArrayHeights
         self.positions = cartesian.Cartesian3.fromDegreesArray(positions)
-        pos_len = len(self.positions) // 2
+        pos_len = len(self.positions) // 3
 
         def _init_heights(x, key):
             if not isinstance(x, list):
@@ -566,12 +565,12 @@ class Wall(_CesiumEntity):
             if len(x) != pos_len:
                 msg = "{key} must has the half length ({pos_len}) of positions: {x}"
                 raise ValueError(
-                    msg.format(key=key, pos_len=pos_len, x=len(maximumHeights))
+                    msg.format(key=key, pos_len=pos_len, x=len(maximum_heights))
                 )
             return x
 
-        self.maximumHeights = _init_heights(maximumHeights, key="maximumHeights")
-        self.minimumHeights = _init_heights(minimumHeights, key="minimumHeights")
+        self.maximum_heights = _init_heights(maximum_heights, key="maximum_heights")
+        self.minimum_heights = _init_heights(minimum_heights, key="minimum_heights")
 
 
 class Rectangle(_CesiumEntity):
@@ -585,11 +584,11 @@ class Rectangle(_CesiumEntity):
         The Property specifying the Rectangle.
     height : float, default 0.
         A numeric Property specifying the altitude of the rectangle.
-    extrudedHeight : float, default 0.
+    extruded_height : float, default 0.
         A numeric Property specifying the altitude of the rectangle extrusion.
-    closeTop : bool, default True
+    close_top : bool, default True
         A boolean Property specifying whether the rectangle has a top cover when extruded
-    closeBottom : bool, default True
+    close_bottom : bool, default True
         A boolean Property specifying whether the rectangle has a bottom cover when extruded.
     show : bool, default True
         A boolean Property specifying the visibility of the rectangle.
@@ -599,59 +598,59 @@ class Rectangle(_CesiumEntity):
         A Property specifying the material used to fill the rectangle.
     outline : bool, default False
         A boolean Property specifying whether the rectangle is outlined.
-    outlineColor : cesiumpy.cesiumpy.color.Color, default BLACK
+    outline_color : cesiumpy.cesiumpy.color.Color, default BLACK
         A Property specifying the Color of the outline.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the width of the outline.
     rotation : float, default 0.
         A numeric property specifying the rotation of the rectangle clockwise from north.
-    stRotation : float, default 0.
+    st_rotation : float, default 0.
         A numeric property specifying the rotation of the rectangle texture counter-clockwise from north.
     granularity : float, default cesiumpy.math.RADIANS_PER_DEGREE
         A numeric Property specifying the angular distance between points on the rectangle.
     """
 
     _klass = "rectangle"
-    _props = ["coordinates", "closeTop", "closeBottom"]
+    _props = ["coordinates", "close_top", "close_bottom"]
 
     coordinates = MaybeTrait(klass=cartesian.Rectangle)
-    closeTop = traitlets.Bool(allow_none=True)
-    closeBottom = traitlets.Bool(allow_none=True)
+    close_top = traitlets.Bool(allow_none=True)
+    close_bottom = traitlets.Bool(allow_none=True)
 
     def __init__(
         self,
         coordinates,
         height=None,
-        extrudedHeight=None,
-        closeTop=None,
-        closeBottom=None,
+        extruded_height=None,
+        close_top=None,
+        close_bottom=None,
         show=None,
         fill=None,
         material=None,
         outline=None,
-        outlineColor=None,
-        outlineWidth=None,
-        stRotation=None,
+        outline_color=None,
+        outline_width=None,
+        st_rotation=None,
         granularity=None,
         name=None,
     ):
         super(Rectangle, self).__init__(
             height=height,
-            extrudedHeight=extrudedHeight,
+            extruded_height=extruded_height,
             show=show,
             fill=fill,
             material=material,
             outline=outline,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
-            stRotation=stRotation,
+            outline_color=outline_color,
+            outline_width=outline_width,
+            st_rotation=st_rotation,
             granularity=granularity,
             name=name,
         )
 
         self.coordinates = coordinates
-        self.closeTop = closeTop
-        self.closeBottom = closeBottom
+        self.close_top = close_top
+        self.close_bottom = close_bottom
 
     def __repr__(self):
         rep = """{klass}({rep})""".format(
@@ -680,7 +679,7 @@ class Polygon(_CesiumEntity):
         A Property specifying the PolygonHierarchy.
     height : float, default 0.
         A numeric Property specifying the altitude of the polygon.
-    extrudedHeight : float, default 0.
+    extruded_height : float, default 0.
         A numeric Property specifying the altitude of the polygon extrusion.
     show : bool, default True
         A boolean Property specifying the visibility of the polygon.
@@ -690,55 +689,55 @@ class Polygon(_CesiumEntity):
         A Property specifying the material used to fill the polygon.
     outline : bool, default False
         A boolean Property specifying whether the polygon is outlined.
-    outlineColor : cesiumpy.cesiumpy.color.Color, default cesiumpy.color.BLACK
+    outline_color : cesiumpy.cesiumpy.color.Color, default cesiumpy.color.BLACK
         A Property specifying the Color of the outline.
-    outlineWidth : float, default 1.
+    outline_width : float, default 1.
         A numeric Property specifying the width of the outline.
-    stRotation : float, default 0.
+    st_rotation : float, default 0.
         A numeric property specifying the rotation of the polygon texture counter-clockwise from north.
     granularity : float, default cesiumpy.math.RADIANS_PER_DEGREE
         A numeric Property specifying the angular distance between each latitude and longitude point.
-    perPositionHeight : bool, default False
+    per_position_height : bool, default False
         A boolean specifying whether or not the the height of each position is used.
     """
 
     _klass = "polygon"
-    _props = ["hierarchy", "perPositionHeight"]
+    _props = ["hierarchy", "per_position_height"]
 
-    perPositionHeight = traitlets.Bool(allow_none=True)
+    per_position_height = traitlets.Bool(allow_none=True)
 
     def __init__(
         self,
         hierarchy,
         height=None,
-        extrudedHeight=None,
+        extruded_height=None,
         show=None,
         fill=None,
         material=None,
         outline=None,
-        outlineColor=None,
-        outlineWidth=None,
-        stRotation=None,
+        outline_color=None,
+        outline_width=None,
+        st_rotation=None,
         granularity=None,
-        perPositionHeight=None,
+        per_position_height=None,
         name=None,
     ):
         super(Polygon, self).__init__(
             height=height,
-            extrudedHeight=extrudedHeight,
+            extruded_height=extruded_height,
             show=show,
             fill=fill,
             material=material,
             outline=outline,
-            outlineColor=outlineColor,
-            outlineWidth=outlineWidth,
-            stRotation=stRotation,
+            outline_color=outline_color,
+            outline_width=outline_width,
+            st_rotation=st_rotation,
             granularity=granularity,
             name=name,
         )
 
         self.hierarchy = cartesian.Cartesian3.fromDegreesArray(hierarchy)
-        self.perPositionHeight = perPositionHeight
+        self.per_position_height = per_position_height
 
     @property
     def positions(self):

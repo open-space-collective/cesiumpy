@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/entities/sensors/cylinder.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -18,11 +12,8 @@ from cesiumpy.base import _CesiumObject
 from cesiumpy.entities.entity import _CesiumEntity
 from cesiumpy.util.trait import MaybeTrait
 
-######################################################################################################################################################
-
 
 class ConicSensor(_CesiumEntity):
-
     """
     Conic Sensor.
     """
@@ -101,9 +92,9 @@ class ConicSensor(_CesiumEntity):
         self.inner_half_angle: float = inner_half_angle
         self.outer_half_angle: float = outer_half_angle
 
-        self.lateral_surface_material: Optional[
-            cesiumpy.color.Color
-        ] = lateral_surface_material
+        self.lateral_surface_material: Optional[cesiumpy.color.Color] = (
+            lateral_surface_material
+        )
 
         self.minimum_clock_angle: Optional[float] = minimum_clock_angle
         self.maximum_clock_angle: Optional[float] = maximum_clock_angle
@@ -127,9 +118,6 @@ class ConicSensor(_CesiumEntity):
         )
 
         return props
-
-
-######################################################################################################################################################
 
 
 class ConicSensorGraphics(_CesiumObject):
@@ -184,9 +172,9 @@ class ConicSensorGraphics(_CesiumObject):
         self.inner_half_angle: float = inner_half_angle
         self.outer_half_angle: float = outer_half_angle
 
-        self.lateral_surface_material: Optional[
-            cesiumpy.color.Color
-        ] = lateral_surface_material
+        self.lateral_surface_material: Optional[cesiumpy.color.Color] = (
+            lateral_surface_material
+        )
 
         self.minimum_clock_angle: Optional[float] = minimum_clock_angle
         self.maximum_clock_angle: Optional[float] = maximum_clock_angle
@@ -201,6 +189,3 @@ class ConicSensorGraphics(_CesiumObject):
 
     def generate_script(self, widget=None) -> str:
         return f"new CesiumSensorVolumes.ConicSensorGraphics({super().generate_script(widget=widget)})"
-
-
-######################################################################################################################################################

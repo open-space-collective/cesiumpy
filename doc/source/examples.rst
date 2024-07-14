@@ -60,7 +60,7 @@ Once prepared the data, iterate over rows and plot its values. The below script 
   >>> for i, row in df.iterrows():
   ...     l = row['Recreation Visitors (2014)[5]']
   ...     cyl = cesiumpy.Cylinder(position=[row['lon'], row['lat'], l / 2.], length=l,
-  ...                             topRadius=10e4, bottomRadius=10e4, material='aqua', alpha=0.5)
+  ...                             top_radius=10e4, bottom_radius=10e4, material='aqua', alpha=0.5)
   ...     v.entities.add(cyl)
 
   >>> v
@@ -75,7 +75,7 @@ If you want bubble chart like output, use ``Point`` entities.
   >>> for i, row in df.iterrows():
   ...     l = row['Recreation Visitors (2014)[5]']
   ...      p= cesiumpy.Point(position=[row['lon'], row['lat'], 0],
-  ...                        pixelSize=np.sqrt(l / 10000), color='blue')
+  ...                        pixel_size=np.sqrt(l / 10000), color='blue')
   >>> v.entities.add(p)
   >>> v
 

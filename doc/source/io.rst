@@ -182,10 +182,10 @@ example shows to draw Cesium Man used in the above tutorial.
 
 .. code-block:: python
 
-  >>> m = cesiumpy.Model(url='data/Cesium_Man.gltf',
+  >>> m = cesiumpy.ModelGraphic(url='data/Cesium_Man.gltf',
   ...                    modelMatrix=(-130, 40, 0.0), scale=1000000)
   >>> m
-  Model("data/Cesium_Man.gltf")
+  ModelGraphic("data/Cesium_Man.gltf")
 
   >>> viewer = cesiumpy.Viewer()
   >>> viewer.scene.primitives.add(m)

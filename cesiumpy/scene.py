@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -15,7 +14,7 @@ class Scene(_CesiumObject):
     def __init__(self, widget):
         self.widget = widget
         self._primitives = RestrictedList(
-            self.widget, allowed=cesiumpy.Model, propertyname="scene.primitives"
+            self.widget, allowed=cesiumpy.ModelGraphic, propertyname="scene.primitives"
         )
 
     @property

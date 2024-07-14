@@ -49,7 +49,7 @@ You can specify the color and size of the point via ``color`` and ``pixelSize`` 
   >>> p.script
   u'{position : Cesium.Cartesian3.fromDegrees(-110, 40, 0), point : {color : Cesium.Color.WHITE, pixelSize : 10}}'
 
-  >>> p = cesiumpy.Point(position=[-110, 40, 0], color=cesiumpy.color.BLUE, pixelSize=20)
+  >>> p = cesiumpy.Point(position=[-110, 40, 0], color=cesiumpy.color.BLUE, pixel_size=20)
   >>> p
   Point(-110, 40, 0)
 
@@ -86,7 +86,7 @@ Label
   >>> l.script
   u'{position : Cesium.Cartesian3.fromDegrees(-110, 40, 0), label : {text : "xxx"}}'
 
-  >>> l = cesiumpy.Label(position=[-110, 40, 0], text='xxx', fillColor='red')
+  >>> l = cesiumpy.Label(position=[-110, 40, 0], text='xxx', fill_color='red')
   >>> l.script
   u'{position : Cesium.Cartesian3.fromDegrees(-110, 40, 0), label : {text : "xxx", fillColor : Cesium.Color.RED}}'
 
@@ -149,7 +149,7 @@ Cylinder
 .. code-block:: python
 
   >>> c = cesiumpy.Cylinder(position=[-110, 40, 100], length=200,
-  ...                       topRadius=100, bottomRadius=100)
+  ...                       top_radius=100, bottom_radius=100)
   >>> c
   Cylinder(-110, 40, 100)
 
@@ -157,7 +157,7 @@ Cylinder
   u'{position : Cesium.Cartesian3.fromDegrees(-110, 40, 100), cylinder : {length : 200, topRadius : 100, bottomRadius : 100}}'
 
   >>> c = cesiumpy.Cylinder(position=[-110, 40, 250], length=500,
-  ...                       topRadius=100, bottomRadius=100,
+  ...                       top_radius=100, bottom_radius=100,
   ...                       material=cesiumpy.color.ORANGE)
   >>> c.script
   u'{position : Cesium.Cartesian3.fromDegrees(-110, 40, 250), cylinder : {length : 500, topRadius : 100, bottomRadius : 100, material : Cesium.Color.ORANGE}}'

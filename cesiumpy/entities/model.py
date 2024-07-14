@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -20,94 +19,94 @@ class Model(_CesiumObject):
 
     url : str
         The object for the glTF JSON or an arraybuffer of Binary glTF defined by the KHR_binary_glTF extension.
-    modelMatrix : Matrix4, default Matrix4.IDENTITY
+    model_matrix : Matrix4, default Matrix4.IDENTITY
         The 4x4 transformation matrix that transforms the model from model to world coordinates.
-    basePath : str, default ''
+    base_path : str, default ''
         The base path that paths in the glTF JSON are relative to.
     show : bool, default True
         Determines if the model primitive will be shown.
     scale : float, default 1.0
         A uniform scale applied to this model.
-    minimumPixelSize : float, default 0.0
+    minimum_pixel_size : float, default 0.0
         The approximate minimum pixel size of the model regardless of zoom.
-    maximumScale : float
-        The maximum scale size of a model. An upper limit for minimumPixelSize.
+    maximum_scale : float
+        The maximum scale size of a model. An upper limit for minimum_pixel_size.
     id :
         A user-defined object to return when the model is picked with Scene#pick.
-    allowPicking : bool, default True
+    allow_picking : bool, default True
         When true, each glTF mesh and primitive is pickable with Scene#pick.
-    incrementallyLoadTextures : bool, default True
+    incrementally_load_textures : bool, default True
         Determine if textures may continue to stream in after the model is loaded.
     asynchronous : bool, default True
         Determines if model WebGL resource creation will be spread out over several frames or block until completion once all glTF files are loaded.
-    debugShowBoundingVolume : bool, default False
+    debug_show_bounding_volume : bool, default False
         For debugging only. Draws the bounding sphere for each draw command in the model.
-    debugWireframe : bool, default False
+    debug_wireframe : bool, default False
         For debugging only. Draws the model in wireframe.
     """
 
     _props = [
         "url",
-        "basePath",
+        "base_path",
         "show",
-        "modelMatrix",
+        "model_matrix",
         "scale",
-        "minimumPixelSize",
-        "maximumScale",
+        "minimum_pixel_size",
+        "maximum_scale",
         "id",
-        "allowPicking",
-        "incrementallyLoadTextures",
+        "allow_picking",
+        "incrementally_load_textures",
         "asynchronous",
-        "debugShowBoundingVolume",
-        "debugWireframe",
+        "debug_show_bounding_volume",
+        "debug_wireframe",
     ]
 
     url = URITrait()
-    modelMatrix = traitlets.Instance(klass=Transforms)
+    model_matrix = traitlets.Instance(klass=Transforms)
 
-    basePath = traitlets.Unicode(allow_none=True)
+    base_path = traitlets.Unicode(allow_none=True)
     show = traitlets.Bool(allow_none=True)
     scale = traitlets.Float(allow_none=True)
-    minimumPixelSize = traitlets.Float(allow_none=True)
-    maximumScale = traitlets.Float(allow_none=True)
+    minimum_pixel_size = traitlets.Float(allow_none=True)
+    maximum_scale = traitlets.Float(allow_none=True)
 
-    allowPicking = traitlets.Bool(allow_none=True)
-    incrementallyLoadTextures = traitlets.Bool(allow_none=True)
+    allow_picking = traitlets.Bool(allow_none=True)
+    incrementally_load_textures = traitlets.Bool(allow_none=True)
     asynchronous = traitlets.Bool(allow_none=True)
-    debugShowBoundingVolume = traitlets.Bool(allow_none=True)
-    debugWireframe = traitlets.Bool(allow_none=True)
+    debug_show_bounding_volume = traitlets.Bool(allow_none=True)
+    debug_wireframe = traitlets.Bool(allow_none=True)
 
     def __init__(
         self,
         url,
-        modelMatrix,
-        basePath=None,
+        model_matrix,
+        base_path=None,
         show=None,
         scale=None,
-        minimumPixelSize=None,
-        maximumScale=None,
+        minimum_pixel_size=None,
+        maximum_scale=None,
         id=None,
-        allowPicking=None,
-        incrementallyLoadTextures=None,
+        allow_picking=None,
+        incrementally_load_textures=None,
         asynchronous=None,
-        debugShowBoundingVolume=None,
-        debugWireframe=None,
+        debug_show_bounding_volume=None,
+        debug_wireframe=None,
     ):
         self.url = url
 
-        self.modelMatrix = Transforms.eastNorthUpToFixedFrame(modelMatrix)
+        self.model_matrix = Transforms.eastNorthUpToFixedFrame(model_matrix)
 
-        self.basePath = basePath
+        self.base_path = base_path
         self.show = show
         self.scale = scale
-        self.minimumPixelSize = minimumPixelSize
-        self.maximumScale = maximumScale
+        self.minimum_pixel_size = minimum_pixel_size
+        self.maximum_scale = maximum_scale
         self.id = com.notimplemented(id)
-        self.allowPicking = allowPicking
-        self.incrementallyLoadTextures = incrementallyLoadTextures
+        self.allow_picking = allow_picking
+        self.incrementally_load_textures = incrementally_load_textures
         self.asynchronous = asynchronous
-        self.debugShowBoundingVolume = debugShowBoundingVolume
-        self.debugWireframe = debugWireframe
+        self.debug_show_bounding_volume = debug_show_bounding_volume
+        self.debug_wireframe = debug_wireframe
 
     def __repr__(self):
         rep = """{klass}("{url}")"""

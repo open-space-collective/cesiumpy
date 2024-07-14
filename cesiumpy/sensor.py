@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/sensor.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 import abc
 import math
@@ -13,8 +7,6 @@ from typing import Optional
 import cesiumpy
 from cesiumpy.util.name import generate_name
 
-######################################################################################################################################################
-
 DEFAULT_LENGTH: int = 1
 DEFAULT_SLICES: int = 10
 DEFAULT_COLOR: cesiumpy.entities.color.Color = cesiumpy.entities.color.Color(
@@ -22,11 +14,8 @@ DEFAULT_COLOR: cesiumpy.entities.color.Color = cesiumpy.entities.color.Color(
 )
 DEFAULT_INTERSECTION_COLOR: cesiumpy.entities.color.Color = cesiumpy.color.WHITE
 
-######################################################################################################################################################
-
 
 class Sensor(abc.ABC):
-
     """
     Sensor.
     """
@@ -152,11 +141,7 @@ class Sensor(abc.ABC):
         return sampled_orientation
 
 
-######################################################################################################################################################
-
-
 class CustomPatternSensor(Sensor):
-
     """
     Custom Pattern Sensor.
     """
@@ -223,11 +208,7 @@ class CustomPatternSensor(Sensor):
         )
 
 
-######################################################################################################################################################
-
-
 class RectangularSensor(CustomPatternSensor):
-
     """
     Rectangular Sensor.
     """
@@ -292,11 +273,7 @@ class RectangularSensor(CustomPatternSensor):
         ]
 
 
-######################################################################################################################################################
-
-
 class CylindricalSensor(Sensor):
-
     """
     Cylindrical Sensor.
     """
@@ -369,11 +346,7 @@ class CylindricalSensor(Sensor):
         )
 
 
-######################################################################################################################################################
-
-
 class ConicSensor(CylindricalSensor):
-
     """
     Conic Sensor.
     """
@@ -441,6 +414,3 @@ class ConicSensor(CylindricalSensor):
                 show=self.show,
             )
         )
-
-
-######################################################################################################################################################

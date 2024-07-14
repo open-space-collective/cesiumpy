@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/sensor.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import annotations
 
@@ -13,11 +7,8 @@ import traitlets
 import cesiumpy
 from cesiumpy.base import _CesiumObject
 
-######################################################################################################################################################
-
 
 class Quaternion(_CesiumObject):
-
     """
     var orientationProperty = new Cesium.SampledProperty(Cesium.Quaternion);
 
@@ -96,11 +87,7 @@ class Quaternion(_CesiumObject):
         )
 
 
-######################################################################################################################################################
-
-
 class HeadingPitchRoll(_CesiumObject):
-
     """
     A rotation expressed as a heading, pitch, and roll.
 
@@ -157,9 +144,6 @@ class HeadingPitchRoll(_CesiumObject):
         )
 
 
-######################################################################################################################################################
-
-
 class _QuaternionFromProduct(Quaternion):
     # Constructor
 
@@ -182,9 +166,6 @@ class _QuaternionFromProduct(Quaternion):
 
     def generate_script(self, widget=None) -> str:
         return f"Cesium.Quaternion.multiply({self.quaternion_2.generate_script(widget=widget)}, {self.quaternion_1.generate_script(widget=widget)}, {Quaternion.unit().generate_script(widget=widget)})"
-
-
-######################################################################################################################################################
 
 
 class _QuaternionFromAxisAngle(Quaternion):
@@ -211,9 +192,6 @@ class _QuaternionFromAxisAngle(Quaternion):
         return f"Cesium.Quaternion.fromAxisAngle({self.axis.generate_script(widget=widget)}, {self.angle})"
 
 
-######################################################################################################################################################
-
-
 class _QuaternionFromHeadingPitchRoll(Quaternion):
     # Constructor
 
@@ -234,9 +212,6 @@ class _QuaternionFromHeadingPitchRoll(Quaternion):
 
     def generate_script(self, widget=None) -> str:
         return f"Cesium.Quaternion.fromHeadingPitchRoll({self.heading_pitch_roll.generate_script(widget=widget)})"
-
-
-######################################################################################################################################################
 
 
 class _HeadingPitchRollFromDegrees(HeadingPitchRoll):
@@ -260,9 +235,6 @@ class _HeadingPitchRollFromDegrees(HeadingPitchRoll):
         return f"Cesium.HeadingPitchRoll.fromDegrees({self.heading}, {self.pitch}, {self.roll})"
 
 
-######################################################################################################################################################
-
-
 class _HeadingPitchRollFromQuaternion(HeadingPitchRoll):
     # Constructor
 
@@ -282,6 +254,3 @@ class _HeadingPitchRollFromQuaternion(HeadingPitchRoll):
 
     def generate_script(self, widget=None) -> str:
         return f"Cesium.HeadingPitchRoll.fromQuaternion({self.quaternion.generate_script(widget=widget)})"
-
-
-######################################################################################################################################################

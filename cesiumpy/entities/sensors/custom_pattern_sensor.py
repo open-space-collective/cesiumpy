@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/entities/sensors/cylinder.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -18,11 +12,8 @@ from cesiumpy.base import _CesiumObject
 from cesiumpy.entities.entity import _CesiumEntity
 from cesiumpy.util.trait import MaybeTrait
 
-######################################################################################################################################################
-
 
 class CustomPatternSensor(_CesiumEntity):
-
     """
     CustomPattern Sensor.
     """
@@ -90,9 +81,9 @@ class CustomPatternSensor(_CesiumEntity):
 
         self.directions: list[cesiumpy.Spherical] = directions
 
-        self.lateral_surface_material: Optional[
-            cesiumpy.color.Color
-        ] = lateral_surface_material
+        self.lateral_surface_material: Optional[cesiumpy.color.Color] = (
+            lateral_surface_material
+        )
 
         self.show_intersection: Optional[bool] = show_intersection
         self.intersection_color: Optional[cesiumpy.color.Color] = intersection_color
@@ -113,9 +104,6 @@ class CustomPatternSensor(_CesiumEntity):
         )
 
         return props
-
-
-######################################################################################################################################################
 
 
 class CustomPatternSensorGraphics(_CesiumObject):
@@ -159,9 +147,9 @@ class CustomPatternSensorGraphics(_CesiumObject):
 
         self.directions: list[cesiumpy.Spherical] = directions
 
-        self.lateral_surface_material: Optional[
-            cesiumpy.color.Color
-        ] = lateral_surface_material
+        self.lateral_surface_material: Optional[cesiumpy.color.Color] = (
+            lateral_surface_material
+        )
 
         self.show_intersection: Optional[bool] = show_intersection
         self.intersection_color: Optional[cesiumpy.color.Color] = intersection_color
@@ -173,6 +161,3 @@ class CustomPatternSensorGraphics(_CesiumObject):
 
     def generate_script(self, widget=None) -> str:
         return f"new CesiumSensorVolumes.CustomPatternSensorGraphics({super().generate_script(widget=widget)})"
-
-
-######################################################################################################################################################

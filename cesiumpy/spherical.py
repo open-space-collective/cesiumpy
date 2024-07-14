@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/position.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import annotations
 
@@ -14,11 +8,8 @@ import traitlets
 
 from cesiumpy.base import _CesiumObject
 
-######################################################################################################################################################
-
 
 class Spherical(_CesiumObject):
-
     """
     A set of curvilinear 3-dimensional coordinates.
 
@@ -48,6 +39,3 @@ class Spherical(_CesiumObject):
         self.clock: Optional[float] = clock
         self.cone: Optional[float] = cone
         self.magnitude: Optional[float] = magnitude
-
-
-######################################################################################################################################################

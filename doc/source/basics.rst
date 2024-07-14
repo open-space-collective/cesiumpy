@@ -95,12 +95,12 @@ The below example draws all entities on the map.
   >>> box = cesiumpy.Box(position=[-110, 40, 0], dimensions=(40e4, 30e4, 50e4), material=cesiumpy.color.RED)
   >>> v.entities.add(box)
 
-  >>> ellipse = cesiumpy.Ellipse(position=[-100, 40, 0], semiMinorAxis=25e4,
-  ...                            semiMajorAxis=40e4, material=cesiumpy.color.BLUE)
+  >>> ellipse = cesiumpy.Ellipse(position=[-100, 40, 0], semi_minor_axis=25e4,
+  ...                            semi_major_axis=40e4, material=cesiumpy.color.BLUE)
   >>> v.entities.add(ellipse)
 
   >>> cylinder = cesiumpy.Cylinder(position=[-90, 40, 50e4], length=100e4,
-  ...                              topRadius=10e4, bottomRadius=10e4,
+  ...                              top_radius=10e4, bottom_radius=10e4,
   ...                              material=cesiumpy.color.AQUA)
   >>> v.entities.add(cylinder)
 
@@ -117,7 +117,7 @@ The below example draws all entities on the map.
   >>> v.entities.add(ellipsoid)
 
   >>> wall = cesiumpy.Wall(positions=[-50, 35, -55, 35, -55, 40, -50, 40, -50, 35],
-  ...                      maximumHeights=10e4, minimumHeights=0,
+  ...                      maximum_heights=10e4, minimum_heights=0,
   ...                      material=cesiumpy.color.RED)
   >>> v.entities.add(wall)
 
@@ -277,8 +277,8 @@ You can use ``str`` specifying location where you can use coordinates as below.
 .. code-block:: python
 
   >>> viewer = cesiumpy.Viewer()
-  >>> cyl = cesiumpy.Cylinder(position='Los Angeles', length=30000, topRadius=10000,
-  ...                         bottomRadius=10000, material='AQUA')
+  >>> cyl = cesiumpy.Cylinder(position='Los Angeles', length=30000, top_radius=10000,
+  ...                         bottom_radius=10000, material='AQUA')
   >>> v.entities.add(cyl)
   >>> v.camera.flyTo('Los Angeles')
   >>> v

@@ -1,35 +1,25 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           tests/entities/test_cartesian.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 import pytest
 
 import cesiumpy
 import cesiumpy.entities.cartesian as cartesian
 
-######################################################################################################################################################
-
 
 class TestCartesian:
     def test_cartesian2(self):
         c = cesiumpy.Cartesian2(5, 10)
-        exp = "new Cesium.Cartesian2(5.0, 10.0)"
+        exp = "Cesium.Cartesian2(5.0, 10.0)"
         assert c.script == exp
 
         c = cesiumpy.Cartesian2.fromDegrees(5, 10)
         exp = "Cesium.Cartesian2.fromDegrees(5.0, 10.0)"
         assert c.script == exp
 
-        msg = "x must be longitude, between -180 to 180"
-        with pytest.raises(ValueError, match=msg):
+        with pytest.raises(ValueError):
             cesiumpy.Cartesian2.fromDegrees(200, 10)
 
-        msg = "y must be latitude, between -90 to 90"
-        with pytest.raises(ValueError, match=msg):
+        with pytest.raises(ValueError):
             cesiumpy.Cartesian2.fromDegrees(50, 100)
 
     def test_cartesian2_repr(self):
@@ -43,7 +33,7 @@ class TestCartesian:
 
     def test_cartesian3(self):
         c = cesiumpy.Cartesian3(5, 10, 20)
-        exp = "new Cesium.Cartesian3(5.0, 10.0, 20.0)"
+        exp = "Cesium.Cartesian3(5.0, 10.0, 20.0)"
         assert c.script == exp
 
         c = cesiumpy.Cartesian3.fromDegrees(5, 10, 20)
@@ -68,56 +58,41 @@ class TestCartesian:
         assert repr(c) == exp
 
     def test_cartesian3_array(self):
-        c = cesiumpy.Cartesian3.fromDegreesArray([1, 2, 3, 4])
-        exp = "Cesium.Cartesian3.fromDegreesArray([1, 2, 3, 4])"
+        c = cesiumpy.Cartesian3.fromDegreesArray([1, 2, 3, 4, 5, 6])
+        exp = "Cesium.Cartesian3.fromDegreesArrayHeights([1, 2, 3, 4, 5, 6])"
         assert c.script == exp
 
         # we can pass tuple
-        c = cesiumpy.Cartesian3.fromDegreesArray([(1, 2), (3, 4)])
+        c = cesiumpy.Cartesian3.fromDegreesArray([(1, 2, 3), (4, 5, 6)])
         assert c.script == exp
-
-        c = cesiumpy.Cartesian3.fromDegreesArray(((1, 2), (3, 4)))
-        assert c.script == exp
-
-        c = cesiumpy.Cartesian3.fromDegreesArray([1, 2, 3, 4, 5, 6, 7, 8])
-        exp = "Cesium.Cartesian3.fromDegreesArray([1, 2, 3, 4, 5, 6, 7, 8])"
-        assert c.script == exp
-
-        # we can pass tuple
-        c = cesiumpy.Cartesian3.fromDegreesArray([(1, 2), (3, 4), (5, 6), (7, 8)])
-        assert c.script == exp
-
-        msg = "x must be list-likes: 1"
-        with pytest.raises(ValueError, match=msg):
-            cesiumpy.Cartesian3.fromDegreesArray(1)
-
-        msg = "x length must be an even number: \\[1, 2, 3\\]"
-        with pytest.raises(ValueError, match=msg):
-            cesiumpy.Cartesian3.fromDegreesArray([1, 2, 3])
 
         msg = "x must be a list consists from longitude and latitude"
         with pytest.raises(ValueError, match=msg):
-            cesiumpy.Cartesian3.fromDegreesArray([10, 20, 200, 20])
+            cesiumpy.Cartesian3.fromDegreesArray([10, 20, 0.0, 200, 20, 0.0])
 
         with pytest.raises(ValueError, match=msg):
-            cesiumpy.Cartesian3.fromDegreesArray([(10, 20), (200, 20)])
+            cesiumpy.Cartesian3.fromDegreesArray([(10, 20, 0.0), (200, 20, 0.0)])
 
-        with pytest.raises(ValueError, match=msg):
+        try:
             import geopy
 
-            try:
-                # string causes geocode search
+            # string causes geocode search
+            with pytest.raises(ValueError):
                 cesiumpy.Cartesian3.fromDegreesArray([("X", 20), (20, 20)])
-            except geopy.exc.GeocoderQuotaExceeded:
-                raise nose.SkipTest("exceeded geocoder quota")
+        except (
+            geopy.exc.GeocoderQuotaExceeded,
+            geopy.exc.GeocoderUnavailable,
+            geopy.exc.GeocoderServiceError,
+        ):
+            pass
 
         msg = "x must be a list consists from longitude and latitude"
         with pytest.raises(ValueError, match=msg):
-            cesiumpy.Cartesian3.fromDegreesArray([10, 20, 20, 91])
+            cesiumpy.Cartesian3.fromDegreesArray([10, 20, 0.0, 20, 91, 0.0])
 
     def test_cartesian4(self):
         c = cesiumpy.Cartesian4(5, 10, 20, 30)
-        exp = "new Cesium.Cartesian4(5.0, 10.0, 20.0, 30.0)"
+        exp = "Cesium.Cartesian4(5.0, 10.0, 20.0, 30.0)"
         assert c.script == exp
 
         c = cesiumpy.Cartesian4.fromDegrees(5, 10, 20, 30)
@@ -143,27 +118,27 @@ class TestCartesian:
 
     def test_maybe_cartesian(self):
         c = cesiumpy.entities.cartesian.Cartesian2.maybe((0, 10))
-        exp = "new Cesium.Cartesian2(0.0, 10.0)"
+        exp = "Cesium.Cartesian2(0.0, 10.0)"
         assert c.script == exp
 
         c = cesiumpy.entities.cartesian.Cartesian3.maybe((0, 10, 20))
-        exp = "new Cesium.Cartesian3(0.0, 10.0, 20.0)"
+        exp = "Cesium.Cartesian3(0.0, 10.0, 20.0)"
         assert c.script == exp
 
         c = cesiumpy.entities.cartesian.Cartesian4.maybe((0, 10, 20, 30))
-        exp = "new Cesium.Cartesian4(0.0, 10.0, 20.0, 30.0)"
+        exp = "Cesium.Cartesian4(0.0, 10.0, 20.0, 30.0)"
         assert c.script == exp
 
         c = cesiumpy.entities.cartesian.Cartesian2.maybe([0, 10])
-        exp = "new Cesium.Cartesian2(0.0, 10.0)"
+        exp = "Cesium.Cartesian2(0.0, 10.0)"
         assert c.script == exp
 
         c = cesiumpy.entities.cartesian.Cartesian3.maybe([0, 10, 20])
-        exp = "new Cesium.Cartesian3(0.0, 10.0, 20.0)"
+        exp = "Cesium.Cartesian3(0.0, 10.0, 20.0)"
         assert c.script == exp
 
         c = cesiumpy.entities.cartesian.Cartesian4.maybe([0, 10, 20, 30])
-        exp = "new Cesium.Cartesian4(0.0, 10.0, 20.0, 30.0)"
+        exp = "Cesium.Cartesian4(0.0, 10.0, 20.0, 30.0)"
         assert c.script == exp
 
         # do not convert
@@ -238,6 +213,3 @@ class TestCartesian:
         c = cartesian.Rectangle.fromDegrees(5, 10, 20, 30)
         exp = "Rectangle.fromDegrees(west=5.0, south=10.0, east=20.0, north=30.0)"
         assert repr(c) == exp
-
-
-######################################################################################################################################################

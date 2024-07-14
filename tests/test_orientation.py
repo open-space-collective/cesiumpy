@@ -1,16 +1,8 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/sensor.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from cesiumpy import Cartesian3
 from cesiumpy import Quaternion
 from cesiumpy import HeadingPitchRoll
-
-######################################################################################################################################################
 
 
 class TestQuaternion:
@@ -23,7 +15,7 @@ class TestQuaternion:
     def test_multiply_success(self):
         assert (
             Quaternion(0.0, 0.0, 0.0, 1.0) * Quaternion(0.0, 1.0, 0.0, 0.0)
-        ).generate_script() == "Cesium.Quaternion.multiply(new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0), new Cesium.Quaternion(0.0, 1.0, 0.0, 0.0), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0))"
+        ).generate_script() == "Cesium.Quaternion.multiply(new Cesium.Quaternion(0.0, 1.0, 0.0, 0.0), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0), new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0))"
 
     def test_from_axis_angle_success(self):
         assert (
@@ -38,9 +30,6 @@ class TestQuaternion:
             ).generate_script()
             == "Cesium.Quaternion.fromHeadingPitchRoll(new Cesium.HeadingPitchRoll(1.0, 2.0, 3.0))"
         )
-
-
-######################################################################################################################################################
 
 
 class TestHeadingPitchRoll:
@@ -63,6 +52,3 @@ class TestHeadingPitchRoll:
             ).generate_script()
             == "Cesium.HeadingPitchRoll.fromQuaternion(new Cesium.Quaternion(0.0, 0.0, 0.0, 1.0))"
         )
-
-
-######################################################################################################################################################

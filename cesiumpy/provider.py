@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -24,7 +23,7 @@ class _CesiumProvider(_CesiumObject):
 
     @property
     def script(self):
-        props = super(_CesiumProvider, self).script
+        props = "".join(com.to_jsobject(self._property_dict))
         rep = """new {klass}({props})"""
         return rep.format(klass=self._klass, props=props)
 
@@ -41,11 +40,11 @@ class TerrainProvider(_CesiumProvider):
     credit = traitlets.Unicode(allow_none=True)
 
     def __init__(
-        self, url=None, proxy=None, tilingScheme=None, ellipsoid=None, credit=None
+        self, url=None, proxy=None, tiling_scheme=None, ellipsoid=None, credit=None
     ):
         self.url = url
         self.proxy = com.notimplemented(proxy)
-        self.tilingScheme = com.notimplemented(tilingScheme)
+        self.tiling_scheme = com.notimplemented(tiling_scheme)
         self.ellipsoid = com.notimplemented(ellipsoid)
         self.credit = credit
 
@@ -63,25 +62,25 @@ class ArcGisImageServerTerrainProvider(TerrainProvider):
         The authorization token to use to connect to the service.
     proxy : Proxy
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
-    tilingScheme : TilingScheme, default new GeographicTilingScheme()
+    tiling_scheme : TilingScheme, default new GeographicTilingScheme()
         The tiling scheme specifying how the terrain is broken into tiles. If this parameter is not provided, a GeographicTilingScheme is used.
     ellipsoid : Ellipsoid
-        The ellipsoid. If the tilingScheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
+        The ellipsoid. If the tiling_scheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
     credit : Credit or str
         The credit, which will is displayed on the canvas.
     """
 
-    _props = ["url", "token", "proxy", "tilingScheme", "ellipsoid", "credit"]
+    _props = ["url", "token", "proxy", "tiling_scheme", "ellipsoid", "credit"]
 
     token = traitlets.Unicode(allow_none=True)
 
     def __init__(
-        self, url, token, proxy=None, tilingScheme=None, ellipsoid=None, credit=None
+        self, url, token, proxy=None, tiling_scheme=None, ellipsoid=None, credit=None
     ):
         super(ArcGisImageServerTerrainProvider, self).__init__(
             url=url,
             proxy=proxy,
-            tilingScheme=tilingScheme,
+            tiling_scheme=tiling_scheme,
             ellipsoid=ellipsoid,
             credit=credit,
         )
@@ -99,9 +98,9 @@ class CesiumTerrainProvider(TerrainProvider):
         The URL of the Cesium terrain server.
     proxy : Proxy
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
-    requestVertexNormals : bool, default False
+    request_vertex_normals : bool, default False
         Flag that indicates if the client should request additional lighting information from the server, in the form of per vertex normals if available.
-    requestWaterMask : bool, default False
+    request_water_mask : bool, default False
         Flag that indicates if the client should request per tile water masks from the server, if available.
     ellipsoid : Ellipsoid
         The ellipsoid. If not specified, the WGS84 ellipsoid is used.
@@ -112,29 +111,29 @@ class CesiumTerrainProvider(TerrainProvider):
     _props = [
         "url",
         "proxy",
-        "requestVertexNormals",
-        "requestWaterMask",
+        "request_vertex_normals",
+        "request_water_mask",
         "ellipsoid",
         "credit",
     ]
 
-    requestVertexNormals = traitlets.Bool(allow_none=True)
-    requestWaterMask = traitlets.Bool(allow_none=True)
+    request_vertex_normals = traitlets.Bool(allow_none=True)
+    request_water_mask = traitlets.Bool(allow_none=True)
 
     def __init__(
         self,
         url,
         proxy=None,
-        requestVertexNormals=None,
-        requestWaterMask=None,
+        request_vertex_normals=None,
+        request_water_mask=None,
         ellipsoid=None,
         credit=None,
     ):
         super(CesiumTerrainProvider, self).__init__(
             url=url, proxy=proxy, ellipsoid=ellipsoid, credit=credit
         )
-        self.requestVertexNormals = requestVertexNormals
-        self.requestWaterMask = requestWaterMask
+        self.request_vertex_normals = request_vertex_normals
+        self.request_water_mask = request_water_mask
 
 
 class EllipsoidTerrainProvider(TerrainProvider):
@@ -144,17 +143,17 @@ class EllipsoidTerrainProvider(TerrainProvider):
     Parameters
     ----------
 
-    tilingScheme : TilingScheme, default new GeographicTilingScheme()
+    tiling_scheme : TilingScheme, default new GeographicTilingScheme()
         The tiling scheme specifying how the ellipsoidal surface is broken into tiles. If this parameter is not provided, a GeographicTilingScheme is used.
     ellipsoid : Ellipsoid
-        The ellipsoid. If the tilingScheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
+        The ellipsoid. If the tiling_scheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
     """
 
     url = traitlets.Unicode(allow_none=True)
 
-    def __init__(self, tilingScheme=None, ellipsoid=None):
+    def __init__(self, tiling_scheme=None, ellipsoid=None):
         super(EllipsoidTerrainProvider, self).__init__(
-            tilingScheme=tilingScheme, ellipsoid=ellipsoid
+            tiling_scheme=tiling_scheme, ellipsoid=ellipsoid
         )
 
 
@@ -188,61 +187,61 @@ class VRTheWorldTerrainProvider(TerrainProvider):
 class ImageryProvider(_CesiumProvider):
     _props = [
         "url",
-        "fileExtension",
+        "file_extension",
         "rectangle",
-        "tillingScheme",
+        "tilling_scheme",
         "ellipsoid",
-        "tileWidth",
-        "tileHeight",
-        "tileDiscardPolicy",
-        "minimumLevel",
-        "maximumLevel",
+        "tile_width",
+        "tile_height",
+        "tile_discard_policy",
+        "minimum_level",
+        "maximum_level",
         "credit",
         "proxy",
         "subdomains",
     ]
 
     url = traitlets.Unicode(allow_none=True)
-    fileExtension = traitlets.Unicode(allow_none=True)
+    file_extension = traitlets.Unicode(allow_none=True)
     rectangle = MaybeTrait(klass=cartesian.Rectangle, allow_none=True)
 
-    tileWidth = traitlets.Float(allow_none=True)
-    tileHeight = traitlets.Float(allow_none=True)
+    tile_width = traitlets.Float(allow_none=True)
+    tile_height = traitlets.Float(allow_none=True)
 
-    minimumLevel = traitlets.Float(allow_none=True)
-    maximumLevel = traitlets.Float(allow_none=True)
+    minimum_level = traitlets.Float(allow_none=True)
+    maximum_level = traitlets.Float(allow_none=True)
 
     credit = traitlets.Unicode(allow_none=True)
 
     def __init__(
         self,
         url=None,
-        fileExtension=None,
+        file_extension=None,
         rectangle=None,
-        tillingScheme=None,
+        tilling_scheme=None,
         ellipsoid=None,
-        tileWidth=None,
-        tileHeight=None,
-        tileDiscardPolicy=None,
-        minimumLevel=None,
-        maximumLevel=None,
+        tile_width=None,
+        tile_height=None,
+        tile_discard_policy=None,
+        minimum_level=None,
+        maximum_level=None,
         credit=None,
         proxy=None,
         subdomains=None,
     ):
         self.url = url
-        self.fileExtension = fileExtension
+        self.file_extension = file_extension
         self.rectangle = rectangle
 
-        self.tillingScheme = com.notimplemented(tillingScheme)
+        self.tilling_scheme = com.notimplemented(tilling_scheme)
         self.ellipsoid = com.notimplemented(ellipsoid)
 
-        self.tileWidth = tileWidth
-        self.tileHeight = tileHeight
-        self.tileDiscardPolicy = com.notimplemented(tileDiscardPolicy)
+        self.tile_width = tile_width
+        self.tile_height = tile_height
+        self.tile_discard_policy = com.notimplemented(tile_discard_policy)
 
-        self.minimumLevel = minimumLevel
-        self.maximumLevel = maximumLevel
+        self.minimum_level = minimum_level
+        self.maximum_level = maximum_level
 
         self.credit = credit
 
@@ -269,17 +268,17 @@ class ArcGisMapServerImageryProvider(ImageryProvider):
         If true, ArcGisMapServerImageryProvider#pickFeatures will invoke the Identify service on the MapServer and return the features included in the response. If false, ArcGisMapServerImageryProvider#pickFeatures will immediately return undefined (indicating no pickable features) without communicating with the server. Set this property to false if you don't want this provider's features to be pickable.
     rectangle : Rectangle, default Rectangle.MAX_VALUE
         The rectangle of the layer. This parameter is ignored when accessing a tiled layer.
-    tilingScheme : TilingScheme, default new GeographicTilingScheme()
+    tiling_scheme : TilingScheme, default new GeographicTilingScheme()
         The tiling scheme to use to divide the world into tiles. This parameter is ignored when accessing a tiled server.
     ellipsoid : Ellipsoid
-        The ellipsoid. If the tilingScheme is specified and used, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
-    tileWidth : int, default 256
+        The ellipsoid. If the tiling_scheme is specified and used, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
+    tile_width : int, default 256
         The width of each tile in pixels. This parameter is ignored when accessing a tiled server.
-    tileHeight : int, default 256
+    tile_height : int, default 256
         The height of each tile in pixels. This parameter is ignored when accessing a tiled server.
-    tileDiscardPolicy : TileDiscardPolicy
+    tile_discard_policy : TileDiscardPolicy
         The policy that determines if a tile is invalid and should be discarded. If this value is not specified, a default DiscardMissingTileImagePolicy is used for tiled map servers, and a NeverTileDiscardPolicy is used for non-tiled map servers. In the former case, we request tile 0,0 at the maximum tile level and check pixels (0,0), (200,20), (20,200), (80,110), and (160, 130). If all of these pixels are transparent, the discard check is disabled and no tiles are discarded. If any of them have a non-transparent color, any tile that has the same values in these pixel locations is discarded. The end result of these defaults should be correct tile discarding for a standard ArcGIS Server. To ensure that no tiles are discarded, construct and pass a NeverTileDiscardPolicy for this parameter.
-    maximumLevel : int
+    maximum_level : int
         The maximum tile level to request, or undefined if there is no maximum. This parameter is ignored when accessing a tiled server.
     proxy : Proxy
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
@@ -292,12 +291,12 @@ class ArcGisMapServerImageryProvider(ImageryProvider):
         "layers",
         "enablePickFeatures",
         "rectangle",
-        "tillingScheme",
+        "tilling_scheme",
         "ellipsoid",
-        "tileWidth",
-        "tileHeight",
-        "tileDiscardPolicy",
-        "minimumLevel",
+        "tile_width",
+        "tile_height",
+        "tile_discard_policy",
+        "minimum_level",
         "proxy",
     ]
 
@@ -314,23 +313,23 @@ class ArcGisMapServerImageryProvider(ImageryProvider):
         layers=None,
         enablePickFeatures=None,
         rectangle=None,
-        tillingScheme=None,
+        tilling_scheme=None,
         ellipsoid=None,
-        tileWidth=None,
-        tileHeight=None,
-        tileDiscardPolicy=None,
-        minimumLevel=None,
+        tile_width=None,
+        tile_height=None,
+        tile_discard_policy=None,
+        minimum_level=None,
         proxy=None,
     ):
         super(ArcGisMapServerImageryProvider, self).__init__(
             url=url,
             rectangle=rectangle,
-            tillingScheme=tillingScheme,
+            tilling_scheme=tilling_scheme,
             ellipsoid=ellipsoid,
-            tileWidth=tileWidth,
-            tileHeight=tileHeight,
-            tileDiscardPolicy=tileDiscardPolicy,
-            minimumLevel=minimumLevel,
+            tile_width=tile_width,
+            tile_height=tile_height,
+            tile_discard_policy=tile_discard_policy,
+            minimum_level=minimum_level,
             proxy=proxy,
         )
 
@@ -359,7 +358,7 @@ class BingMapsImageryProvider(ImageryProvider):
         The culture to use when requesting Bing Maps imagery. Not all cultures are supported. See http://msdn.microsoft.com/en-us/library/hh441729.aspx for information on the supported cultures.
     ellipsoid : Ellipsoid
         The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-    tileDiscardPolicy : TileDiscardPolicy
+    tile_discard_policy : TileDiscardPolicy
         The policy that determines if a tile is invalid and should be discarded. If this value is not specified, a default DiscardMissingTileImagePolicy is used which requests tile 0,0 at the maximum tile level and checks pixels (0,0), (120,140), (130,160), (200,50), and (200,200). If all of these pixels are transparent, the discard check is disabled and no tiles are discarded. If any of them have a non-transparent color, any tile that has the same values in these pixel locations is discarded. The end result of these defaults should be correct tile discarding for a standard Bing Maps server. To ensure that no tiles are discarded, construct and pass a NeverTileDiscardPolicy for this parameter.
     proxy : Proxy
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
@@ -372,7 +371,7 @@ class BingMapsImageryProvider(ImageryProvider):
         "mapStyle",
         "culture",
         "ellipsoid",
-        "tileDiscardPolicy",
+        "tile_discard_policy",
         "proxy",
     ]
 
@@ -389,13 +388,13 @@ class BingMapsImageryProvider(ImageryProvider):
         mapStyle=None,
         culture=None,
         ellipsoid=None,
-        tileDiscardPolicy=None,
+        tile_discard_policy=None,
         proxy=None,
     ):
         super(BingMapsImageryProvider, self).__init__(
             url=url,
             ellipsoid=ellipsoid,
-            tileDiscardPolicy=tileDiscardPolicy,
+            tile_discard_policy=tile_discard_policy,
             proxy=proxy,
         )
 
@@ -420,9 +419,9 @@ class GoogleEarthImageryProvider(ImageryProvider):
         The path of the Google Earth server hosting the imagery.
     ellipsoid : Ellipsoid
         The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-    tileDiscardPolicy : TileDiscardPolicy
+    tile_discard_policy : TileDiscardPolicy
         The policy that determines if a tile is invalid and should be discarded. To ensure that no tiles are discarded, construct and pass a NeverTileDiscardPolicy for this parameter.
-    maximumLevel : int
+    maximum_level : int
         The maximum level-of-detail supported by the Google Earth Enterprise server, or undefined if there is no limit.
     proxy : Proxy
         A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
@@ -433,8 +432,8 @@ class GoogleEarthImageryProvider(ImageryProvider):
         "channel",
         "path",
         "ellipsoid",
-        "tileDiscardPolicy",
-        "maximumLevel",
+        "tile_discard_policy",
+        "maximum_level",
         "proxy",
     ]
 
@@ -447,15 +446,15 @@ class GoogleEarthImageryProvider(ImageryProvider):
         channel,
         path=None,
         ellipsoid=None,
-        tileDiscardPolicy=None,
-        maximumLevel=None,
+        tile_discard_policy=None,
+        maximum_level=None,
         proxy=None,
     ):
         super(GoogleEarthImageryProvider, self).__init__(
             url=url,
             ellipsoid=ellipsoid,
-            tileDiscardPolicy=tileDiscardPolicy,
-            maximumLevel=maximumLevel,
+            tile_discard_policy=tile_discard_policy,
+            maximum_level=maximum_level,
             proxy=proxy,
         )
 
@@ -488,9 +487,9 @@ class MapboxImageryProvider(ImageryProvider):
         The rectangle, in radians, covered by the image.
     ellipsoid : Ellipsoid
         The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-    minimumLevel : int, default 0
+    minimum_level : int, default 0
         The minimum level-of-detail supported by the imagery provider. Take care when specifying this that the number of tiles at the minimum level is small, such as four or less. A larger number is likely to result in rendering problems.
-    maximumLevel : int, default 0
+    maximum_level : int, default 0
         The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
     credit : Credit or str
         A credit for the data source, which is displayed on the canvas.
@@ -505,8 +504,8 @@ class MapboxImageryProvider(ImageryProvider):
         "format",
         "rectangle",
         "ellipsoid",
-        "minimumLevel",
-        "maximumLevel",
+        "minimum_level",
+        "maximum_level",
         "credit",
         "proxy",
     ]
@@ -524,8 +523,8 @@ class MapboxImageryProvider(ImageryProvider):
         format=None,
         rectangle=None,
         ellipsoid=None,
-        minimumLevel=None,
-        maximumLevel=None,
+        minimum_level=None,
+        maximum_level=None,
         credit=None,
         proxy=None,
     ):
@@ -533,8 +532,8 @@ class MapboxImageryProvider(ImageryProvider):
             url=url,
             rectangle=rectangle,
             ellipsoid=ellipsoid,
-            minimumLevel=minimumLevel,
-            maximumLevel=maximumLevel,
+            minimum_level=minimum_level,
+            maximum_level=maximum_level,
             credit=credit,
             proxy=proxy,
         )
@@ -553,15 +552,15 @@ class OpenStreetMapImageryProvider(ImageryProvider):
 
     url : str, default '//a.tile.openstreetmap.org'
         The OpenStreetMap server url.
-    fileExtension : str, default 'png'
+    file_extension : str, default 'png'
         The file extension for images on the server.
     rectangle : Rectangle, default Rectangle.MAX_VALUE
         The rectangle of the layer.
     ellipsoid : Ellipsoid
         The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-    minimumLevel : int, default 0
+    minimum_level : int, default 0
         The minimum level-of-detail supported by the imagery provider.
-    maximumLevel : int
+    maximum_level : int
         The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
     credit : Credit or str, default 'MapQuest, Open Street Map and contributors, CC-BY-SA'
         A credit for the data source, which is displayed on the canvas.
@@ -572,21 +571,21 @@ class OpenStreetMapImageryProvider(ImageryProvider):
     def __init__(
         self,
         url=None,
-        fileExtension=None,
+        file_extension=None,
         rectangle=None,
         ellipsoid=None,
-        minimumLevel=None,
-        maximumLevel=None,
+        minimum_level=None,
+        maximum_level=None,
         credit=None,
         proxy=None,
     ):
         super(OpenStreetMapImageryProvider, self).__init__(
             url=url,
-            fileExtension=fileExtension,
+            file_extension=file_extension,
             rectangle=rectangle,
             ellipsoid=ellipsoid,
-            minimumLevel=minimumLevel,
-            maximumLevel=maximumLevel,
+            minimum_level=minimum_level,
+            maximum_level=maximum_level,
             credit=credit,
             proxy=proxy,
         )
@@ -635,31 +634,31 @@ class TileCoordinatesImageryProvider(ImageryProvider):
 
     color : cesiumpy.color.Color, default YELLOW
         The color to draw the tile box and label.
-    tilingScheme : TilingScheme, default new GeographicTilingScheme()
+    tiling_scheme : TilingScheme, default new GeographicTilingScheme()
         The tiling scheme for which to draw tiles.
     ellipsoid : Ellipsoid
-        The ellipsoid. If the tilingScheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
-    tileWidth : int, default 256
+        The ellipsoid. If the tiling_scheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
+    tile_width : int, default 256
         The width of the tile for level-of-detail selection purposes.
-    tileHeight : int, default 256
+    tile_height : int, default 256
         The height of the tile for level-of-detail selection purposes.
     """
 
-    _props = ["color", "tillingScheme", "ellipsoid", "tileWidth", "tileHeight"]
+    _props = ["color", "tilling_scheme", "ellipsoid", "tile_width", "tile_height"]
 
     def __init__(
         self,
         color=None,
-        tillingScheme=None,
+        tilling_scheme=None,
         ellipsoid=None,
-        tileWidth=None,
-        tileHeight=None,
+        tile_width=None,
+        tile_height=None,
     ):
         super(TileCoordinatesImageryProvider, self).__init__(
-            tillingScheme=tillingScheme,
+            tilling_scheme=tilling_scheme,
             ellipsoid=ellipsoid,
-            tileWidth=tileWidth,
-            tileHeight=tileHeight,
+            tile_width=tile_width,
+            tile_height=tile_height,
         )
 
         if color is not None:
@@ -679,21 +678,21 @@ class TileMapServiceImageryProvider(ImageryProvider):
 
     url : str, default '.'
         Path to image tiles on server.
-    fileExtension : default 'png'
+    file_extension : default 'png'
         The file extension for images on the server.
     rectangle : Rectangle, default Rectangle.MAX_VALUE
         The rectangle, in radians, covered by the image.
-    tilingScheme : TilingScheme, default new GeographicTilingScheme()
+    tiling_scheme : TilingScheme, default new GeographicTilingScheme()
         The tiling scheme specifying how the ellipsoidal surface is broken into tiles. If this parameter is not provided, a WebMercatorTilingScheme is used.
     ellipsoid : Ellipsoid
-        The ellipsoid. If the tilingScheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
-    tileWidth : int, default 256
+        The ellipsoid. If the tiling_scheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
+    tile_width : int, default 256
         Pixel width of image tiles.
-    tileHeight : int, default 256
+    tile_height : int, default 256
         Pixel height of image tiles.
-    minimumLevel : int, default 0
+    minimum_level : int, default 0
         The minimum level-of-detail supported by the imagery provider. Take care when specifying this that the number of tiles at the minimum level is small, such as four or less. A larger number is likely to result in rendering problems.
-    maximumLevel : int
+    maximum_level : int
         The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
     credit : Credit or str, default ''
         A credit for the data source, which is displayed on the canvas.
@@ -704,27 +703,27 @@ class TileMapServiceImageryProvider(ImageryProvider):
     def __init__(
         self,
         url=None,
-        fileExtension=None,
+        file_extension=None,
         rectangle=None,
-        tillingScheme=None,
+        tilling_scheme=None,
         ellipsoid=None,
-        tileWidth=None,
-        tileHeight=None,
-        minimumLevel=None,
-        maximumLevel=None,
+        tile_width=None,
+        tile_height=None,
+        minimum_level=None,
+        maximum_level=None,
         credit=None,
         proxy=None,
     ):
         super(TileMapServiceImageryProvider, self).__init__(
             url=url,
-            fileExtension=fileExtension,
+            file_extension=file_extension,
             rectangle=rectangle,
-            tillingScheme=tillingScheme,
+            tilling_scheme=tilling_scheme,
             ellipsoid=ellipsoid,
-            tileWidth=tileWidth,
-            tileHeight=tileHeight,
-            minimumLevel=minimumLevel,
-            maximumLevel=maximumLevel,
+            tile_width=tile_width,
+            tile_height=tile_height,
+            minimum_level=minimum_level,
+            maximum_level=maximum_level,
             credit=credit,
             proxy=proxy,
         )
@@ -756,17 +755,17 @@ class WebMapServiceImageryProvider(ImageryProvider):
         The formats in which to try WMS GetFeatureInfo requests.
     rectangle : Rectangle, default Rectangle.MAX_VALUE
         The rectangle of the layer.
-    tilingScheme : TilingScheme, default new GeographicTilingScheme()
+    tiling_scheme : TilingScheme, default new GeographicTilingScheme()
         The tiling scheme to use to divide the world into tiles.
     ellipsoid : Ellipsoid
-        The ellipsoid. If the tilingScheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
-    tileWidth : int, default 256
+        The ellipsoid. If the tiling_scheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither parameter is specified, the WGS84 ellipsoid is used.
+    tile_width : int, default 256
         The width of each tile in pixels.
-    tileHeight : int, default 256
+    tile_height : int, default 256
         The height of each tile in pixels.
-    minimumLevel : int, default 0
+    minimum_level : int, default 0
         The minimum level-of-detail supported by the imagery provider. Take care when specifying this that the number of tiles at the minimum level is small, such as four or less. A larger number is likely to result in rendering problems.
-    maximumLevel : int
+    maximum_level : int
         The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit. If not specified, there is no limit.
     credit : Credit or str
         A credit for the data source, which is displayed on the canvas.
@@ -783,13 +782,13 @@ class WebMapServiceImageryProvider(ImageryProvider):
         "enablePickFeatures",
         "getFeatureInfoFormats",
         "rectangle",
-        "tillingScheme",
+        "tilling_scheme",
         "ellipsoid",
-        "tileWidth",
-        "tileHeight",
-        "tileDiscardPolicy",
-        "minimumLevel",
-        "maximumLevel",
+        "tile_width",
+        "tile_height",
+        "tile_discard_policy",
+        "minimum_level",
+        "maximum_level",
         "credit",
         "proxy",
         "subdomains",
@@ -807,13 +806,13 @@ class WebMapServiceImageryProvider(ImageryProvider):
         enablePickFeatures=None,
         getFeatureInfoFormats=None,
         rectangle=None,
-        tillingScheme=None,
+        tilling_scheme=None,
         ellipsoid=None,
-        tileWidth=None,
-        tileHeight=None,
-        tileDiscardPolicy=None,
-        minimumLevel=None,
-        maximumLevel=None,
+        tile_width=None,
+        tile_height=None,
+        tile_discard_policy=None,
+        minimum_level=None,
+        maximum_level=None,
         credit=None,
         proxy=None,
         subdomains=None,
@@ -821,13 +820,13 @@ class WebMapServiceImageryProvider(ImageryProvider):
         super(WebMapServiceImageryProvider, self).__init__(
             url=url,
             rectangle=rectangle,
-            tillingScheme=tillingScheme,
+            tilling_scheme=tilling_scheme,
             ellipsoid=ellipsoid,
-            tileWidth=tileWidth,
-            tileHeight=tileHeight,
-            tileDiscardPolicy=tileDiscardPolicy,
-            minimumLevel=minimumLevel,
-            maximumLevel=maximumLevel,
+            tile_width=tile_width,
+            tile_height=tile_height,
+            tile_discard_policy=tile_discard_policy,
+            minimum_level=minimum_level,
+            maximum_level=maximum_level,
             credit=credit,
             proxy=proxy,
             subdomains=subdomains,
@@ -858,23 +857,23 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
         The style name for WMTS requests.
     format : str, default 'image/jpeg'
         The MIME type for images to retrieve from the server.
-    tileMatrixSetID : str
+    tile_matrix_set_id : str
         The identifier of the TileMatrixSet to use for WMTS requests.
-    tileMatrixLabels : list
+    tile_matrix_labels : list
         optional A list of identifiers in the TileMatrix to use for WMTS requests, one per TileMatrix level.
     rectangle : Rectangle, default Rectangle.MAX_VALUE
         The rectangle covered by the layer.
-    tilingScheme : TilingScheme, default new GeographicTilingScheme()
+    tiling_scheme : TilingScheme, default new GeographicTilingScheme()
         The tiling scheme corresponding to the organization of the tiles in the TileMatrixSet.
     ellipsoid : Ellipsoid
         The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-    tileWidth : int, default 256
+    tile_width : int, default 256
         optional The tile width in pixels.
-    tileHeight : int, default 256
+    tile_height : int, default 256
         The tile height in pixels.
-    minimumLevel : int, default 0
+    minimum_level : int, default 0
         The minimum level-of-detail supported by the imagery provider.
-    maximumLevel : int
+    maximum_level : int
         The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
     credit : Credit or str
         A credit for the data source, which is displayed on the canvas.
@@ -889,16 +888,16 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
         "layer",
         "style",
         "format",
-        "tileMatrixLabels",
-        "tileMatrixLabels",
+        "tile_matrix_labels",
+        "tile_matrix_labels",
         "rectangle",
-        "tillingScheme",
+        "tilling_scheme",
         "ellipsoid",
-        "tileWidth",
-        "tileHeight",
-        "tileDiscardPolicy",
-        "minimumLevel",
-        "maximumLevel",
+        "tile_width",
+        "tile_height",
+        "tile_discard_policy",
+        "minimum_level",
+        "maximum_level",
         "credit",
         "proxy",
         "subdomains",
@@ -907,7 +906,7 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
     layer = traitlets.Unicode()
     style = traitlets.Unicode()
     format = traitlets.Unicode(allow_none=True)
-    tileMatrixSetID = traitlets.Unicode(allow_none=True)
+    tile_matrix_set_id = traitlets.Unicode(allow_none=True)
 
     def __init__(
         self,
@@ -915,16 +914,16 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
         layer,
         style,
         format=None,
-        tileMatrixSetID=None,
-        tileMatrixLabels=None,
+        tile_matrix_set_id=None,
+        tile_matrix_labels=None,
         rectangle=None,
-        tillingScheme=None,
+        tilling_scheme=None,
         ellipsoid=None,
-        tileWidth=None,
-        tileHeight=None,
-        tileDiscardPolicy=None,
-        minimumLevel=None,
-        maximumLevel=None,
+        tile_width=None,
+        tile_height=None,
+        tile_discard_policy=None,
+        minimum_level=None,
+        maximum_level=None,
         credit=None,
         proxy=None,
         subdomains=None,
@@ -932,13 +931,13 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
         super(WebMapTileServiceImageryProvider, self).__init__(
             url=url,
             rectangle=rectangle,
-            tillingScheme=tillingScheme,
+            tilling_scheme=tilling_scheme,
             ellipsoid=ellipsoid,
-            tileWidth=tileWidth,
-            tileHeight=tileHeight,
-            tileDiscardPolicy=tileDiscardPolicy,
-            minimumLevel=minimumLevel,
-            maximumLevel=maximumLevel,
+            tile_width=tile_width,
+            tile_height=tile_height,
+            tile_discard_policy=tile_discard_policy,
+            minimum_level=minimum_level,
+            maximum_level=maximum_level,
             credit=credit,
             proxy=proxy,
             subdomains=subdomains,
@@ -946,6 +945,6 @@ class WebMapTileServiceImageryProvider(ImageryProvider):
         self.layer = layer
         self.style = style
         self.format = format
-        self.tileMatrixSetID = tileMatrixSetID
+        self.tile_matrix_set_id = tile_matrix_set_id
 
-        self.tileMatrixLabels = com.notimplemented(tileMatrixLabels)
+        self.tile_matrix_labels = com.notimplemented(tile_matrix_labels)

@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -10,7 +9,6 @@ import cesiumpy.util.common as com
 
 
 class Viewer(_CesiumBase):
-
     """
     Viewer
 
@@ -256,7 +254,7 @@ class Viewer(_CesiumBase):
         # ToDo: API to disable all flags to False
 
         if data_sources is not None:
-            data_sources = com.validate_listlike(data_sources, key="data_sources")
+            data_sources = com.validate_listlike(data_sources, key="dataSources")
             for ds in data_sources:
                 self._data_sources.add(ds)
 

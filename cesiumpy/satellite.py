@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/satellite.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 import cesiumpy
 
@@ -12,11 +6,8 @@ from typing import Optional
 
 from cesiumpy.util.name import generate_name
 
-######################################################################################################################################################
-
 
 class Satellite:
-
     """
     Satellite.
     """
@@ -99,7 +90,7 @@ class Satellite:
 
         # Add satellite model
         viewer.entities.add(
-            cesiumpy.Model(
+            cesiumpy.ModelGraphic(
                 position=self.position,
                 orientation=self.orientation,
                 availability=self.availability,
@@ -112,6 +103,3 @@ class Satellite:
                 viewer=viewer,
                 satellite=self,
             )
-
-
-#######################################################################################################################################

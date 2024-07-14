@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -29,6 +28,13 @@ class Camera(_CesiumObject):
             return rep.format(
                 klass=self.__class__.__name__, destination=self.destination
             )
+
+    @property
+    def script(self):
+        if self.destination is not None:
+            return "{" + f"destination: {self.destination.generate_script()}" + "}"
+
+        return ""
 
     def flyTo(self, destination, orientation=None):
         from cesiumpy.entities.entity import _CesiumEntity

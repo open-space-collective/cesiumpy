@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 from __future__ import unicode_literals
 
@@ -69,8 +68,8 @@ class PlottingAccessor(object):
             p = cesiumpy.Cylinder(
                 position=(_x, _y, _bottom + _z / 2.0),
                 length=_z,
-                topRadius=_size,
-                bottomRadius=_size,
+                top_radius=_size,
+                bottom_radius=_size,
                 material=_color,
             )
             self.widget.entities.add(p)
@@ -106,7 +105,7 @@ class PlottingAccessor(object):
         color = self._fill_by(color, len(x), key="color")
 
         for i, (_x, _y, _z, _size, _color) in enumerate(zip(x, y, z, size, color)):
-            p = cesiumpy.Point(position=(_x, _y, _z), pixelSize=_size, color=_color)
+            p = cesiumpy.Point(position=(_x, _y, _z), pixel_size=_size, color=_color)
             self.widget.entities.add(p)
         return self.widget
 
@@ -185,7 +184,7 @@ class PlottingAccessor(object):
             zip(text, x, y, z, size, color)
         ):
             p = cesiumpy.Label(
-                position=(_x, _y, _z), text=_text, scale=_size, fillColor=_color
+                position=(_x, _y, _z), text=_text, scale=_size, fill_color=_color
             )
             self.widget.entities.add(p)
         return self.widget

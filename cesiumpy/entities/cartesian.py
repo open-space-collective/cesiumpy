@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/entities/cartesian.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import annotations
 from __future__ import unicode_literals
@@ -17,8 +11,6 @@ import cesiumpy.extension.geocode as geocode
 import cesiumpy.extension.shapefile as shapefile
 import cesiumpy.util.common as com
 
-######################################################################################################################################################
-
 
 class _Cartesian(_CesiumObject):
     _is_degrees = traitlets.Bool()
@@ -29,10 +21,14 @@ class _Cartesian(_CesiumObject):
     def __init__(self):
         raise NotImplementedError
 
+    @property
+    def script(self):
+        return f"Cesium.{self}"
+
     def generate_script(self, widget=None) -> str:
         if self._is_array or self._is_degrees:
-            return f"Cesium.{self}"
-        return f"new Cesium.{self}"
+            return self.script
+        return f"new {self.script}"
 
 
 def _maybe_cartesian2_list(x, key):
@@ -48,14 +44,11 @@ def _maybe_cartesian2_list(x, key):
             raise ValueError(msg.format(key=key, x=x))
 
         if com.is_listlike_2elem(x):
-            x = com._flatten_list_of_listlike(x)
+            x = com.flatten_list_of_listlike(x)
 
     x = com.validate_listlike_even(x, key=key)
     x = [Cartesian2(i, j) for (i, j) in zip(x[::2], x[1::2])]
     return x
-
-
-######################################################################################################################################################
 
 
 class Cartesian2(_Cartesian):
@@ -110,9 +103,6 @@ class Cartesian2(_Cartesian):
         if com.is_listlike(x) and len(x) == 2:
             return Cartesian2(*x, degrees=degrees)
         return x
-
-
-######################################################################################################################################################
 
 
 class Cartesian3(_Cartesian):
@@ -241,9 +231,10 @@ class Cartesian3(_Cartesian):
         x = geocode._maybe_geocode(x, height=0)
 
         if com.is_listlike_2elem(x):
-            x = com._flatten_list_of_listlike(x)
+            x = com.flatten_list_of_listlike([(i[0], i[1], 0.0) for i in x])
+
         elif com.is_listlike_3elem(x):
-            raise NotImplementedError
+            x = com.flatten_list_of_listlike(x)
 
         return Cartesian3Array(x)
 
@@ -267,9 +258,6 @@ class Cartesian3(_Cartesian):
         return x
 
 
-######################################################################################################################################################
-
-
 class Cartesian3Array(_Cartesian):
     _is_array = True
 
@@ -287,9 +275,6 @@ class Cartesian3Array(_Cartesian):
     def __repr__(self):
         rep = """Cartesian3.fromDegreesArrayHeights({x})"""
         return rep.format(x=self.x)
-
-
-######################################################################################################################################################
 
 
 class Cartesian4(_Cartesian):
@@ -335,9 +320,6 @@ class Cartesian4(_Cartesian):
         return x
 
 
-######################################################################################################################################################
-
-
 class Rectangle(_Cartesian):
     west = traitlets.Float()
     south = traitlets.Float()
@@ -353,10 +335,10 @@ class Rectangle(_Cartesian):
         self._is_degrees = degrees
 
         if degrees:
-            self.west = com.validate_longitude(west, key="west")
-            self.south = com.validate_latitude(south, key="south")
-            self.east = com.validate_longitude(east, key="east")
-            self.north = com.validate_latitude(north, key="north")
+            com.validate_longitude(west, key="west")
+            com.validate_latitude(south, key="south")
+            com.validate_longitude(east, key="east")
+            com.validate_latitude(north, key="north")
 
     @classmethod
     def fromDegrees(cls, west, south, east, north):
@@ -396,10 +378,7 @@ class Rectangle(_Cartesian):
             return x
 
         if com.is_listlike_2elem(x):
-            x = com._flatten_list_of_listlike(x)
+            x = com.flatten_list_of_listlike(x)
         if com.is_listlike(x) and len(x) == 4:
             return Rectangle.fromDegrees(*x)
         return x
-
-
-######################################################################################################################################################

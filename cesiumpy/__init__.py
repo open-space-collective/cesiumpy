@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Apache License 2.0
 
 # data
 import cesiumpy.data.country  # noqa
@@ -29,11 +28,11 @@ from cesiumpy.entities.graphics import (
     ShadowMode,
     Box,
     Polygon,
-    Model,
+    Model as ModelGraphic,
     IonResource,
 )  # noqa
 
-# from cesiumpy.entities.model import Model                                       # noqa
+from cesiumpy.entities.model import Model  # noqa
 from cesiumpy.entities.pinbuilder import Pin  # noqa
 from cesiumpy.entities.transform import Transforms  # noqa
 

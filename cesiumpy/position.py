@@ -1,10 +1,4 @@
-######################################################################################################################################################
-
-# @project        CesiumPy
-# @file           cesiumpy/position.py
-# @license        Apache 2.0
-
-######################################################################################################################################################
+# Apache License 2.0
 
 from __future__ import annotations
 
@@ -17,15 +11,10 @@ from cesiumpy.base import _CesiumEnum
 import cesiumpy.entities.cartesian as cartesian
 from cesiumpy.property import Property, SampledProperty
 
-######################################################################################################################################################
-
 
 class ReferenceFrame(_CesiumEnum):
     FIXED = "Cesium.ReferenceFrame.FIXED"  # The fixed frame.
     INERTIAL = "Cesium.ReferenceFrame.INERTIAL"  # The inertial frame.
-
-
-######################################################################################################################################################
 
 
 class PositionProperty(Property):
@@ -45,9 +34,6 @@ class PositionProperty(Property):
         reference_frame: Optional[ReferenceFrame] = None,
     ) -> None:
         self.reference_frame = reference_frame
-
-
-######################################################################################################################################################
 
 
 class SampledPositionProperty(PositionProperty, SampledProperty):
@@ -98,6 +84,3 @@ class SampledPositionProperty(PositionProperty, SampledProperty):
         derivatives: Optional[list[cartesian.Cartesian3]] = None,
     ) -> None:
         super().add_sample(time, position, derivatives)
-
-
-######################################################################################################################################################
