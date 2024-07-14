@@ -34,15 +34,25 @@ class URITrait(traitlets.Unicode):
             self.error(obj, value)
         return super(URITrait, self).validate(obj, value)
 
+
 class CZMLTrait(traitlets.TraitType):
     info_text = "a CZML"
 
     def validate(self, obj, value):
+        data = []
         if isinstance(value, list):
-            return value
+            data = value
+
         if isinstance(value, dict):
-            return [value]
-        self.error(obj, value)
+            data = [value]
+
+        if len(data) == 0:
+            raise ValueError("CZML is empty.")
+
+        if data[0]["id"] != "document":
+            raise ValueError("CZML must start with a document object.")
+
+        return value
 
 
 class DateTimeTrait(traitlets.TraitType):

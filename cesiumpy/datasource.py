@@ -4,10 +4,12 @@ from __future__ import unicode_literals
 
 import traitlets
 
+import json
+
 from cesiumpy.base import _CesiumObject
 import cesiumpy.entities.color
 import cesiumpy.util.common as com
-from cesiumpy.util.trait import MaybeTrait
+from cesiumpy.util.trait import MaybeTrait, CZMLTrait
 
 
 class DataSource(_CesiumObject):
@@ -44,8 +46,24 @@ class CustomDataSource(DataSource):
 
 class CzmlDataSource(DataSource):
 
-    def __init__(self, source_uri):
-        super(CzmlDataSource, self).__init__(source_uri=source_uri)
+    _czml = CZMLTrait()
+
+    def __init__(self, czml):
+        self._czml = czml
+        super(CzmlDataSource, self).__init__(source_uri="PLACEHOLDER")
+
+    def generate_script(self, widget=None):
+        return self.script.replace('"', "").replace(
+            "PLACEHOLDER",
+            json.dumps(self._czml),
+        )
+
+    @staticmethod
+    def from_file(filename):
+        with open(filename, "r") as f:
+            czml = json.load(f)
+
+        return CzmlDataSource(czml)
 
 
 class GeoJsonDataSource(DataSource):
