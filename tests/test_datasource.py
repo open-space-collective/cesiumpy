@@ -21,7 +21,7 @@ class TestDataSource:
 
         ds = cesiumpy.GeoJsonDataSource(
             "xxx.geojson",
-            markerColor=cesiumpy.color.RED,
+            marker_color=cesiumpy.color.RED,
             stroke=cesiumpy.color.BLUE,
             fill=cesiumpy.color.GREEN,
         )
@@ -29,18 +29,18 @@ class TestDataSource:
         assert ds.script == exp
         ds = cesiumpy.GeoJsonDataSource.load(
             "xxx.geojson",
-            markerColor=cesiumpy.color.RED,
+            marker_color=cesiumpy.color.RED,
             stroke=cesiumpy.color.BLUE,
             fill=cesiumpy.color.GREEN,
         )
         assert ds.script == exp
 
         ds = cesiumpy.GeoJsonDataSource(
-            "xxx.geojson", markerColor="red", stroke="blue", fill="green"
+            "xxx.geojson", marker_color="red", stroke="blue", fill="green"
         )
         assert ds.script == exp
         ds = cesiumpy.GeoJsonDataSource.load(
-            "xxx.geojson", markerColor="red", stroke="blue", fill="green"
+            "xxx.geojson", marker_color="red", stroke="blue", fill="green"
         )
         assert ds.script == exp
 
@@ -72,7 +72,7 @@ class TestDataSource:
         assert result == exp
 
     def test_geojson_viewer(self):
-        ds = cesiumpy.GeoJsonDataSource("./test.geojson", markerSymbol="?")
+        ds = cesiumpy.GeoJsonDataSource("./test.geojson", marker_symbol="?")
         viewer = cesiumpy.Viewer(id="viewertest")
         viewer.data_sources.add(ds)
         viewer.camera.flyTo((-105.01621, 39.57422, 1000))

@@ -26,11 +26,11 @@ Assuming we have following ``.geojson`` file named "example.geojson".
   }
 
 You can create ``GeoJsonDataSource`` instance then add to ``Viewer.DataSources``.
-``markerSymbol`` option specifies the symbol displayed on the marker.
+``marker_symbol`` option specifies the symbol displayed on the marker.
 
 .. code-block:: python
 
-  >>> ds = cesiumpy.GeoJsonDataSource('./example.geojson', markerSymbol='!')
+  >>> ds = cesiumpy.GeoJsonDataSource('./example.geojson', marker_symbol='!')
   >>> v = cesiumpy.Viewer()
   >>> v.dataSources.add(ds)
   >>> v
@@ -41,7 +41,7 @@ Or, you can use ``load`` class method to instantiate ``DataSource`` like ``Cesiu
 
 .. code-block:: python
 
-  >>> cesiumpy.GeoJsonDataSource.load('./example.geojson', markerSymbol='!')
+  >>> cesiumpy.GeoJsonDataSource.load('./example.geojson', marker_symbol='!')
 
 KML
 ^^^
