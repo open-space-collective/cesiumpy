@@ -34,6 +34,16 @@ class URITrait(traitlets.Unicode):
             self.error(obj, value)
         return super(URITrait, self).validate(obj, value)
 
+class CZMLTrait(traitlets.TraitType):
+    info_text = "a CZML"
+
+    def validate(self, obj, value):
+        if isinstance(value, list):
+            return value
+        if isinstance(value, dict):
+            return [value]
+        self.error(obj, value)
+
 
 class DateTimeTrait(traitlets.TraitType):
     info_text = "a datetime"

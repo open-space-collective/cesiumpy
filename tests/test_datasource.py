@@ -21,7 +21,7 @@ class TestDataSource:
 
         ds = cesiumpy.GeoJsonDataSource(
             "xxx.geojson",
-            markerColor=cesiumpy.color.RED,
+            marker_color=cesiumpy.color.RED,
             stroke=cesiumpy.color.BLUE,
             fill=cesiumpy.color.GREEN,
         )
@@ -29,18 +29,18 @@ class TestDataSource:
         assert ds.script == exp
         ds = cesiumpy.GeoJsonDataSource.load(
             "xxx.geojson",
-            markerColor=cesiumpy.color.RED,
+            marker_color=cesiumpy.color.RED,
             stroke=cesiumpy.color.BLUE,
             fill=cesiumpy.color.GREEN,
         )
         assert ds.script == exp
 
         ds = cesiumpy.GeoJsonDataSource(
-            "xxx.geojson", markerColor="red", stroke="blue", fill="green"
+            "xxx.geojson", marker_color="red", stroke="blue", fill="green"
         )
         assert ds.script == exp
         ds = cesiumpy.GeoJsonDataSource.load(
-            "xxx.geojson", markerColor="red", stroke="blue", fill="green"
+            "xxx.geojson", marker_color="red", stroke="blue", fill="green"
         )
         assert ds.script == exp
 
@@ -65,14 +65,14 @@ class TestDataSource:
 <script type="text/javascript">
   async function init() {
     var widget = new Cesium.Viewer("viewertest");
-    widget.dataSources.add();
+    widget.dataSources.add(Cesium.CzmlDataSource.load("data/simple.czml"));
   }
   init();
 </script>"""
         assert result == exp
 
     def test_geojson_viewer(self):
-        ds = cesiumpy.GeoJsonDataSource("./test.geojson", markerSymbol="?")
+        ds = cesiumpy.GeoJsonDataSource("./test.geojson", marker_symbol="?")
         viewer = cesiumpy.Viewer(id="viewertest")
         viewer.data_sources.add(ds)
         viewer.camera.flyTo((-105.01621, 39.57422, 1000))
@@ -86,7 +86,7 @@ class TestDataSource:
 <script type="text/javascript">
   async function init() {
     var widget = new Cesium.Viewer("viewertest");
-    widget.dataSources.add({markerSymbol: "?"});
+    widget.dataSources.add(Cesium.GeoJsonDataSource.load("./test.geojson", {markerSymbol: "?"}));
     widget.camera.flyTo({destination: Cesium.Cartesian3.fromDegrees(-105.01621, 39.57422, 1000.0)});
   }
   init();

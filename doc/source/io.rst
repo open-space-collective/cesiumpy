@@ -16,7 +16,7 @@ can draw external data as entities.
 GeoJSON
 ^^^^^^^
 
-Assuming we hanve following ``.geojson`` file named "example.geojson".
+Assuming we have following ``.geojson`` file named "example.geojson".
 
 ::
 
@@ -25,23 +25,23 @@ Assuming we hanve following ``.geojson`` file named "example.geojson".
       "coordinates": [-118.27, 34.05 ]
   }
 
-You can create ``GeoJsonDataSource`` instannce then add to ``Viewer.DataSources``.
-``markerSymbol`` option specifies the symbol displayed on the marker.
+You can create ``GeoJsonDataSource`` instance then add to ``Viewer.DataSources``.
+``marker_symbol`` option specifies the symbol displayed on the marker.
 
 .. code-block:: python
 
-  >>> ds = cesiumpy.GeoJsonDataSource('./example.geojson', markerSymbol='!')
+  >>> ds = cesiumpy.GeoJsonDataSource('./example.geojson', marker_symbol='!')
   >>> v = cesiumpy.Viewer()
   >>> v.dataSources.add(ds)
   >>> v
 
 .. image:: ./_static/datasources01.png
 
-Or, you can use ``load`` class method to instanciate ``DataSource`` like ``Cesium.js``.
+Or, you can use ``load`` class method to instantiate ``DataSource`` like ``Cesium.js``.
 
 .. code-block:: python
 
-  >>> cesiumpy.GeoJsonDataSource.load('./example.geojson', markerSymbol='!')
+  >>> cesiumpy.GeoJsonDataSource.load('./example.geojson', marker_symbol='!')
 
 KML
 ^^^
