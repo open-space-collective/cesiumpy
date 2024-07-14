@@ -40,7 +40,7 @@ dev: dev-image ## Run development environment
 		-it \
 		--rm \
 		--volume="$(CURDIR):$(working_directory)" \
-		--env="CESIUM_TOKEN" \
+		--env="CESIUM_TOKEN=$(CESIUM_TOKEN)" \
 		--workdir=$(working_directory) \
 		$(dev_image_url):$(project_version) \
 		/bin/bash
