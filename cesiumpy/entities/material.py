@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 
 import os
-import six
 import tempfile
 import traitlets
 
@@ -21,7 +20,7 @@ class Material(_CesiumObject):
         except ValueError:
             pass
 
-        if isinstance(x, six.string_types):
+        if isinstance(x, str):
             # regard value as image file path
             x = ImageMaterialProperty(x)
         return x

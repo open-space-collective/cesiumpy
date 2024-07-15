@@ -39,5 +39,5 @@ v
 
 ## Dependencies
 
-- `geopy`, `traitlets`, `six` and `enum34` (Python 3.3 or earlier)
+- `geopy`, `traitlets`
 - (Optional) `scipy` and `shapely`

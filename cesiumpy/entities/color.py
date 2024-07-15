@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import random
 from typing import Optional
-import six
 import traitlets
 import warnings
 
@@ -133,7 +132,7 @@ class Color(Material):
         if isinstance(x, Color):
             return x
 
-        if isinstance(x, six.string_types):
+        if isinstance(x, str):
             cname = x.upper()
             cname = _SINGLE_COLORS.get(cname, cname)
 

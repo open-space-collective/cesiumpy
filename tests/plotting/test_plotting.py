@@ -6,8 +6,6 @@ import cesiumpy
 
 import pandas as pd
 
-import numpy as np
-
 
 class TestScatter:
     def test_scatter_xy(self):
@@ -15,25 +13,25 @@ class TestScatter:
         v.plot.scatter([130, 140, 150], [30, 40, 50])
         assert isinstance(v, cesiumpy.Viewer)
 
-        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {color: Cesium.Color.WHITE}});"""
+        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});"""
         assert exp in v.to_html()
 
     def test_scatter_xyz(self):
         v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter([130, 140, 150], [30, 40, 50], [1e05, 2e05, 3e05])
-        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 100000.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 200000.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 300000.0), point: {color: Cesium.Color.WHITE}});"""
+        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 100000.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 200000.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 300000.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});"""
         assert exp in v.to_html()
 
     def test_scatter_xy_color_scalar(self):
         v = cesiumpy.Viewer(id="viewertest")
         v.plot.scatter([130, 140, 150], [30, 40, 50], color=cesiumpy.color.BLUE)
-        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {color: Cesium.Color.BLUE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {color: Cesium.Color.BLUE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {color: Cesium.Color.BLUE}});"""
+        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.BLUE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.BLUE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.BLUE}});"""
         assert exp in v.to_html()
 
     def test_scatter_xy_color_list(self):
@@ -43,9 +41,9 @@ class TestScatter:
             [30, 40, 50],
             color=[cesiumpy.color.BLUE, cesiumpy.color.RED, cesiumpy.color.GREEN],
         )
-        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {color: Cesium.Color.BLUE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {color: Cesium.Color.RED}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {color: Cesium.Color.GREEN}});"""
+        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.BLUE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.RED}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.GREEN}});"""
         assert exp in v.to_html()
 
     def test_scatter_xy_size_scalar(self):
@@ -379,9 +377,9 @@ class TestNumpyLike:
         res = v.plot.scatter(np.array([130, 140, 150]), np.array([30, 40, 50]))
         assert isinstance(v, cesiumpy.Viewer)
 
-        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {color: Cesium.Color.WHITE}});"""
+        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});"""
         # entities must be added to original instance
         assert exp in v.to_html()
 
@@ -399,14 +397,13 @@ class TestNumpyLike:
                 return np.array(self.values)
 
         v = cesiumpy.Viewer(id="viewertest")
-        res = v.plot.scatter(
-            ExtendedArray([130, 140, 150]), ExtendedArray([30, 40, 50])
-        )
+        v.plot.scatter(ExtendedArray([130, 140, 150]), ExtendedArray([30, 40, 50]))
         assert isinstance(v, cesiumpy.Viewer)
 
-        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {color: Cesium.Color.WHITE}});
-    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {color: Cesium.Color.WHITE}});"""
+        exp = """    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(130.0, 30.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(140.0, 40.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});
+    widget.entities.add({position: Cesium.Cartesian3.fromDegrees(150.0, 50.0, 0.0), point: {pixelSize: 10.0, color: Cesium.Color.WHITE}});"""
+
         assert exp in v.to_html()
 
 

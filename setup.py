@@ -20,20 +20,6 @@ def read(fname):
     ).read()
 
 
-def write_version_py(filename=None):
-    cnt = """\
-version = '%s'
-"""
-    a = open(filename, "w")
-    try:
-        a.write(cnt % VERSION)
-    finally:
-        a.close()
-
-
-version_file = os.path.join(os.path.dirname(__file__), PACKAGE, "version.py")
-write_version_py(filename=version_file)
-
 install_requires = list(read(REQUIREMENTS).splitlines())
 if sys.version_info < (3, 4, 0):
     install_requires.append("enum34")

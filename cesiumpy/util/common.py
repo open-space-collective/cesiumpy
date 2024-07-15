@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 import collections
 import importlib
 import itertools
-import six
 import datetime
 
 from cesiumpy.util import case
@@ -125,7 +124,7 @@ def validate_listlike_lonlatalt(x, key):
 
 
 def is_numeric(x):
-    return isinstance(x, (six.integer_types, float))
+    return isinstance(x, (int, float))
 
 
 def is_longitude(x):
@@ -189,7 +188,7 @@ def to_jsscalar(x, widget=None):
     if isinstance(x, bool):
         # convert to JavaScript repr
         x = "true" if x else "false"
-    elif isinstance(x, six.string_types):
+    elif isinstance(x, str):
         x = f'"{x}"'
     elif isinstance(x, datetime.datetime):
         x = f'Cesium.JulianDate.fromIso8601("{x.isoformat()}")'
@@ -209,14 +208,14 @@ def to_jsobject(x, widget=None):
     # filter None
     dic = collections.OrderedDict()
     # do not use dict comprehension to keep property order
-    for k, v in six.iteritems(x):
+    for k, v in x.items():
         if v is not None:
             dic[k] = v
     x = dic
     if len(x) == 0:
         return [""]
 
-    for key, val in six.iteritems(x):
+    for key, val in x.items():
         results.append(
             f"{case.snake_case_to_camel_case(key)}: {to_jsscalar(val, widget = widget)}, "
         )
