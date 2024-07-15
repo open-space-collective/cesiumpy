@@ -10,6 +10,10 @@ dev_image_url := $(image_url)-dev
 service_name := $(project_name)
 working_directory := /workspace
 
+jupyter_image_url := $(image_url)-jupyter
+jupyter_port := 9001
+jupyter_python_version := 3.11
+
 image: ## Build production image
 	docker build \
 		--target=prod \
@@ -25,6 +29,14 @@ dev-image: ## Build development image
 		--tag=$(dev_image_url):$(project_version) \
 		.
 .PHONY: dev-image
+
+jupyter-image: ## Build Jupyter image
+	docker build \
+		--file="$(CURDIR)/docker/jupyter/Dockerfile" \
+		--tag=$(jupyter_image_url):$(project_version) \
+		--tag=$(jupyter_image_url):latest \
+		.
+.PHONY: jupyter-image
 
 run: image ## Run container
 	docker run \
@@ -45,6 +57,24 @@ dev: dev-image ## Run development environment
 		$(dev_image_url):$(project_version) \
 		/bin/bash
 .PHONY: dev
+
+jupyter-dev: jupyter-image ## Run Jupyter environment
+	docker run \
+	    --name=$(service_name)-jupyter-dev \
+		-it \
+		--rm \
+		--user=root \
+		--env="CESIUM_TOKEN=$(CESIUM_TOKEN)" \
+		--publish=$(jupyter_port):8888 \
+		--volume="$(CURDIR)/notebooks:/home/jovyan/work" \
+		--volume="$(CURDIR):/opt/conda/lib/python$(jupyter_python_version)/site-packages/$(project_name)" \
+		--workdir="/home/jovyan/work" \
+		$(jupyter_image_url):$(project_version) \
+		/bin/bash -c "chown -R jovyan:users /home/jovyan ; export PYTHONPATH="${PYTHONPATH}:/opt/conda/lib/python$(jupyter_python_version)/site-packages/$(project_name)" ; start-notebook.sh --ServerApp.token=''"
+
+	@ sudo chown -R $(shell id -u):$(shell id -g) $(CURDIR)
+
+.PHONY: jupyter-dev
 
 check-style: dev-image ## Check code formatting
 	docker run \
