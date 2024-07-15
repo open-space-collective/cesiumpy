@@ -6,7 +6,6 @@ import functools
 import operator
 from typing import List, Dict, Optional
 
-import six
 import traitlets
 
 import cesiumpy.util.common as com
@@ -163,7 +162,7 @@ class _CesiumBase(_CesiumObject):
 
         self._scripts = RestrictedList(
             self,
-            allowed=six.string_types,
+            allowed=str,
             propertyname="script",
         )
 
@@ -289,9 +288,9 @@ class _CesiumBase(_CesiumObject):
     def to_html(self) -> str:
         headers = self._load_scripts
         container = self.container
-        scripts = html._wrap_scripts(self.script)
+        scripts = html.wrap_scripts(self.script)
 
-        return html._build_html(headers, container, scripts)
+        return html.build_html(headers, container, scripts)
 
     # Private methods
 
@@ -314,7 +313,7 @@ class RestrictedList(_CesiumObject):
             for i in item:
                 self.add(i, **kwargs)
         elif isinstance(item, self._allowed):
-            for key, value in six.iteritems(kwargs):
+            for key, value in kwargs.items():
                 setattr(item, key, value)
             self._items.append(item)
         else:

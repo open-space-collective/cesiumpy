@@ -2,7 +2,6 @@
 
 from __future__ import unicode_literals
 
-import six
 from geopy.geocoders.geocodefarm import GeocodeFarm
 
 import cesiumpy.util.common as com
@@ -16,7 +15,7 @@ def _maybe_geocode(x, height=None):
     geocode passed str or its list-like
     height can be used to create base data for Cartesian3
     """
-    if isinstance(x, six.string_types):
+    if isinstance(x, str):
         loc = _GEOCODER.geocode(x)
         if loc is not None:
             if height is None:

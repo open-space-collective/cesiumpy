@@ -49,7 +49,7 @@ class Point(_CesiumEntity):
         self,
         position,
         color=None,
-        pixel_size=10,
+        pixel_size=None,
         outline_color=None,
         outline_width=None,
         show=None,
@@ -70,4 +70,4 @@ class Point(_CesiumEntity):
             **kwargs,
         )
 
-        self.pixel_size = pixel_size
+        self.pixel_size = pixel_size if pixel_size is not None else 10

@@ -5,19 +5,19 @@ import cesiumpy.util.html as html
 
 
 class TestHTML:
-    def test_wrap_uri(self):
-        res = html._wrap_uri("https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js")
+    def testwrap_uri(self):
+        res = html.wrap_uri("https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js")
         exp = """<script src="https://cesiumjs.org/Cesium/Build/Cesium/Cesium.js"></script>"""
         assert res == exp
 
-        res = html._wrap_uri(
+        res = html.wrap_uri(
             "http://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css"
         )
         exp = """<link rel="stylesheet" href="http://cesiumjs.org/Cesium/Build/Cesium/Widgets/widgets.css" type="text/css">"""
         assert res == exp
 
     def test_wrap_script(self):
-        res = html._wrap_scripts("aaa")
+        res = html.wrap_scripts("aaa")
         exp = [
             '<script type="text/javascript">',
             "  async function init() {",
@@ -28,7 +28,7 @@ class TestHTML:
         ]
         assert res == exp
 
-        res = html._wrap_scripts(["aaa", "bbb"])
+        res = html.wrap_scripts(["aaa", "bbb"])
         exp = [
             '<script type="text/javascript">',
             "  async function init() {",

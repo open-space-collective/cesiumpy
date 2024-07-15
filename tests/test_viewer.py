@@ -129,9 +129,6 @@ class TestViewer:
             f.write(viewer.to_html())
 
     def test_viewer_czml_datasource_success(self):
-        ds = cesiumpy.CzmlDataSource(source_uri="data/simple.czml")
+        ds = cesiumpy.CzmlDataSource.from_file("tests/data/simple.czml")
         viewer = cesiumpy.Viewer(data_sources=[ds])
-        assert (
-            'widget.dataSources.add(Cesium.CzmlDataSource.load("data/simple.czml")'
-            in viewer.to_html()
-        )
+        assert "widget.dataSources.add(Cesium.CzmlDataSource.load" in viewer.to_html()

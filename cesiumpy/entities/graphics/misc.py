@@ -2,7 +2,6 @@
 
 from __future__ import unicode_literals
 
-import six
 import traitlets
 
 import cesiumpy
@@ -190,7 +189,7 @@ class Billboard(_CesiumEntity):
         if image is None:
             image = Pin()
 
-        if isinstance(image, six.string_types):
+        if isinstance(image, str):
             image = cesiumpy.entities.pinbuilder.Icon(image)
         self.image = image
 

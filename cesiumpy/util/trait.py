@@ -30,7 +30,7 @@ class URITrait(traitlets.Unicode):
         if self.allow_none is True and value is None:
             return super(URITrait, self).validate(obj, value)
 
-        if not html._check_uri(value):
+        if not html.check_uri(value):
             self.error(obj, value)
         return super(URITrait, self).validate(obj, value)
 
@@ -49,8 +49,12 @@ class CZMLTrait(traitlets.TraitType):
         if len(data) == 0:
             raise ValueError("CZML is empty.")
 
-        if data[0]["id"] != "document":
-            raise ValueError("CZML must start with a document object.")
+        if isinstance(data[0], dict):
+            if data[0]["id"] != "document":
+                raise ValueError("CZML must start with a document object.")
+        else:
+            if data[0].id != "document":
+                raise ValueError("CZML must start with a document object.")
 
         return value
 
