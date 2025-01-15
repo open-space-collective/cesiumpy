@@ -21,6 +21,9 @@ class Icon(_BillboardContents):
     def __init__(self, image):
         self.image = image
 
+    def generate_script(self, widget=None):
+        return self.script
+
     @property
     def script(self):
         return '"{path}"'.format(path=self.image)
@@ -86,6 +89,9 @@ class Pin(_BillboardContents):
         else:
             rep = """Pin("{text}", {color}, {size})"""
             return rep.format(text=self.text, color=self.color, size=self.size)
+
+    def generate_script(self, widget=None):
+        return self.script
 
     @property
     def script(self):
