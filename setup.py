@@ -10,7 +10,7 @@ PACKAGE = "cesiumpy"
 README = "README.md"
 REQUIREMENTS = "requirements.txt"
 
-VERSION = "0.4.0.dev"
+VERSION = "0.4.0"
 
 
 def read(fname):
