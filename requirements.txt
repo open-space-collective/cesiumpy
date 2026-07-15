@@ -1,4 +1,4 @@
 # Apache License 2.0
 
 traitlets
-geopy>=1.11.0
+geopy>=1.11.0,<2.5.0 # 2.5.0's .whl no longer contains geocodefarm
